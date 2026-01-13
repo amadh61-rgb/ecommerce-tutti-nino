@@ -1,5 +1,5 @@
 import React from 'react';
-import { Instagram, Facebook, MessageCircle, Shield, Lock, CreditCard } from 'lucide-react';
+import { Instagram, Facebook, Twitter, Shield, Lock, CreditCard } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
 export default function Footer({ setSelectedCategory, setActiveDrawer, setActiveModal }) {
@@ -42,7 +42,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
 
                 {/* Payment Methods + Security Seals + Social Media */}
                 <div className="border-t border-slate-100 pt-8 mb-8">
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-12">
                         {/* Payment Methods */}
                         <div className="flex flex-col items-center gap-3">
                             <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">{t('footer.paymentMethods')}</span>
@@ -99,8 +99,8 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg" aria-label="Facebook">
                                     <Facebook className="w-5 h-5" />
                                 </a>
-                                <a href="https://wa.me/5511999999999" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg" aria-label="WhatsApp">
-                                    <MessageCircle className="w-5 h-5" />
+                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-sky-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform shadow-lg" aria-label="Twitter">
+                                    <Twitter className="w-5 h-5" />
                                 </a>
                             </div>
                         </div>

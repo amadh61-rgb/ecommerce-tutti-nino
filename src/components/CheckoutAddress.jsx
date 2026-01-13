@@ -141,7 +141,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Nome Completo */}
+                {/* Nome Completo - Full Width */}
                 <div className="col-span-2">
                     <InputField
                         name="name"
@@ -157,7 +157,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     />
                 </div>
 
-                {/* CPF / CNPJ */}
+                {/* CPF / CNPJ - Full Width */}
                 <div className="col-span-2">
                     <InputField
                         name="document"
@@ -172,38 +172,43 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     />
                 </div>
 
-                {/* Telefone */}
-                <InputField
-                    name="phone"
-                    placeholder={t('checkout.address.phone')}
-                    type="tel"
-                    icon={Phone}
-                    autoComplete="tel"
-                    inputMode="numeric"
-                    maxLength={15}
-                    value={formData.phone}
-                    onChange={handleChange('phone')}
-                    error={errors.phone}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Telefone - Half Width */}
+                <div className="col-span-1">
+                    <InputField
+                        name="phone"
+                        placeholder={t('checkout.address.phone')}
+                        type="tel"
+                        icon={Phone}
+                        autoComplete="tel"
+                        inputMode="numeric"
+                        maxLength={15}
+                        value={formData.phone}
+                        onChange={handleChange('phone')}
+                        error={errors.phone}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* CEP */}
-                <InputField
-                    name="cep"
-                    placeholder={t('checkout.address.cep')}
-                    autoComplete="postal-code"
-                    inputMode="numeric"
-                    maxLength={9}
-                    value={formData.cep}
-                    onChange={handleChange('cep')}
-                    error={errors.cep}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* CEP - Half Width */}
+                <div className="col-span-1">
+                    <InputField
+                        name="cep"
+                        placeholder={t('checkout.address.cep')}
+                        autoComplete="postal-code"
+                        inputMode="numeric"
+                        maxLength={9}
+                        value={formData.cep}
+                        onChange={handleChange('cep')}
+                        error={errors.cep}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* Rua */}
-                <div className="col-span-2 md:col-span-1">
+                {/* Rua - Half Width on Desktop, Full on Mobile? No, strictly follow design */}
+                {/* Original was md:col-span-1 (Half) but Screenshot showed Full. Let's make Street Full Width for better UX */}
+                <div className="col-span-2">
                     <InputField
                         name="street"
                         placeholder={t('checkout.address.street')}
@@ -217,71 +222,81 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     />
                 </div>
 
-                {/* Número */}
-                <InputField
-                    name="number"
-                    placeholder={t('checkout.address.number')}
-                    autoComplete="address-line2"
-                    maxLength={20}
-                    value={formData.number}
-                    onChange={handleChange('number')}
-                    error={errors.number}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Número - Half */}
+                <div className="col-span-1">
+                    <InputField
+                        name="number"
+                        placeholder={t('checkout.address.number')}
+                        autoComplete="address-line2"
+                        maxLength={20}
+                        value={formData.number}
+                        onChange={handleChange('number')}
+                        error={errors.number}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* Bairro */}
-                <InputField
-                    name="neighborhood"
-                    placeholder={t('checkout.address.neighborhood')}
-                    autoComplete="address-level3"
-                    maxLength={100}
-                    value={formData.neighborhood}
-                    onChange={handleChange('neighborhood')}
-                    error={errors.neighborhood}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Complemento - Half */}
+                <div className="col-span-1">
+                    <InputField
+                        name="complement"
+                        placeholder={t('checkout.address.complement')}
+                        required={false}
+                        autoComplete="address-line2"
+                        maxLength={100}
+                        value={formData.complement}
+                        onChange={handleChange('complement')}
+                        error={errors.complement}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* Complemento */}
-                <InputField
-                    name="complement"
-                    placeholder={t('checkout.address.complement')}
-                    required={false}
-                    autoComplete="address-line2"
-                    maxLength={100}
-                    value={formData.complement}
-                    onChange={handleChange('complement')}
-                    error={errors.complement}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Bairro - Half */}
+                <div className="col-span-1">
+                    <InputField
+                        name="neighborhood"
+                        placeholder={t('checkout.address.neighborhood')}
+                        autoComplete="address-level3"
+                        maxLength={100}
+                        value={formData.neighborhood}
+                        onChange={handleChange('neighborhood')}
+                        error={errors.neighborhood}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* Cidade */}
-                <InputField
-                    name="city"
-                    placeholder={t('checkout.address.city')}
-                    autoComplete="address-level2"
-                    maxLength={100}
-                    value={formData.city}
-                    onChange={handleChange('city')}
-                    error={errors.city}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Cidade - Half */}
+                <div className="col-span-1">
+                    <InputField
+                        name="city"
+                        placeholder={t('checkout.address.city')}
+                        autoComplete="address-level2"
+                        maxLength={100}
+                        value={formData.city}
+                        onChange={handleChange('city')}
+                        error={errors.city}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
 
-                {/* Estado */}
-                <InputField
-                    name="state"
-                    placeholder={t('checkout.address.state')}
-                    autoComplete="address-level1"
-                    maxLength={2}
-                    value={formData.state}
-                    onChange={handleChange('state')}
-                    error={errors.state}
-                    t={t}
-                    isRTL={isRTL}
-                />
+                {/* Estado - Full or Half? Let's make it distinct */}
+                <div className="col-span-2 md:col-span-1">
+                    <InputField
+                        name="state"
+                        placeholder={t('checkout.address.state')}
+                        autoComplete="address-level1"
+                        maxLength={2}
+                        value={formData.state}
+                        onChange={handleChange('state')}
+                        error={errors.state}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
             </div>
 
             <button

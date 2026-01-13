@@ -49,7 +49,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                             <div className="flex items-center gap-5">
                                 {/* Visa - Official logo image */}
                                 <div className="h-12 px-4 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <img src="/visa-logo.png" alt="Visa" className="h-8 object-contain" />
+                                    <img src="/visa-logo.png" alt="Visa" className="h-10 object-contain" />
                                 </div>
                                 {/* Mastercard - Official overlapping circles */}
                                 <div className="h-12 px-3 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">

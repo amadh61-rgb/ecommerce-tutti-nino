@@ -140,9 +140,9 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
             )}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {/* Nome Completo - Full Width */}
-                <div className="col-span-2">
+                <div className="col-span-2 w-full">
                     <InputField
                         name="name"
                         placeholder={t('checkout.address.name')}
@@ -158,7 +158,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* CPF / CNPJ - Full Width */}
-                <div className="col-span-2">
+                <div className="col-span-2 w-full">
                     <InputField
                         name="document"
                         placeholder={t('checkout.address.document') || 'CPF / CNPJ'}
@@ -173,7 +173,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* Telefone - Half Width */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="phone"
                         placeholder={t('checkout.address.phone')}
@@ -191,7 +191,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* CEP - Half Width */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="cep"
                         placeholder={t('checkout.address.cep')}
@@ -206,9 +206,8 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     />
                 </div>
 
-                {/* Rua - Half Width on Desktop, Full on Mobile? No, strictly follow design */}
-                {/* Original was md:col-span-1 (Half) but Screenshot showed Full. Let's make Street Full Width for better UX */}
-                <div className="col-span-2">
+                {/* Rua - Full Width */}
+                <div className="col-span-2 w-full">
                     <InputField
                         name="street"
                         placeholder={t('checkout.address.street')}
@@ -223,7 +222,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* Número - Half */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="number"
                         placeholder={t('checkout.address.number')}
@@ -238,7 +237,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* Complemento - Half */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="complement"
                         placeholder={t('checkout.address.complement')}
@@ -254,7 +253,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* Bairro - Half */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="neighborhood"
                         placeholder={t('checkout.address.neighborhood')}
@@ -269,7 +268,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                 </div>
 
                 {/* Cidade - Half */}
-                <div className="col-span-1">
+                <div className="col-span-1 w-full min-w-0">
                     <InputField
                         name="city"
                         placeholder={t('checkout.address.city')}
@@ -283,8 +282,8 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     />
                 </div>
 
-                {/* Estado - Full or Half? Let's make it distinct */}
-                <div className="col-span-2 md:col-span-1">
+                {/* Estado - Half on Tablet/Desktop, Full on Mobile? Let's use Full for clarity or Half if safe */}
+                <div className="col-span-2 sm:col-span-1 w-full min-w-0">
                     <InputField
                         name="state"
                         placeholder={t('checkout.address.state')}

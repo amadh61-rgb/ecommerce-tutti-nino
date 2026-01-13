@@ -61,17 +61,9 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
-                                {/* Elo - Official circular logo */}
-                                <div className="h-10 w-10 bg-black rounded-full shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow overflow-hidden">
-                                    <svg viewBox="0 0 100 100" className="h-full w-full">
-                                        <circle cx="50" cy="50" r="50" fill="black" />
-                                        {/* "elo" text */}
-                                        <text x="10" y="58" fill="white" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif">el</text>
-                                        {/* Colored ring for "o" */}
-                                        <path d="M75,35 A18,18 0 0,1 75,65" fill="none" stroke="#FFCB05" strokeWidth="6" strokeLinecap="round" />
-                                        <path d="M75,65 A18,18 0 0,1 57,50" fill="none" stroke="#00A4E0" strokeWidth="6" strokeLinecap="round" />
-                                        <path d="M57,50 A18,18 0 0,1 75,35" fill="none" stroke="#EF4123" strokeWidth="6" strokeLinecap="round" />
-                                    </svg>
+                                {/* Elo - Official logo image */}
+                                <div className="h-10 w-10 rounded-full shadow-sm flex items-center justify-center overflow-hidden hover:shadow-md transition-shadow">
+                                    <img src="/elo-logo.png" alt="Elo" className="h-full w-full object-cover" />
                                 </div>
                                 {/* Pix - Official logo with icon and text */}
                                 <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center gap-1 border border-slate-100 hover:shadow-md transition-shadow">

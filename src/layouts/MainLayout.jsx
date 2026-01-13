@@ -10,6 +10,7 @@ import AnnouncementBar from '../components/AnnouncementBar';
 import CookieBanner from '../components/CookieBanner';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
 import ReloadPrompt from '../components/ReloadPrompt';
+import LanguageSelector from '../components/LanguageSelector';
 
 import SEO from '../components/SEO';
 import SkipLinks from '../components/SkipLinks';
@@ -366,12 +367,11 @@ export default function MainLayout() {
                                 <button onClick={() => { openModal('login'); setIsMobileMenuOpen(false); }} className="flex items-center gap-3 text-sky-600 font-semibold text-left py-3 w-full touch-target">
                                     <User className="w-5 h-5" /> {t('nav.account')}
                                 </button>
-                                <button onClick={() => { setActiveDrawer('tracking'); setIsMobileMenuOpen(false); }} className="flex items-center gap-3 text-sky-600 font-semibold text-left py-3 w-full touch-target">
-                                    <PackageSearch className="w-5 h-5" /> {t('nav.tracking')}
-                                </button>
-                                <button onClick={() => { setActiveDrawer('favorites'); setIsMobileMenuOpen(false); }} className="flex items-center gap-3 text-pink-500 font-semibold text-left py-3 w-full touch-target">
-                                    <Heart className="w-5 h-5" /> {t('nav.favorites')} {favorites.length > 0 && <span className="bg-pink-100 text-pink-600 text-xs px-2 py-1 rounded-full">{favorites.length}</span>}
-                                </button>
+                                {/* Language Selector */}
+                                <div className="py-3">
+                                    <span className="text-sm text-slate-500 mb-2 block">{t('common.language')}</span>
+                                    <LanguageSelector />
+                                </div>
                             </div>
                         </div>
                     </div>

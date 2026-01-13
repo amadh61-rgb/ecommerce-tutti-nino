@@ -195,6 +195,7 @@ export const arSA = {
         },
     },
     common: {
+        menu: 'القائمة',
         loading: 'جاري التحميل...',
         error: 'خطأ',
         success: 'تم بنجاح',
@@ -207,6 +208,7 @@ export const arSA = {
         seeMore: 'المزيد',
         seeLess: 'أقل',
         processing: 'جاري المعالجة...',
+        language: 'اللغة',
     },
     errors: {
         required: 'حقل مطلوب',

@@ -194,6 +194,7 @@ export const enUS = {
         },
     },
     common: {
+        menu: 'Menu',
         loading: 'Loading...',
         error: 'Error',
         success: 'Success',
@@ -206,6 +207,7 @@ export const enUS = {
         seeMore: 'See More',
         seeLess: 'See Less',
         processing: 'Processing...',
+        language: 'Language',
     },
     errors: {
         required: 'Required field',

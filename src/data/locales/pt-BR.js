@@ -194,6 +194,7 @@ export const ptBR = {
         },
     },
     common: {
+        menu: 'Menu',
         loading: 'Carregando...',
         error: 'Erro',
         success: 'Sucesso',
@@ -206,6 +207,7 @@ export const ptBR = {
         seeMore: 'Ver Mais',
         seeLess: 'Ver Menos',
         processing: 'Processando...',
+        language: 'Idioma',
     },
     errors: {
         required: 'Campo obrigatório',

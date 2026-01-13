@@ -194,6 +194,7 @@ export const esES = {
         },
     },
     common: {
+        menu: 'Menú',
         loading: 'Cargando...',
         error: 'Error',
         success: 'Éxito',
@@ -206,6 +207,7 @@ export const esES = {
         seeMore: 'Ver Más',
         seeLess: 'Ver Menos',
         processing: 'Procesando...',
+        language: 'Idioma',
     },
     errors: {
         required: 'Campo obligatorio',

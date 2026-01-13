@@ -165,6 +165,11 @@ export const enUS = {
         terms: 'Terms of Use',
         contact: 'Contact Us',
         copyright: '© 2026 Tutti & Nino. All rights reserved.',
+        paymentMethods: 'Payment Methods',
+        security: 'Security',
+        securePurchase: 'Secure',
+        secureLabel: 'Purchase',
+        followUs: 'Follow Us',
         company: {
             razaoSocial: 'Company Name',
             cnpj: 'Tax ID',

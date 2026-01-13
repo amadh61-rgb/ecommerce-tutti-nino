@@ -165,6 +165,11 @@ export const ptBR = {
         terms: 'Termos de Uso',
         contact: 'Fale Conosco',
         copyright: '© 2026 Tutti & Nino. Todos os direitos reservados.',
+        paymentMethods: 'Formas de Pagamento',
+        security: 'Segurança',
+        securePurchase: 'Compra',
+        secureLabel: 'Segura',
+        followUs: 'Siga-nos',
         company: {
             razaoSocial: 'Razão Social',
             cnpj: 'CNPJ',

@@ -165,6 +165,11 @@ export const esES = {
         terms: 'Términos de Uso',
         contact: 'Contáctanos',
         copyright: '© 2026 Tutti & Nino. Todos los derechos reservados.',
+        paymentMethods: 'Formas de Pago',
+        security: 'Seguridad',
+        securePurchase: 'Compra',
+        secureLabel: 'Segura',
+        followUs: 'Síguenos',
         company: {
             razaoSocial: 'Razón Social',
             cnpj: 'RUC/NIT',

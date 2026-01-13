@@ -166,6 +166,11 @@ export const arSA = {
         terms: 'شروط الاستخدام',
         contact: 'اتصل بنا',
         copyright: '© 2026 Tutti & Nino. جميع الحقوق محفوظة.',
+        paymentMethods: 'طرق الدفع',
+        security: 'الأمان',
+        securePurchase: 'شراء',
+        secureLabel: 'آمن',
+        followUs: 'تابعنا',
         company: {
             razaoSocial: 'اسم الشركة',
             cnpj: 'السجل التجاري',

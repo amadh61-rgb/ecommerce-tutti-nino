@@ -61,12 +61,15 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
-                                {/* Elo - Official logo with colored circles */}
-                                <div className="h-8 w-12 bg-black rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <svg viewBox="0 0 100 100" className="h-6 w-6">
-                                        <circle fill="#FFCB05" cx="30" cy="35" r="18" />
-                                        <circle fill="#00A4E0" cx="70" cy="35" r="18" />
-                                        <circle fill="#EF4123" cx="50" cy="65" r="18" />
+                                {/* Elo - Official logo with text and colored ring */}
+                                <div className="h-8 w-14 bg-black rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow overflow-hidden">
+                                    <svg viewBox="0 0 100 40" className="h-5">
+                                        {/* "el" text */}
+                                        <text x="5" y="28" fill="white" fontSize="22" fontWeight="bold" fontFamily="Arial, sans-serif">el</text>
+                                        {/* "o" with colored ring */}
+                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#FFCB05" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="0" />
+                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#00A4E0" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="-18.85" />
+                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#EF4123" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="-37.7" />
                                     </svg>
                                 </div>
                                 {/* Pix - Official logo with icon and text */}

@@ -46,31 +46,31 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                         {/* Payment Methods */}
                         <div className="flex flex-col items-center gap-4">
                             <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.paymentMethods')}</span>
-                            <div className="flex items-center gap-4">
+                            <div className="flex items-center gap-5">
                                 {/* Visa - Official logo image */}
-                                <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <img src="/visa-logo.png" alt="Visa" className="h-5 object-contain" />
+                                <div className="h-12 px-4 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
+                                    <img src="/visa-logo.png" alt="Visa" className="h-8 object-contain" />
                                 </div>
                                 {/* Mastercard - Official overlapping circles */}
-                                <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <svg viewBox="0 0 131.39 86.9" className="h-6">
+                                <div className="h-12 px-3 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
+                                    <svg viewBox="0 0 131.39 86.9" className="h-9">
                                         <circle fill="#EB001B" cx="43.45" cy="43.45" r="43.45" />
                                         <circle fill="#F79E1B" cx="87.94" cy="43.45" r="43.45" />
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
                                 {/* Elo - Official logo image */}
-                                <div className="h-10 w-10 rounded-full shadow-sm flex items-center justify-center overflow-hidden hover:shadow-md transition-shadow">
+                                <div className="h-12 w-12 rounded-full shadow-sm flex items-center justify-center overflow-hidden hover:shadow-md transition-shadow">
                                     <img src="/elo-logo.png" alt="Elo" className="h-full w-full object-cover" />
                                 </div>
                                 {/* Pix - Official logo with icon and text */}
-                                <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center gap-1 border border-slate-100 hover:shadow-md transition-shadow">
-                                    <svg viewBox="0 0 512 512" className="h-4 w-4">
+                                <div className="h-12 px-3 bg-white rounded-lg shadow-sm flex items-center justify-center gap-2 border border-slate-100 hover:shadow-md transition-shadow">
+                                    <svg viewBox="0 0 512 512" className="h-6 w-6">
                                         <path fill="#32BCAD" d="M112.57 391.19c20.056 0 38.928-7.808 53.12-22l76.693-76.692c5.385-5.404 14.765-5.384 20.15 0l76.989 76.989c14.191 14.172 33.045 21.98 53.12 21.98h15.098l-97.138 97.139c-30.326 30.344-79.505 30.344-109.85 0l-97.415-97.416h9.232zm280.068-271.294c-20.056 0-38.929 7.809-53.12 22l-76.97 76.99c-5.551 5.53-14.6 5.568-20.15-.02l-76.711-76.693c-14.192-14.191-33.046-21.999-53.12-21.999h-9.234l97.416-97.416c30.344-30.344 79.523-30.344 109.867 0l97.138 97.138h-15.116z" />
                                         <path fill="#32BCAD" d="M112.57 266.156h-9.232L6.149 168.967c-8.187-8.187-8.187-21.452 0-29.64l47.104-47.123 59.317 59.317c14.192 14.192 22 33.064 22 53.12 0 20.075-7.808 38.947-22 53.139zm280.068 0c20.075-20.075 20.075-52.641 0-72.716L333.32 134.12l59.013-59.013 47.104 47.104c8.188 8.187 8.188 21.452 0 29.64l-97.16 97.157h15.098z" />
                                         <path fill="#32BCAD" d="M392.638 266.156h15.098l97.16 97.16c8.188 8.186 8.188 21.45 0 29.639l-47.104 47.104-59.013-59.013c-14.192-14.192-22-33.065-22-53.12 0-20.057 7.808-38.929 22-53.121zm-280.068 0c-14.192 14.192-22 33.064-22 53.12 0 20.056 7.808 38.929 22 53.12l59.298 59.31-59.014 59.012-47.103-47.103c-8.188-8.188-8.188-21.453 0-29.64l97.188-97.188-15.098.001z" />
                                     </svg>
-                                    <span className="text-[#32BCAD] font-medium text-sm">pix</span>
+                                    <span className="text-[#32BCAD] font-bold text-lg">pix</span>
                                 </div>
                             </div>
                         </div>

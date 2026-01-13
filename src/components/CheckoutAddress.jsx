@@ -4,6 +4,37 @@ import { addressSchema, validateForm, formatCEP, formatPhone, sanitizeString } f
 import { detectXSS } from '../utils/security';
 import { useI18n } from '../hooks/useI18n';
 
+// Component moved outside to prevent re-renders
+const InputField = ({ name, placeholder, type = 'text', icon: Icon, autoComplete, required = true, inputMode, maxLength, value, onChange, error, t, isRTL }) => (
+    <div className="relative">
+        {Icon && (
+            <Icon className={`absolute ${isRTL ? 'right-3' : 'left-3'} top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400`} />
+        )}
+        <input
+            id={name}
+            type={type}
+            name={name}
+            required={required}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+            autoComplete={autoComplete}
+            inputMode={inputMode}
+            maxLength={maxLength}
+            className={`w-full ${Icon ? (isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4') : 'px-4'} py-3 rounded-xl border ${error
+                ? 'border-red-400 bg-red-50'
+                : 'border-slate-200'
+                } focus:outline-none focus:ring-2 focus:ring-pink-300 transition-all font-medium text-slate-700`}
+        />
+        {error && (
+            <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
+                <AlertCircle className="w-3 h-3" />
+                {t(error)}
+            </p>
+        )}
+    </div>
+);
+
 export default function CheckoutAddress({ onSubmit, initialData }) {
     const { t, isRTL } = useI18n();
     const [formData, setFormData] = useState(initialData || {
@@ -91,37 +122,6 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
         }, 500);
     };
 
-    // Componente de campo com erro
-    const InputField = ({ name, label, placeholder, type = 'text', icon: Icon, autoComplete, required = true, inputMode, maxLength }) => (
-        <div className="relative">
-            {Icon && (
-                <Icon className={`absolute ${isRTL ? 'right-3' : 'left-3'} top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400`} />
-            )}
-            <input
-                id={name}
-                type={type}
-                name={name}
-                required={required}
-                placeholder={placeholder}
-                value={formData[name]}
-                onChange={handleChange(name)}
-                autoComplete={autoComplete}
-                inputMode={inputMode}
-                maxLength={maxLength}
-                className={`w-full ${Icon ? (isRTL ? 'pr-10 pl-4' : 'pl-10 pr-4') : 'px-4'} py-3 rounded-xl border ${errors[name]
-                    ? 'border-red-400 bg-red-50'
-                    : 'border-slate-200'
-                    } focus:outline-none focus:ring-2 focus:ring-pink-300 transition-all font-medium text-slate-700`}
-            />
-            {errors[name] && (
-                <p className="text-red-500 text-xs mt-1 flex items-center gap-1">
-                    <AlertCircle className="w-3 h-3" />
-                    {t(errors[name])}
-                </p>
-            )}
-        </div>
-    );
-
     return (
         <form onSubmit={handleSubmit} className="space-y-6 animate-fade-in">
             <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
@@ -145,6 +145,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                         icon={User}
                         autoComplete="name"
                         maxLength={100}
+                        value={formData.name}
+                        onChange={handleChange('name')}
+                        error={errors.name}
+                        t={t}
+                        isRTL={isRTL}
                     />
                 </div>
 
@@ -157,6 +162,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     autoComplete="tel"
                     inputMode="numeric"
                     maxLength={15}
+                    value={formData.phone}
+                    onChange={handleChange('phone')}
+                    error={errors.phone}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* CEP */}
@@ -166,6 +176,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     autoComplete="postal-code"
                     inputMode="numeric"
                     maxLength={9}
+                    value={formData.cep}
+                    onChange={handleChange('cep')}
+                    error={errors.cep}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* Rua */}
@@ -175,6 +190,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                         placeholder={t('checkout.address.street')}
                         autoComplete="street-address"
                         maxLength={200}
+                        value={formData.street}
+                        onChange={handleChange('street')}
+                        error={errors.street}
+                        t={t}
+                        isRTL={isRTL}
                     />
                 </div>
 
@@ -184,6 +204,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     placeholder={t('checkout.address.number')}
                     autoComplete="address-line2"
                     maxLength={20}
+                    value={formData.number}
+                    onChange={handleChange('number')}
+                    error={errors.number}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* Bairro */}
@@ -192,6 +217,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     placeholder={t('checkout.address.neighborhood')}
                     autoComplete="address-level3"
                     maxLength={100}
+                    value={formData.neighborhood}
+                    onChange={handleChange('neighborhood')}
+                    error={errors.neighborhood}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* Complemento */}
@@ -201,6 +231,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     required={false}
                     autoComplete="address-line2"
                     maxLength={100}
+                    value={formData.complement}
+                    onChange={handleChange('complement')}
+                    error={errors.complement}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* Cidade */}
@@ -209,6 +244,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     placeholder={t('checkout.address.city')}
                     autoComplete="address-level2"
                     maxLength={100}
+                    value={formData.city}
+                    onChange={handleChange('city')}
+                    error={errors.city}
+                    t={t}
+                    isRTL={isRTL}
                 />
 
                 {/* Estado */}
@@ -217,6 +257,11 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                     placeholder={t('checkout.address.state')}
                     autoComplete="address-level1"
                     maxLength={2}
+                    value={formData.state}
+                    onChange={handleChange('state')}
+                    error={errors.state}
+                    t={t}
+                    isRTL={isRTL}
                 />
             </div>
 

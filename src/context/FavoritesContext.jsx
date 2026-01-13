@@ -1,0 +1,139 @@
+// src/context/FavoritesContext.jsx
+import React, { createContext, useState, useCallback, useMemo, useEffect } from 'react';
+
+export const FavoritesContext = createContext(null);
+
+// Configurações de segurança
+const FAVORITES_STORAGE_KEY = 'tutti_nino_favorites';
+const MAX_FAVORITES = 100; // Limite máximo de favoritos
+
+/**
+ * Valida que um ID é um número positivo válido
+ */
+function isValidId(id) {
+    return typeof id === 'number' && Number.isInteger(id) && id > 0 && id < Number.MAX_SAFE_INTEGER;
+}
+
+/**
+ * Carrega e valida favoritos do localStorage
+ */
+function loadFavoritesFromStorage() {
+    try {
+        const saved = localStorage.getItem(FAVORITES_STORAGE_KEY);
+        if (!saved) return [];
+
+        const parsed = JSON.parse(saved);
+
+        // Validar que é um array
+        if (!Array.isArray(parsed)) {
+            localStorage.removeItem(FAVORITES_STORAGE_KEY);
+            return [];
+        }
+
+        // Filtrar apenas IDs válidos e limitar quantidade
+        const validIds = parsed
+            .filter(isValidId)
+            .slice(0, MAX_FAVORITES);
+
+        // Remover duplicatas
+        return [...new Set(validIds)];
+    } catch {
+        // Se falhar, limpar dados corrompidos
+        localStorage.removeItem(FAVORITES_STORAGE_KEY);
+        return [];
+    }
+}
+
+/**
+ * Salva favoritos no localStorage com validação
+ */
+function saveFavoritesToStorage(favorites) {
+    try {
+        // Validar antes de salvar
+        const validFavorites = favorites
+            .filter(isValidId)
+            .slice(0, MAX_FAVORITES);
+
+        localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(validFavorites));
+    } catch {
+        // Falha silenciosa (localStorage cheio, etc)
+    }
+}
+
+export const FavoritesProvider = ({ children }) => {
+    // Inicializar do localStorage com validação
+    const [favorites, setFavorites] = useState(loadFavoritesFromStorage);
+
+    // Persistir no localStorage quando mudar
+    useEffect(() => {
+        saveFavoritesToStorage(favorites);
+    }, [favorites]);
+
+    const toggleFavorite = useCallback((event, productId) => {
+        // Se vier de um evento, evitar propagação
+        if (event?.stopPropagation) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        // Se productId for passado diretamente (sem evento)
+        const id = typeof event === 'number' ? event : productId;
+
+        // Validar ID
+        if (!isValidId(id)) return;
+
+        setFavorites((prev) => {
+            if (prev.includes(id)) {
+                return prev.filter((favId) => favId !== id);
+            }
+            // Verificar limite antes de adicionar
+            if (prev.length >= MAX_FAVORITES) {
+                return prev;
+            }
+            return [...prev, id];
+        });
+    }, []);
+
+    const addFavorite = useCallback((productId) => {
+        if (!isValidId(productId)) return;
+
+        setFavorites((prev) => {
+            if (prev.includes(productId)) return prev;
+            if (prev.length >= MAX_FAVORITES) return prev;
+            return [...prev, productId];
+        });
+    }, []);
+
+    const removeFavorite = useCallback((productId) => {
+        if (!isValidId(productId)) return;
+        setFavorites((prev) => prev.filter((id) => id !== productId));
+    }, []);
+
+    const isFavorite = useCallback(
+        (productId) => isValidId(productId) && favorites.includes(productId),
+        [favorites]
+    );
+
+    const favoritesCount = useMemo(() => favorites.length, [favorites]);
+
+    const clearFavorites = useCallback(() => {
+        setFavorites([]);
+    }, []);
+
+    return (
+        <FavoritesContext.Provider
+            value={{
+                favorites,
+                toggleFavorite,
+                addFavorite,
+                removeFavorite,
+                isFavorite,
+                favoritesCount,
+                clearFavorites,
+                maxFavorites: MAX_FAVORITES
+            }}
+        >
+            {children}
+        </FavoritesContext.Provider>
+    );
+};

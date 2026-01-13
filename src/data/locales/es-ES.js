@@ -122,6 +122,7 @@ export const esES = {
             pixMessage: 'El código PIX se generará en el siguiente paso.',
             pixSecure: 'Aprobación inmediata y más seguridad.',
             boleto: 'Boleto',
+            installments: 'Cuotas',
             acceptedCards: 'Tarjetas Aceptadas',
             secure: 'Entorno 100% Seguro • Tus datos están encriptados',
         },

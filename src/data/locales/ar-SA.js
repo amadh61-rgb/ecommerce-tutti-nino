@@ -123,6 +123,7 @@ export const arSA = {
             pixMessage: 'سيتم إنشاء رمز PIX في الخطوة التالية.',
             pixSecure: 'موافقة فورية ومزيد من الأمان.',
             boleto: 'قسيمة بنكية',
+            installments: 'أقساط',
             acceptedCards: 'البطاقات المقبولة',
             secure: 'بيئة آمنة 100٪ • بياناتك مشفرة',
         },

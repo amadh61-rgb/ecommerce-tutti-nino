@@ -122,6 +122,7 @@ export const enUS = {
             pixMessage: 'The PIX code will be generated in the next step.',
             pixSecure: 'Immediate approval and more security.',
             boleto: 'Bank Slip',
+            installments: 'Installments',
             acceptedCards: 'Accepted Cards',
             secure: '100% Secure Environment • Your data is encrypted',
         },

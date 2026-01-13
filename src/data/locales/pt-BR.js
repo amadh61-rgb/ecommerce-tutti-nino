@@ -122,6 +122,7 @@ export const ptBR = {
             pixMessage: 'O código PIX será gerado na próxima etapa.',
             pixSecure: 'Aprovação imediata e mais segurança.',
             boleto: 'Boleto',
+            installments: 'Parcelamento',
             acceptedCards: 'Cartões Aceitos',
             secure: 'Ambiente 100% Seguro • Seus dados são criptografados',
         },

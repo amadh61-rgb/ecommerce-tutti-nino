@@ -280,9 +280,8 @@ export default function CheckoutPayment({ onSubmit, total }) {
 
             <div className="bg-slate-800 text-white p-4 rounded-xl flex items-center justify-between">
                 <span className="font-medium text-slate-300">{t('cart.total')}</span>
-                <span className="text-xl font-bold">
-                    <span>{t('cart.total')}:</span>
-                    <span className="text-xl text-slate-800">{formatCurrency(total)}</span>
+                <span className="text-xl font-bold text-white">
+                    {formatCurrency(total)}
                 </span>
             </div>
 

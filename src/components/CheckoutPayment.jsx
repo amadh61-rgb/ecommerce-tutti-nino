@@ -20,7 +20,8 @@ export default function CheckoutPayment({ onSubmit, total }) {
         cardNumber: '',
         cardName: '',
         expiry: '',
-        cvv: ''
+        cvv: '',
+        installments: '1'
     });
 
     // Formatar número do cartão enquanto digita
@@ -108,11 +109,11 @@ export default function CheckoutPayment({ onSubmit, total }) {
                     const session = await paymentService.createPaymentSession({
                         amount: total,
                         customer: {
-                            // Em produção, pegar dados reais do form de endereço
                             firstName: formData.cardName.split(' ')[0],
                             lastName: formData.cardName.split(' ').slice(1).join(' '),
                             email: 'cliente@exemplo.com', // Pegar do contexto de auth
                         },
+                        installments: formData.installments, // Passar parcelas
                         items: [], // Pegar do carrinho
                         orderId: `ORD-${Date.now()}`
                     });
@@ -266,6 +267,32 @@ export default function CheckoutPayment({ onSubmit, total }) {
                         {errors.cardName && (
                             <p className="text-red-500 text-xs mt-1">{t(errors.cardName)}</p>
                         )}
+                    </div>
+
+                    {/* Parcelas */}
+                    <div>
+                        <label htmlFor="installments" className="block text-xs font-bold text-slate-500 mb-1 uppercase tracking-wide">
+                            {t('checkout.payment.installments') || 'Parcelamento'}
+                        </label>
+                        <div className="relative">
+                            <select
+                                id="installments"
+                                value={formData.installments}
+                                onChange={handleInputChange('installments')}
+                                className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-300 transition-all font-medium text-slate-700 appearance-none bg-white"
+                            >
+                                {Array.from({ length: 12 }, (_, i) => i + 1)
+                                    .filter(qty => total / qty >= 5) // Parcela mínima de R$ 5,00
+                                    .map(qty => (
+                                        <option key={qty} value={qty}>
+                                            {qty}x de {formatCurrency(total / qty)} {qty === 1 ? 'à vista' : 'sem juros'}
+                                        </option>
+                                    ))}
+                            </select>
+                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                            </div>
+                        </div>
                     </div>
                 </form>
             )}

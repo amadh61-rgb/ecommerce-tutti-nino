@@ -47,11 +47,9 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                         <div className="flex flex-col items-center gap-4">
                             <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.paymentMethods')}</span>
                             <div className="flex items-center gap-4">
-                                {/* Visa - Official logo */}
-                                <div className="h-8 px-3 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <svg viewBox="0 0 1000 324.68" className="h-5">
-                                        <path fill="#1434CB" d="M651.19 0.5c-70.933 0-134.32 36.766-134.32 104.69 0 77.9 112.42 83.28 112.42 122.42 0 16.478-18.884 31.229-51.137 31.229-45.773 0-79.984-20.611-79.984-20.611l-14.638 68.547s39.41 17.41 91.734 17.41c77.552 0 138.58-38.571 138.58-107.66 0-82.316-112.89-87.536-112.89-123.86 0-12.908 15.502-27.052 47.66-27.052 36.287 0 65.892 14.99 65.892 14.99l14.326-66.204S696.22.5 651.19.5zM2.218 5.497L0 18.159s29.842 5.461 56.719 16.356c34.607 12.493 37.072 19.765 42.9 42.354l63.51 244.83h85.137L379.93 5.497h-84.942l-84.278 218.6-34.109-183.28c-3.2-20.467-19.543-35.32-40.091-35.32H2.218zm411.865 0l-66.634 316.2h80.999l66.4-316.2h-80.765zm451.76 0c-20.586 0-31.05 11.07-38.897 30.4L709.5 321.7h84.942l16.434-47.467h103.48l9.994 47.467h74.948L934.11 5.497h-68.267zm11.047 84.707l25.178 117.65h-67.454l42.276-117.65z" />
-                                    </svg>
+                                {/* Visa - Official logo image */}
+                                <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
+                                    <img src="/visa-logo.png" alt="Visa" className="h-5 object-contain" />
                                 </div>
                                 {/* Mastercard - Official overlapping circles */}
                                 <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">

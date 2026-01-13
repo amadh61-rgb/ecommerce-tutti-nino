@@ -61,9 +61,13 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
-                                {/* Elo - Official logo */}
-                                <div className="h-8 px-3 bg-black rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
-                                    <span className="text-yellow-400 font-bold text-sm tracking-wide">elo</span>
+                                {/* Elo - Official logo with colored circles */}
+                                <div className="h-8 w-12 bg-black rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
+                                    <svg viewBox="0 0 100 100" className="h-6 w-6">
+                                        <circle fill="#FFCB05" cx="30" cy="35" r="18" />
+                                        <circle fill="#00A4E0" cx="70" cy="35" r="18" />
+                                        <circle fill="#EF4123" cx="50" cy="65" r="18" />
+                                    </svg>
                                 </div>
                                 {/* Pix - Official diamond logo */}
                                 <div className="h-8 px-2 bg-white rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">

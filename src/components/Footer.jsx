@@ -61,15 +61,16 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
-                                {/* Elo - Official logo with text and colored ring */}
-                                <div className="h-8 w-14 bg-black rounded-md shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow overflow-hidden">
-                                    <svg viewBox="0 0 100 40" className="h-5">
-                                        {/* "el" text */}
-                                        <text x="5" y="28" fill="white" fontSize="22" fontWeight="bold" fontFamily="Arial, sans-serif">el</text>
-                                        {/* "o" with colored ring */}
-                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#FFCB05" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="0" />
-                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#00A4E0" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="-18.85" />
-                                        <circle cx="62" cy="20" r="12" fill="none" stroke="#EF4123" strokeWidth="5" strokeDasharray="18.85 56.55" strokeDashoffset="-37.7" />
+                                {/* Elo - Official circular logo */}
+                                <div className="h-10 w-10 bg-black rounded-full shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow overflow-hidden">
+                                    <svg viewBox="0 0 100 100" className="h-full w-full">
+                                        <circle cx="50" cy="50" r="50" fill="black" />
+                                        {/* "elo" text */}
+                                        <text x="10" y="58" fill="white" fontSize="28" fontWeight="bold" fontFamily="Arial, sans-serif">el</text>
+                                        {/* Colored ring for "o" */}
+                                        <path d="M75,35 A18,18 0 0,1 75,65" fill="none" stroke="#FFCB05" strokeWidth="6" strokeLinecap="round" />
+                                        <path d="M75,65 A18,18 0 0,1 57,50" fill="none" stroke="#00A4E0" strokeWidth="6" strokeLinecap="round" />
+                                        <path d="M57,50 A18,18 0 0,1 75,35" fill="none" stroke="#EF4123" strokeWidth="6" strokeLinecap="round" />
                                     </svg>
                                 </div>
                                 {/* Pix - Official logo with icon and text */}

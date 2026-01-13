@@ -100,6 +100,7 @@ export const enUS = {
         address: {
             title: 'Shipping Address',
             name: 'Full Name',
+            document: 'Tax ID (CPF/CNPJ)',
             cep: 'ZIP Code',
             street: 'Street',
             number: 'Number',

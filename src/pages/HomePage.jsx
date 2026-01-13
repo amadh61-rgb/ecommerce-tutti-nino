@@ -24,6 +24,7 @@ export default function HomePage() {
     const [searchQuery, setSearchQuery] = useState(searchParam);
     const [filteredProducts, setFilteredProducts] = useState(productsData);
     const [activeDot, setActiveDot] = useState(0);
+    const [activeTestimonial, setActiveTestimonial] = useState(0); // Novo state para testemunhos
     const [quickViewProduct, setQuickViewProduct] = useState(null);
 
     const { addToCart } = useCart();
@@ -146,12 +147,33 @@ export default function HomePage() {
             <section className="py-20 bg-sky-50">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl font-bold text-slate-800 mb-4">{t('testimonials.title')}</h2>
+                        <h2 className="text-[17px] md:text-3xl font-bold text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis px-4">
+                            {t('testimonials.title')}
+                        </h2>
                         <p className="text-slate-500">{t('testimonials.subtitle')}</p>
                     </div>
-                    <div className="flex overflow-x-auto pt-8 pb-6 -mx-4 px-4 md:grid md:grid-cols-3 gap-6 md:gap-8 mobile-scroll snap-x snap-mandatory md:pb-0 md:mx-0 md:px-0 scrollbar-hide">
+
+                    <div
+                        className="flex overflow-x-auto pt-8 pb-6 -mx-4 px-4 md:grid md:grid-cols-3 gap-6 md:gap-8 mobile-scroll snap-x snap-mandatory md:pb-0 md:mx-0 md:px-0 scrollbar-hide"
+                        onScroll={(e) => {
+                            const scrollLeft = e.currentTarget.scrollLeft;
+                            const width = e.currentTarget.offsetWidth;
+                            const index = Math.round(scrollLeft / width);
+                            setActiveTestimonial(index);
+                        }}
+                    >
                         {testimonials.map((t) => (
                             <TestimonialCard key={t.id} data={t} />
+                        ))}
+                    </div>
+
+                    {/* Dots Indicator (Mobile Only) */}
+                    <div className="flex md:hidden justify-center gap-2 mt-4">
+                        {testimonials.map((_, idx) => (
+                            <div
+                                key={idx}
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeTestimonial ? 'bg-pink-500 w-6' : 'bg-slate-300'}`}
+                            />
                         ))}
                     </div>
                 </div>

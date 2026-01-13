@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CreditCard, QrCode, Lock, AlertCircle } from 'lucide-react';
 import { paymentSchema, formatCardNumber, validateForm } from '../utils/validation';
 import { RateLimiter, detectXSS } from '../utils/security';
+import { paymentService } from '../services/payment';
 import { useI18n } from '../hooks/useI18n';
 
 // Rate limiter para checkout (3 tentativas por 5 minutos)
@@ -100,14 +101,40 @@ export default function CheckoutPayment({ onSubmit, total }) {
         checkoutLimiter.attempt();
 
         // Simular processamento
-        setTimeout(() => {
-            setIsSubmitting(false);
-            onSubmit({
-                method: 'credit',
-                // Nota: Em produção, NUNCA enviar dados de cartão para o backend
-                // Use tokenização do gateway de pagamento
-                lastFour: formData.cardNumber.slice(-4)
-            });
+        setTimeout(async () => {
+            try {
+                if (method === 'credit') {
+                    // Chama BFF para criar sessão segura
+                    const session = await paymentService.createPaymentSession({
+                        amount: total,
+                        customer: {
+                            // Em produção, pegar dados reais do form de endereço
+                            firstName: formData.cardName.split(' ')[0],
+                            lastName: formData.cardName.split(' ').slice(1).join(' '),
+                            email: 'cliente@exemplo.com', // Pegar do contexto de auth
+                        },
+                        items: [], // Pegar do carrinho
+                        orderId: `ORD-${Date.now()}`
+                    });
+
+                    if (session.checkoutUrl) {
+                        window.location.href = session.checkoutUrl; // Redireciona para InfinitePay
+                    } else {
+                        throw new Error('URL de pagamento não gerada');
+                    }
+                } else {
+                    // Mantém fluxo simulado para outros métodos se necessário
+                    onSubmit({
+                        method: 'credit',
+                        lastFour: formData.cardNumber.slice(-4)
+                    });
+                }
+            } catch (err) {
+                console.error(err);
+                setErrors({ _form: 'Erro ao processar pagamento. Tente novamente.' });
+            } finally {
+                setIsSubmitting(false);
+            }
         }, 1000);
     };
 

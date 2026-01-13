@@ -31,19 +31,58 @@ class PaymentService {
      * @returns {Promise<object>} - Sessão de pagamento
      */
     async createPaymentSession(orderData) {
-        // Simulação - será substituído por integração real
-        console.log(`[${this.gateway}] Criando sessão de pagamento...`, orderData);
+        console.log(`[${this.gateway}] Iniciando pagamento seguro...`, orderData);
 
-        // Simular delay de API
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        try {
+            const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-        return {
-            sessionId: `sess_${Date.now()}`,
-            gateway: this.gateway,
-            amount: orderData.total,
-            currency: 'BRL',
-            status: 'pending'
-        };
+            // Tentar chamar a API
+            let response;
+            try {
+                response = await fetch('/api/create-payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+            } catch (fetchError) {
+                // Se falhar o fetch e for localhost, assumimos que é porque a API Route não existe no Vite
+                if (isLocalhost) {
+                    console.warn('[DEV] Simulando resposta da API InfinitePay (Localhost)');
+                    await new Promise(r => setTimeout(r, 1000)); // Delay simulado
+                    return {
+                        sessionId: `mock_sess_${Date.now()}`,
+                        checkoutUrl: 'https://pay.infinitepay.io/simulacao', // URL fictícia
+                        status: 'pending'
+                    };
+                }
+                throw fetchError;
+            }
+
+            if (!response.ok) {
+                // Fallback específico para 404 local
+                if (response.status === 404 && isLocalhost) {
+                    console.warn('[DEV] API não encontrada (normal no Vite). Simulando sucesso.');
+                    return {
+                        sessionId: `mock_sess_${Date.now()}`,
+                        checkoutUrl: 'https://pay.infinitepay.io/simulacao',
+                        status: 'pending'
+                    };
+                }
+
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Erro ao iniciar pagamento');
+            }
+
+            const data = await response.json();
+            return {
+                sessionId: data.transactionId,
+                checkoutUrl: data.checkoutUrl,
+                status: 'pending'
+            };
+        } catch (error) {
+            console.error('Payment Service Error:', error);
+            throw error;
+        }
     }
 
     /**

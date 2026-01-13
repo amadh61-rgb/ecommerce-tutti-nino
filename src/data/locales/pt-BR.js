@@ -72,7 +72,7 @@ export const ptBR = {
     },
     testimonials: {
         title: 'Quem comprou, amou! 💖',
-        subtitle: 'Veja o que nossos clientes estão dizendo sobre os produtos.',
+        subtitle: 'Veja o que nossos clientes estão dizendo.',
     },
     cart: {
         title: 'Minha Sacola',
@@ -236,7 +236,7 @@ export const ptBR = {
         cvvInvalid: 'CVV inválido',
     },
     announcement: {
-        freeShipping: '✨ Frete Grátis para todo o Brasil em compras acima de R$ 199,00 🌸',
+        freeShipping: 'Frete Grátis para todo o Brasil em compras acima de R$ 199,00',
     },
     infoStrip: {
         creditCard: 'Até 6x no Cartão de Crédito',

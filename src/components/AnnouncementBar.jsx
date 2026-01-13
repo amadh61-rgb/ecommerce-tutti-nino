@@ -6,7 +6,7 @@ const AnnouncementBar = () => {
 
     return (
         <div className="bg-pink-500 text-white py-3 text-center shadow-md">
-            <p style={{ fontSize: '20px', fontWeight: '800', letterSpacing: '0.5px' }}>
+            <p className="text-xs md:text-xl font-bold md:font-extrabold tracking-tight md:tracking-wide px-1 md:px-4 whitespace-nowrap overflow-hidden text-ellipsis">
                 {t('announcement.freeShipping')}
             </p>
         </div>

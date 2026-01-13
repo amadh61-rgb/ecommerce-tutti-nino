@@ -343,7 +343,10 @@ export default function MainLayout() {
                         <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
                         <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto mobile-scroll safe-top safe-bottom">
                             <div className="flex items-center justify-between mb-6">
-                                <span className="text-2xl font-bold text-pink-500">{t('common.menu') || 'Menu'}</span>
+                                <div className="flex items-center gap-3">
+                                    <span className="text-2xl font-bold text-pink-500">{t('common.menu') || 'Menu'}</span>
+                                    <LanguageSelector />
+                                </div>
                                 <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 touch-target" aria-label={t('aria.closeMenu')}><X className="w-7 h-7 text-slate-400" /></button>
                             </div>
                             {/* Search */}
@@ -363,15 +366,10 @@ export default function MainLayout() {
                                 ))}
                             </nav>
                             {/* Footer Mobile */}
-                            <div className="pt-6 mt-4 border-t border-slate-100 space-y-3">
+                            <div className="pt-6 mt-4 border-t border-slate-100">
                                 <button onClick={() => { openModal('login'); setIsMobileMenuOpen(false); }} className="flex items-center gap-3 text-sky-600 font-semibold text-left py-3 w-full touch-target">
                                     <User className="w-5 h-5" /> {t('nav.account')}
                                 </button>
-                                {/* Language Selector */}
-                                <div className="py-3">
-                                    <span className="text-sm text-slate-500 mb-2 block">{t('common.language')}</span>
-                                    <LanguageSelector />
-                                </div>
                             </div>
                         </div>
                     </div>

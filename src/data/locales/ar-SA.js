@@ -101,6 +101,7 @@ export const arSA = {
         address: {
             title: 'عنوان التوصيل',
             name: 'الاسم الكامل',
+            document: 'رقم الهوية / السجل التجاري',
             cep: 'الرمز البريدي',
             street: 'الشارع',
             number: 'رقم',

@@ -100,6 +100,7 @@ export const esES = {
         address: {
             title: 'Dirección de Entrega',
             name: 'Nombre Completo',
+            document: 'RUC / NIT',
             cep: 'Código Postal',
             street: 'Calle',
             number: 'Número',

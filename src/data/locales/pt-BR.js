@@ -100,6 +100,7 @@ export const ptBR = {
         address: {
             title: 'Endereço de Entrega',
             name: 'Nome Completo',
+            document: 'CPF / CNPJ',
             cep: 'CEP',
             street: 'Rua',
             number: 'Número',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PackageSearch, X, CircleCheck } from 'lucide-react';
+import { PackageSearch, X, CheckCircle } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
 export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrackingCode, trackingResult, setTrackingResult }) {
@@ -61,7 +61,7 @@ export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrack
                         <div className="bg-white p-4 rounded-xl border-2 border-green-100 animate-fade-in shadow-sm">
                             <div className="flex items-start gap-3">
                                 <div className="mt-1 bg-green-100 p-1 rounded-full">
-                                    <CircleCheck className="w-5 h-5 text-green-600" />
+                                    <CheckCircle className="w-5 h-5 text-green-600" />
                                 </div>
                                 <div>
                                     <h4 className="font-bold text-slate-800 text-lg">{trackingResult.status}</h4>

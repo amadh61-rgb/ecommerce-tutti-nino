@@ -41,7 +41,7 @@ import { useFocusTrap } from '../hooks/useFocusTrap';
 import { useI18n } from '../hooks/useI18n';
 
 // Icons
-import { X, User, Mail, Lock, CircleCheck, ChevronDown, ChevronRight, PackageSearch, Heart, Instagram, Search } from 'lucide-react';
+import { X, User, Mail, Lock, CheckCircle, ChevronDown, ChevronRight, PackageSearch, Heart, Instagram, Search } from 'lucide-react';
 
 export default function MainLayout() {
     const navigate = useNavigate();
@@ -380,7 +380,7 @@ export default function MainLayout() {
                 {/* Notifications */}
                 {notification && (
                     <div className="fixed top-24 right-4 z-[90] bg-white shadow-xl rounded-xl p-4 border-l-4 border-pink-400 animate-bounce-in flex items-center gap-3">
-                        <div className="bg-green-100 p-2 rounded-full"><CircleCheck className="w-5 h-5 text-green-600" /></div>
+                        <div className="bg-green-100 p-2 rounded-full"><CheckCircle className="w-5 h-5 text-green-600" /></div>
                         <span className="font-medium text-slate-700">{notification}</span>
                     </div>
                 )}

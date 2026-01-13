@@ -1,37 +1,32 @@
 @echo off
-TITLE Corrigindo Conflito de Dependencias
+TITLE Corrigindo Icones
 cd /d "%~dp0"
 
 echo ==========================================
-echo   REMOVENDO ARQUIVO DE TRAVA (LOCKFILE)
+echo   CORRIGINDO ICONES INCOMPATIVEIS
 echo ==========================================
 
 set GIT_PATH="C:\Program Files\Git\cmd\git.exe"
 if not exist %GIT_PATH% set GIT_PATH=git
 
 echo.
-echo [1/4] Deletando package-lock.json antigo...
-if exist "package-lock.json" del "package-lock.json"
-echo [OK] Arquivo deletado.
-
-echo.
-echo [2/4] Adicionando alteracoes (remocao)...
+echo [1/3] Adicionando alteracoes...
 %GIT_PATH% add .
 echo [OK] Alteracoes registradas.
 
 echo.
-echo [3/4] Criando commit de limpeza...
-%GIT_PATH% commit -m "Fix: Remove package-lock.json to force dependency resolution"
+echo [2/3] Criando commit de correcao...
+%GIT_PATH% commit -m "Fix: Replace CircleCheck with CheckCircle for compatibility"
 echo [OK] Commit criado.
 
 echo.
-echo [4/4] Enviando para o GitHub...
+echo [3/3] Enviando para o GitHub...
 %GIT_PATH% push origin main
 echo [OK] Enviado com sucesso!
 
 echo.
 echo ==========================================
-echo   AGORA VAI! A VERCEL VAI TENTAR DE NOVO.
+echo   TERCEIRA EH A DA SORTE! VAI FUNCIONAR.
 echo ==========================================
 echo pode fechar esta janela.
 pause

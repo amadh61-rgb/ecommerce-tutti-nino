@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { MapPin, User, Phone, Check, AlertCircle } from 'lucide-react';
-import { addressSchema, validateForm, formatCEP, formatPhone, sanitizeString } from '../utils/validation';
+import { MapPin, User, Phone, Check, AlertCircle, FileText } from 'lucide-react';
+import { addressSchema, validateForm, formatCEP, formatPhone, formatDocument, sanitizeString } from '../utils/validation';
 import { detectXSS } from '../utils/security';
 import { useI18n } from '../hooks/useI18n';
 
@@ -39,6 +39,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
     const { t, isRTL } = useI18n();
     const [formData, setFormData] = useState(initialData || {
         name: '',
+        document: '',
         phone: '',
         cep: '',
         street: '',
@@ -67,6 +68,8 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
             value = formatCEP(value);
         } else if (field === 'phone') {
             value = formatPhone(value);
+        } else if (field === 'document') {
+            value = formatDocument(value);
         } else if (field === 'state') {
             value = value.toUpperCase().slice(0, 2);
         }
@@ -87,6 +90,7 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
         // Preparar dados para validação
         const dataToValidate = {
             name: formData.name,
+            document: formData.document,
             cep: formData.cep.replace('-', ''),
             street: formData.street,
             number: formData.number,
@@ -148,6 +152,21 @@ export default function CheckoutAddress({ onSubmit, initialData }) {
                         value={formData.name}
                         onChange={handleChange('name')}
                         error={errors.name}
+                        t={t}
+                        isRTL={isRTL}
+                    />
+                </div>
+
+                {/* CPF / CNPJ */}
+                <div className="col-span-2">
+                    <InputField
+                        name="document"
+                        placeholder={t('checkout.address.document') || 'CPF / CNPJ'}
+                        icon={FileText}
+                        maxLength={18}
+                        value={formData.document}
+                        onChange={handleChange('document')}
+                        error={errors.document}
                         t={t}
                         isRTL={isRTL}
                     />

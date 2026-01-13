@@ -41,6 +41,11 @@ export const addressSchema = z.object({
         .min(2, 'errors.nameTooShort')
         .max(100, 'errors.nameTooLong')
         .transform((val) => sanitizeString(val)),
+    document: z
+        .string()
+        .min(11, 'errors.documentTooShort')
+        .max(18, 'errors.documentTooLong')
+        .transform((val) => val.replace(/\D/g, '')), // Remove formatação
     cep: z
         .string()
         .regex(/^\d{5}-?\d{3}$/, 'errors.cepInvalid')
@@ -177,6 +182,30 @@ export function formatPhone(value) {
     if (cleaned.length <= 2) return `(${cleaned}`;
     if (cleaned.length <= 7) return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2)}`;
     return `(${cleaned.slice(0, 2)}) ${cleaned.slice(2, 7)}-${cleaned.slice(7, 11)}`;
+}
+
+/**
+ * Formata CPF ou CNPJ.
+ * @param {string} value - O documento a ser formatado
+ * @returns {string} Documento formatado
+ */
+export function formatDocument(value) {
+    const cleaned = value.replace(/\D/g, '');
+    if (cleaned.length <= 11) {
+        // CPF: 000.000.000-00
+        return cleaned
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d)/, '$1.$2')
+            .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+            .replace(/(-\d{2})\d+?$/, '$1');
+    }
+    // CNPJ: 00.000.000/0000-00
+    return cleaned
+        .replace(/^(\d{2})(\d)/, '$1.$2')
+        .replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3')
+        .replace(/\.(\d{3})(\d)/, '.$1/$2')
+        .replace(/(\d{4})(\d)/, '$1-$2')
+        .replace(/(-\d{2})\d+?$/, '$1');
 }
 
 /**

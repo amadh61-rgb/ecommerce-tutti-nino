@@ -139,16 +139,16 @@ export default function ProductDetails({ product, onClose, onAddToCart, isModal 
                             </div>
                         </div>
 
-                        {/* Watch Video Button */}
-                        {product.video && (
+                        {/* Watch Video Button - Centered below image */}
+                        <div className="flex justify-center w-full mt-4">
                             <button
-                                className="border-2 border-pink-500 text-pink-500 font-bold rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors uppercase text-sm tracking-widest w-full max-w-md mx-auto"
-                                onClick={() => window.open(product.video, '_blank')}
+                                className="border-2 border-pink-500 text-pink-500 font-bold rounded-lg py-3 px-8 flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors uppercase text-sm tracking-widest"
+                                onClick={() => product.video ? window.open(product.video, '_blank') : null}
                             >
                                 <Play className="w-5 h-5 fill-current" />
                                 {t('products.watchVideo') || 'Assista ao vídeo'}
                             </button>
-                        )}
+                        </div>
                     </div>
 
                     {/* RIGHT COLUMN: INFO & BUY (7 Cols) */}

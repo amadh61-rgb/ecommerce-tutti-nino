@@ -11,16 +11,13 @@ export default function ProductPage() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
-    const [product, setProduct] = useState(null);
+    const product = productsData.find((p) => generateSlug(p.name) === slug);
 
     useEffect(() => {
-        const found = productsData.find((p) => generateSlug(p.name) === slug);
-        if (found) {
-            setProduct(found);
-        } else {
+        if (!product) {
             navigate('/404', { replace: true });
         }
-    }, [slug, navigate]);
+    }, [product, navigate]);
 
     if (!product) {
         return (

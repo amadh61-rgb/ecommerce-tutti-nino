@@ -11,7 +11,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                     {/* Logo */}
                     <div className="col-span-1 flex flex-col items-center md:items-start">
                         <div className="mb-6">
-                            <img src="/footer-logo.png" alt="Tutti & Nino" className="h-48 w-auto object-contain" />
+                            <img src="/footer-logo.png" alt="Tutti & Nino" className="h-64 w-auto object-contain" />
                         </div>
                     </div>
 
@@ -73,25 +73,8 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                         {/* Security Seals */}
                         <div className="flex flex-col items-center gap-4">
                             <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.security')}</span>
-                            <div className="flex items-center gap-4">
-                                <div className="flex items-center gap-2 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-shadow">
-                                    <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                                        <Lock className="w-4 h-4 text-white" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-xs font-bold text-green-700">SSL</span>
-                                        <span className="text-[10px] text-green-600">Seguro</span>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl px-4 py-2.5 shadow-sm hover:shadow-md transition-shadow">
-                                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                                        <Shield className="w-4 h-4 text-white" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-xs font-bold text-blue-700">{t('footer.securePurchase')}</span>
-                                        <span className="text-[10px] text-blue-600">{t('footer.secureLabel')}</span>
-                                    </div>
-                                </div>
+                            <div className="flex items-center gap-4 h-12">
+                                <img src="/lets-encrypt.png" alt="Let's Encrypt" className="h-full object-contain" />
                             </div>
                         </div>
 

@@ -6,12 +6,11 @@ import ProductCard from '../components/ProductCard';
 import TestimonialCard from '../components/TestimonialCard';
 import QuickViewModal from '../components/QuickViewModal';
 import InfoStrip from '../components/InfoStrip';
-import { productsData, quickFilters, testimonials } from '../data/mockData';
+import { productsData, testimonials } from '../data/mockData';
 import { useCart } from '../hooks/useCart';
 import { useFavorites } from '../hooks/useFavorites';
 import { useModal } from '../hooks/useModal';
 import { Smile } from 'lucide-react';
-import { generateSlug } from '../utils/slug';
 import { useI18n } from '../hooks/useI18n';
 import NewsletterForm from '../components/NewsletterForm';
 
@@ -22,8 +21,8 @@ export default function HomePage() {
 
     const [selectedCategory, setSelectedCategory] = useState(categoryParam);
     const [searchQuery, setSearchQuery] = useState(searchParam);
-    const [filteredProducts, setFilteredProducts] = useState(productsData);
-    const [activeDot, setActiveDot] = useState(0);
+    // deleted state
+    // deleted state
     const [activeTestimonial, setActiveTestimonial] = useState(0); // Novo state para testemunhos
     const [quickViewProduct, setQuickViewProduct] = useState(null);
 
@@ -41,7 +40,7 @@ export default function HomePage() {
     }, [selectedCategory, searchQuery, setSearchParams]);
 
     // Filter products
-    useEffect(() => {
+    const filteredProducts = React.useMemo(() => {
         let result = productsData;
         if (selectedCategory !== 'Todos') {
             result = result.filter((p) => {
@@ -57,7 +56,7 @@ export default function HomePage() {
                     p.description.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
-        setFilteredProducts(result);
+        return result;
     }, [selectedCategory, searchQuery]);
 
     // Category mapping for translation
@@ -131,15 +130,7 @@ export default function HomePage() {
                         </div>
                     )}
 
-                    {/* Dots Indicator (Mobile Only) */}
-                    <div className="flex sm:hidden justify-center gap-2 mt-4">
-                        {filteredProducts.map((_, idx) => (
-                            <div
-                                key={idx}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeDot ? 'bg-pink-500 w-4' : 'bg-slate-200'}`}
-                            />
-                        ))}
-                    </div>
+
                 </div>
             </section>
 

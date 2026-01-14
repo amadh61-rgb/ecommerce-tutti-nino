@@ -61,6 +61,7 @@ export const arSA = {
             bookmarks: 'فواصل الكتب',
             kits: 'أطقم هدايا',
         },
+        watchVideo: 'شاهد الفيديو',
     },
     home: {
         searchTitle: 'جار البحث عن: "{query}"',

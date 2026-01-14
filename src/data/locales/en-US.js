@@ -61,9 +61,8 @@ export const enUS = {
             bookmarks: 'Bookmarks',
             kits: 'Gift Kits',
         },
+        watchVideo: 'Watch Video',
     },
-    watchVideo: 'Watch Video',
-},
     home: {
         searchTitle: 'Searching for: "{query}"',
         weekHighlights: 'Weekly Highlights',

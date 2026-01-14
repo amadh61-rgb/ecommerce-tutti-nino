@@ -61,6 +61,7 @@ export const esES = {
             bookmarks: 'Marcadores',
             kits: 'Kits de Regalo',
         },
+        watchVideo: 'Ver Vídeo',
     },
     home: {
         searchTitle: 'Buscando: "{query}"',

@@ -61,9 +61,8 @@ export const ptBR = {
             bookmarks: 'Marcadores de Página',
             kits: 'Kits Presente',
         },
+        watchVideo: 'Assistir ao Vídeo',
     },
-    watchVideo: 'Assistir ao Vídeo',
-},
     home: {
         searchTitle: 'Buscando por: "{query}"',
         weekHighlights: 'Destaques da Semana',

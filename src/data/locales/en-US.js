@@ -323,6 +323,12 @@ export const enUS = {
         defaultTitle: 'Cute Stationery and Organization',
         defaultDescription: 'Brazil\'s cutest stationery. Smart notebooks, premium pens and planners that transform your routine.',
     },
+    skipLinks: {
+        navigation: 'Quick navigation links',
+        mainContent: 'Skip to main content',
+        products: 'Go to products',
+        footer: 'Go to footer',
+    },
     productData: {
         1: {
             name: '2026 Annual Planner - Bloom',

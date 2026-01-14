@@ -2,7 +2,7 @@ import React from 'react';
 import { CreditCard, Truck, Percent, Lock } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
-export default function InfoStrip() {
+function InfoStrip() {
     const { t } = useI18n();
 
     const items = [
@@ -41,7 +41,7 @@ export default function InfoStrip() {
                                 <h3 className="text-slate-700 font-bold text-xs md:text-sm lg:text-base leading-tight mb-1 md:mb-0">
                                     {item.title}
                                 </h3>
-                                <p className="text-slate-400 text-[10px] md:text-xs lg:text-sm leading-tight">
+                                <p className="text-slate-500 text-[10px] md:text-xs lg:text-sm leading-tight">
                                     {item.subtitle}
                                 </p>
                             </div>
@@ -52,3 +52,5 @@ export default function InfoStrip() {
         </section>
     );
 }
+
+export default React.memo(InfoStrip);

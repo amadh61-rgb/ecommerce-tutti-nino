@@ -327,6 +327,12 @@ export const esES = {
         defaultTitle: 'Papelería Linda y Organización',
         defaultDescription: 'La papelería más linda de Brasil. Cuadernos inteligentes, bolígrafos premium y planners que transforman tu rutina.',
     },
+    skipLinks: {
+        navigation: 'Enlaces de navegación rápida',
+        mainContent: 'Saltar al contenido principal',
+        products: 'Ir a productos',
+        footer: 'Ir al pie de página',
+    },
     productData: {
         1: {
             name: 'Planner Anual 2026 - Bloom',

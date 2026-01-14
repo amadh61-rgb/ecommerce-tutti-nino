@@ -2,6 +2,9 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import security from 'eslint-plugin-security'
+import importPlugin from 'eslint-plugin-import'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -12,6 +15,10 @@ export default defineConfig([
       js.configs.recommended,
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
+      'plugin:jsx-a11y/recommended',
+      'plugin:security/recommended',
+      'plugin:import/errors',
+      'plugin:import/warnings'
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -24,6 +31,9 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      'jsx-a11y/anchor-is-valid': 'error',
+      'security/detect-object-injection': 'error',
+      'import/no-unresolved': 'error'
     },
   },
 ])

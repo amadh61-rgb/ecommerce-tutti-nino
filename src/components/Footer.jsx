@@ -5,7 +5,7 @@ import { useI18n } from '../hooks/useI18n';
 export default function Footer({ setSelectedCategory, setActiveDrawer, setActiveModal }) {
     const { t } = useI18n();
     return (
-        <footer className="bg-white pt-16 pb-8 border-t border-slate-100">
+        <footer id="footer" className="bg-white pt-16 pb-8 border-t border-slate-100" role="contentinfo">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     {/* Logo */}
@@ -45,7 +45,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                     <div className="flex flex-col md:flex-row items-center justify-center gap-16">
                         {/* Payment Methods */}
                         <div className="flex flex-col items-center gap-4">
-                            <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.paymentMethods')}</span>
+                            <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest">{t('footer.paymentMethods')}</span>
                             <div className="flex items-center gap-5">
                                 {/* Visa - Official logo image */}
                                 <div className="h-12 px-4 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
@@ -72,7 +72,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
 
                         {/* Security Seals */}
                         <div className="flex flex-col items-center gap-4">
-                            <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.security')}</span>
+                            <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest">{t('footer.security')}</span>
                             <div className="flex items-center gap-4 h-12">
                                 <img src="/lets-encrypt.png" alt="Let's Encrypt" className="h-full object-contain" />
                             </div>
@@ -80,7 +80,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
 
                         {/* Social Media */}
                         <div className="flex flex-col items-center gap-4">
-                            <span className="text-xs text-slate-400 font-semibold uppercase tracking-widest">{t('footer.followUs')}</span>
+                            <span className="text-xs text-slate-500 font-semibold uppercase tracking-widest">{t('footer.followUs')}</span>
                             <div className="flex items-center gap-6">
                                 {/* Instagram - Official logo image */}
                                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="group hover:scale-110 transition-transform duration-200" aria-label="Instagram">

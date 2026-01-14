@@ -322,6 +322,12 @@ export const ptBR = {
         defaultTitle: 'Papelaria Fofa e Organização',
         defaultDescription: 'A papelaria mais fofa do Brasil. Cadernos inteligentes, canetas premium e planners que transformam a sua rotina.',
     },
+    skipLinks: {
+        navigation: 'Links de navegação rápida',
+        mainContent: 'Pular para o conteúdo principal',
+        products: 'Ir para produtos',
+        footer: 'Ir para o rodapé',
+    },
     productData: {
         1: {
             name: 'Planner Anual 2026 - Bloom',

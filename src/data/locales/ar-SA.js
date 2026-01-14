@@ -332,6 +332,12 @@ export const arSA = {
         defaultTitle: 'قرطاسية لطيفة وتنظيم',
         defaultDescription: 'أجمل قرطاسية في البرازيل. دفاتر ذكية وأقلام ممتازة ومخططات تحول روتينك.',
     },
+    skipLinks: {
+        navigation: 'روابط التنقل السريع',
+        mainContent: 'انتقل إلى المحتوى الرئيسي',
+        products: 'الذهاب إلى المنتجات',
+        footer: 'الذهاب إلى التذييل',
+    },
     productData: {
         1: {
             name: 'مخطط سنوي 2026 - بلوم',

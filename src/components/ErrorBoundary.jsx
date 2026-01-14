@@ -39,8 +39,31 @@ class ErrorBoundary extends React.Component {
         window.location.href = '/';
     };
 
+    handleRetry = () => {
+        this.setState({ hasError: false, error: null, errorInfo: null });
+    };
+
     render() {
         if (this.state.hasError) {
+            // Minimal variant for section-level errors
+            if (this.props.minimal) {
+                return (
+                    <div className="p-6 bg-red-50 border border-red-200 rounded-xl text-center">
+                        <AlertTriangle className="w-8 h-8 text-red-400 mx-auto mb-2" />
+                        <p className="text-slate-600 font-medium mb-3">
+                            {this.props.message || 'Erro ao carregar esta seção'}
+                        </p>
+                        <button
+                            onClick={this.handleRetry}
+                            className="text-sm text-pink-500 hover:underline flex items-center gap-1 mx-auto"
+                        >
+                            <RefreshCw className="w-4 h-4" />
+                            Tentar novamente
+                        </button>
+                    </div>
+                );
+            }
+
             return (
                 <div className="min-h-screen bg-gradient-to-br from-pink-50 to-sky-50 flex items-center justify-center p-4">
                     <div className="bg-white rounded-3xl shadow-xl p-8 max-w-lg w-full text-center">

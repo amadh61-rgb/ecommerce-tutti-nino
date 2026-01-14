@@ -1,5 +1,6 @@
 // src/utils/validation.js
 import { z } from 'zod';
+import { sanitizeInput } from './security';
 
 /**
  * Schemas de validação Zod para formulários da aplicação
@@ -116,7 +117,6 @@ export const trackingSchema = z.object({
  * Re-exportado de security.js para manter compatibilidade.
  * @deprecated Usar sanitizeInput de security.js diretamente
  */
-import { sanitizeInput } from './security';
 export const sanitizeString = (str) => {
     if (typeof str !== 'string') return '';
     return sanitizeInput(str);

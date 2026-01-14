@@ -62,6 +62,8 @@ export const ptBR = {
             kits: 'Kits Presente',
         },
     },
+    watchVideo: 'Assistir ao Vídeo',
+},
     home: {
         searchTitle: 'Buscando por: "{query}"',
         weekHighlights: 'Destaques da Semana',

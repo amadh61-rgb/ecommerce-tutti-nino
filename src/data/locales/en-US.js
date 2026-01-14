@@ -62,6 +62,8 @@ export const enUS = {
             kits: 'Gift Kits',
         },
     },
+    watchVideo: 'Watch Video',
+},
     home: {
         searchTitle: 'Searching for: "{query}"',
         weekHighlights: 'Weekly Highlights',

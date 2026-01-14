@@ -89,6 +89,7 @@ export const ptBR = {
         priceBy: 'por',
         warrantyMessage: 'Todos os produtos Tutti & Nino possuem garantia de 30 dias contra defeitos de fabricação. Oferecemos troca facilitada e suporte completo para garantir sua satisfação.',
         paymentMessage: 'Aceitamos os principais cartões de crédito em até 3x sem juros, PIX com 5% de desconto e boleto bancario.',
+        watchVideo: 'Assistir ao Vídeo',
     },
     checkout: {
         title: 'Finalizar Compra',

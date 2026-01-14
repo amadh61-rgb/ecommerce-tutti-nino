@@ -144,7 +144,7 @@ export default function ProductDetails({ product, onClose, onAddToCart, isModal 
                         {/* Watch Video Button */}
                         {product.video && (
                             <button
-                                className="border-2 border-pink-500 text-pink-500 font-bold rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors uppercase text-sm tracking-widest w-full max-w-md mx-auto lg:mx-0"
+                                className="border-2 border-pink-500 text-pink-500 font-bold rounded-lg py-3 flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors uppercase text-sm tracking-widest w-full max-w-md mx-auto"
                                 onClick={() => window.open(product.video, '_blank')}
                             >
                                 <Play className="w-5 h-5 fill-current" />

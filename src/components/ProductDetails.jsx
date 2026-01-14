@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Star, X, Share2, Copy, Facebook, MessageCircle, Twitter, Play, Minus, Plus, Truck, Lock, CreditCard } from 'lucide-react';
-import ProductVideo from './ProductVideo';
+import { ShoppingBag, X, Play, Minus, Plus, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { generateSlug } from '../utils/slug';
 import { productsData } from '../data/mockData';
@@ -9,7 +8,6 @@ import { useI18n } from '../hooks/useI18n';
 export default function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
     const navigate = useNavigate();
     const { t, isRTL, formatCurrency, getProductData } = useI18n();
-    const [activeTab, setActiveTab] = useState('descricao');
     const [quantity, setQuantity] = useState(1);
     const [shippingZip, setShippingZip] = useState('');
     const [activeImage, setActiveImage] = useState(product ? product.image : '');
@@ -245,90 +243,50 @@ export default function ProductDetails({ product, onClose, onAddToCart, isModal 
                     </div>
                 </div>
 
-                {/* BOTTOM SECTION: TABS (With Split Layout) */}
+                {/* BOTTOM SECTION: DESCRIPTION (No Tabs) */}
                 <div className="mt-20">
-                    <div className="flex justify-start lg:justify-center border-b border-slate-200 mb-8 overflow-x-auto">
-                        {['descricao', 'garantia', 'pagamento'].map((tab) => (
-                            <button
-                                key={tab}
-                                onClick={() => setActiveTab(tab)}
-                                className={`px-8 py-4 text-sm font-bold uppercase tracking-wider border-b-2 transition-colors whitespace-nowrap ${activeTab === tab
-                                    ? 'border-pink-600 text-pink-600'
-                                    : 'border-transparent text-slate-400 hover:text-slate-600'
-                                    }`}
-                            >
-                                {tab === 'descricao' ? t('products.tabs.description') : tab === 'garantia' ? t('products.tabs.warranty') : t('products.tabs.payment')}
-                            </button>
-                        ))}
+                    <div className="border-b border-slate-200 mb-8">
+                        <h2 className="text-xl font-bold uppercase tracking-wider text-pink-600 border-b-2 border-pink-600 inline-block pb-4">
+                            {t('products.tabs.description')}
+                        </h2>
                     </div>
 
                     <div className="animate-fade-in max-w-7xl mx-auto text-slate-600 leading-relaxed text-justify">
-                        {activeTab === 'descricao' && (
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                                {/* LEFT: Description Text */}
-                                <div className="space-y-6">
-                                    <h2 className="text-2xl font-bold text-slate-800 mb-4">{t('products.aboutProduct') || 'Sobre o Produto'}</h2>
-                                    <p>{productDescription}</p>
-                                    <p>{productDescription}</p>
-                                    <p>{t('products.productDeveloped') || 'Este produto foi desenvolvido pensando na sua rotina, trazendo praticidade e beleza para o seu dia a dia. Todos os detalhes foram cuidadosamente planejados para oferecer a melhor experiência.'}</p>
-                                    <p>{t('products.idealGift') || 'Ideal para presentear ou para uso pessoal, combinando funcionalidade com um design exclusivo da Tutti & Nino.'}</p>
-                                </div>
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                            {/* LEFT: Description Text */}
+                            <div className="space-y-6">
+                                <h2 className="text-2xl font-bold text-slate-800 mb-4">{t('products.aboutProduct') || 'Sobre o Produto'}</h2>
+                                <p>{productDescription}</p>
+                                <p>{productDescription}</p>
+                                <p>{t('products.productDeveloped') || 'Este produto foi desenvolvido pensando na sua rotina, trazendo praticidade e beleza para o seu dia a dia. Todos os detalhes foram cuidadosamente planejados para oferecer a melhor experiência.'}</p>
+                                <p>{t('products.idealGift') || 'Ideal para presentear ou para uso pessoal, combinando funcionalidade com um design exclusivo da Tutti & Nino.'}</p>
+                            </div>
 
-                                {/* RIGHT: Specs Table */}
-                                <div>
-                                    {productSpecs && (
-                                        <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
-                                            <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
-                                                {t('products.specs')}
-                                            </h3>
-                                            <div className="space-y-4">
-                                                {Object.entries(productSpecs).map(([key, value]) => (
-                                                    <div key={key} className="flex justify-between border-b border-slate-200 pb-3 last:border-0 last:pb-0 hover:bg-slate-100 px-2 rounded-lg transition-colors">
-                                                        <span className="font-bold text-slate-500 uppercase text-xs tracking-wider">{key}</span>
-                                                        <span className="font-medium text-slate-800 text-right">{value}</span>
-                                                    </div>
-                                                ))}
-                                                {product.ean && (
-                                                    <div className="flex justify-between border-b border-slate-200 pb-3 last:border-0 last:pb-0 hover:bg-slate-100 px-2 rounded-lg transition-colors">
-                                                        <span className="font-bold text-slate-500 uppercase text-xs tracking-wider">EAN</span>
-                                                        <span className="font-mono text-slate-800 text-right">{product.ean}</span>
-                                                    </div>
-                                                )}
-                                            </div>
+                            {/* RIGHT: Specs Table */}
+                            <div>
+                                {productSpecs && (
+                                    <div className="bg-slate-50 p-8 rounded-2xl border border-slate-100">
+                                        <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2">
+                                            {t('products.specs')}
+                                        </h3>
+                                        <div className="space-y-4">
+                                            {Object.entries(productSpecs).map(([key, value]) => (
+                                                <div key={key} className="flex justify-between border-b border-slate-200 pb-3 last:border-0 last:pb-0 hover:bg-slate-100 px-2 rounded-lg transition-colors">
+                                                    <span className="font-bold text-slate-500 uppercase text-xs tracking-wider">{key}</span>
+                                                    <span className="font-medium text-slate-800 text-right">{value}</span>
+                                                </div>
+                                            ))}
+                                            {product.ean && (
+                                                <div className="flex justify-between border-b border-slate-200 pb-3 last:border-0 last:pb-0 hover:bg-slate-100 px-2 rounded-lg transition-colors">
+                                                    <span className="font-bold text-slate-500 uppercase text-xs tracking-wider">EAN</span>
+                                                    <span className="font-mono text-slate-800 text-right">{product.ean}</span>
+                                                </div>
+                                            )}
                                         </div>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
-                        )}
-
-                        {activeTab === 'garantia' && (
-                            <div className="text-center py-8">
-                                <div className="inline-block p-4 bg-pink-50 rounded-full mb-4">
-                                    <Lock className="w-8 h-8 text-pink-500" />
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-2">{t('products.tabs.warranty')}</h3>
-                                <p className="max-w-lg mx-auto">
-                                    {t('products.warrantyMessage') || 'Todos os produtos Tutti & Nino possuem garantia de 30 dias contra defeitos de fabricação.'}
-                                </p>
-                            </div>
-                        )}
-
-                        {activeTab === 'pagamento' && (
-                            <div className="text-center py-8">
-                                <div className="inline-block p-4 bg-pink-50 rounded-full mb-4">
-                                    <CreditCard className="w-8 h-8 text-pink-500" />
-                                </div>
-                                <h3 className="text-xl font-bold text-slate-800 mb-2">{t('products.tabs.payment')}</h3>
-                                <p className="max-w-lg mx-auto mb-6">
-                                    {t('products.paymentMessage') || 'Aceitamos os principais cartões de crédito em até 3x sem juros, PIX com 5% de desconto e boleto bancário.'}
-                                </p>
-                                <div className="flex justify-center gap-4 text-slate-400">
-                                    <CreditCard className="w-10 h-10" />
-                                    <div className="w-10 h-10 border-2 rounded flex items-center justify-center font-bold text-xs">PIX</div>
-                                    <div className="w-10 h-10 border-2 rounded flex items-center justify-center font-bold text-[10px]">BOLETO</div>
-                                </div>
-                            </div>
-                        )}
+                        </div>
                     </div>
                 </div>
 

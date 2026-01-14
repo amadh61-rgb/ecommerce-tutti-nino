@@ -142,11 +142,15 @@ export default function MainLayout() {
                     onOpenLogin={() => { openModal('login'); setIsMobileMenuOpen(false); }}
                 />
 
-                {/* Notifications */}
+                {/* Notifications - Accessible */}
                 {notification && (
-                    <div className="fixed top-24 right-4 z-[90] bg-white shadow-xl rounded-xl p-4 border-l-4 border-pink-400 animate-bounce-in flex items-center gap-3">
+                    <div
+                        role="alert"
+                        aria-live="polite"
+                        className="fixed top-24 right-4 z-[90] bg-white shadow-xl rounded-xl p-4 border-l-4 border-pink-400 animate-bounce-in flex items-center gap-3"
+                    >
                         <div className={`p-2 rounded-full ${notification.type === 'error' ? 'bg-red-100' : 'bg-green-100'}`}>
-                            <CheckCircle className={`w-5 h-5 ${notification.type === 'error' ? 'text-red-600' : 'text-green-600'}`} />
+                            <CheckCircle className={`w-5 h-5 ${notification.type === 'error' ? 'text-red-600' : 'text-green-600'}`} aria-hidden="true" />
                         </div>
                         <span className="font-medium text-slate-700">{notification.message || notification}</span>
                     </div>

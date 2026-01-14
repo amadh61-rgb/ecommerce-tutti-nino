@@ -1,12 +1,13 @@
 // src/context/CartContext.jsx
 import React, { createContext, useState, useCallback, useMemo, useEffect } from 'react';
+import { CART_CONFIG } from '../config/constants';
 
 export const CartContext = createContext(null);
 
-// Chave para localStorage
-const CART_STORAGE_KEY = 'tutti_nino_cart';
-const CART_MAX_ITEMS = 50; // Limite de segurança
-const CART_MAX_QUANTITY = 99; // Quantidade máxima por item
+// Usar constantes centralizadas
+const CART_STORAGE_KEY = CART_CONFIG.STORAGE_KEY;
+const CART_MAX_ITEMS = CART_CONFIG.MAX_ITEMS;
+const CART_MAX_QUANTITY = CART_CONFIG.MAX_QUANTITY_PER_ITEM;
 
 /**
  * Valida estrutura de um item do carrinho

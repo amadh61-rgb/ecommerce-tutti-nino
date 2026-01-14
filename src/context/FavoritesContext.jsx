@@ -1,11 +1,12 @@
 // src/context/FavoritesContext.jsx
 import React, { createContext, useState, useCallback, useMemo, useEffect } from 'react';
+import { FAVORITES_CONFIG } from '../config/constants';
 
 export const FavoritesContext = createContext(null);
 
-// Configurações de segurança
-const FAVORITES_STORAGE_KEY = 'tutti_nino_favorites';
-const MAX_FAVORITES = 100; // Limite máximo de favoritos
+// Usar constantes centralizadas
+const FAVORITES_STORAGE_KEY = FAVORITES_CONFIG.STORAGE_KEY;
+const MAX_FAVORITES = FAVORITES_CONFIG.MAX_ITEMS;
 
 /**
  * Valida que um ID é um número positivo válido

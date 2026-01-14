@@ -113,18 +113,14 @@ export const trackingSchema = z.object({
 
 /**
  * Sanitiza strings removendo caracteres perigosos e prevenindo XSS básico.
- * Remove tags HTML, protocolo javascript: e event handlers on*.
- * @param {string} str - A string a ser sanitizada
- * @returns {string} String limpa e sem espaços nas pontas
+ * Re-exportado de security.js para manter compatibilidade.
+ * @deprecated Usar sanitizeInput de security.js diretamente
  */
-export function sanitizeString(str) {
+import { sanitizeInput } from './security';
+export const sanitizeString = (str) => {
     if (typeof str !== 'string') return '';
-    return str
-        .replace(/<[^>]*>/g, '') // Remove HTML tags
-        .replace(/javascript:/gi, '') // Remove javascript: protocol
-        .replace(/on\w+=/gi, '') // Remove event handlers
-        .trim();
-}
+    return sanitizeInput(str);
+};
 
 /**
  * Valida dados usando um schema Zod e formata os erros para uso fácil no frontend.

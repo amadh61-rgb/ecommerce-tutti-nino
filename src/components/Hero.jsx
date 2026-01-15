@@ -31,7 +31,7 @@ function Hero({ setSelectedCategory }) {
                     <div className="w-full max-w-[1400px] relative group">
 
                         {/* Carousel Slides */}
-                        <div className="relative h-[280px] sm:h-[300px] lg:h-[500px] w-full">
+                        <div className="relative h-[250px] sm:h-[270px] lg:h-[450px] w-full">
                             {slides.map((slide, index) => (
                                 <div
                                     key={slide.id}

@@ -10,6 +10,23 @@
   padding: 0;
 }
 
+/* Protection against browser extension overlays */
+#prject,
+#tap-layer,
+[id*="mobext"],
+[class*="extension-overlay"] {
+  display: none !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+}
+
+/* Ensure main app content is always on top */
+#root {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
 body {
   font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-family: 'Inter', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

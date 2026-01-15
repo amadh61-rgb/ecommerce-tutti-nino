@@ -44,7 +44,7 @@ function InfoStrip() {
     }, [mobileGroups.length]);
 
     return (
-        <section className="bg-pink-50 py-6 border-b border-pink-200">
+        <section className="bg-pink-50 py-6 border-b border-pink-200 -mt-6 md:-mt-12 relative z-20">
             <div className="container mx-auto px-4">
 
                 {/* --- VERSÃO MOBILE (Carrossel: 2 itens por vez) --- */}
@@ -54,8 +54,8 @@ function InfoStrip() {
                             <div
                                 key={groupIndex}
                                 className={`absolute inset-0 w-full grid grid-cols-2 gap-2 transition-all duration-500 ease-in-out ${groupIndex === currentGroup
-                                        ? 'opacity-100 translate-x-0 z-10'
-                                        : 'opacity-0 translate-x-10 -z-10'
+                                    ? 'opacity-100 translate-x-0 z-10'
+                                    : 'opacity-0 translate-x-10 -z-10'
                                     }`}
                             >
                                 {group.map((item, index) => (

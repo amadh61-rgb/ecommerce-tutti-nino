@@ -84,7 +84,7 @@ export default function HomePage() {
             <InfoStrip />
 
             {/* Product Grid */}
-            <section id="products-grid" className="py-16 bg-gradient-to-b from-[#EBD9F7] to-white min-h-[600px]">
+            <section id="products-grid" className="py-16 bg-gradient-to-b from-[#F3E5F5] to-white min-h-[600px]">
                 <div className="container mx-auto px-4">
                     <div className="flex items-end justify-between mb-10">
                         <div>
@@ -95,7 +95,6 @@ export default function HomePage() {
                                         ? t('home.weekHighlights')
                                         : getCategoryTranslation(selectedCategory)}
                             </h2>
-                            <p className="text-slate-500">{t('products.found', { count: filteredProducts.length })}</p>
                         </div>
                     </div>
 

@@ -80,7 +80,6 @@ export default function ModalManager({ onLoginSuccess }) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-title"
-            dir="ltr"
         >
             <div className={`bg-white rounded-3xl w-full ${maxWidthClass} overflow-hidden shadow-2xl relative animate-scale-up`}>
                 <button onClick={closeModal} className="absolute top-4 right-4 z-10 p-3 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors" aria-label={t('aria.closeModal')}>

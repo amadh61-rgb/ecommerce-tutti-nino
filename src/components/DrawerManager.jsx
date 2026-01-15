@@ -34,11 +34,7 @@ export default function DrawerManager() {
     if (!activeDrawer) return null;
 
     return (
-        /* Force LTR direction to ensure sliding animations work physically (Right to Left) */
-        <div
-            className={`fixed inset-0 z-[60] transform transition-all duration-300 ${activeDrawer ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
-            dir="ltr"
-        >
+        <div className="fixed inset-0 z-[60]">
             {/* DEBUG: Changed to RED to identify if this is the stuck overlay */}
             <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} />
             <div

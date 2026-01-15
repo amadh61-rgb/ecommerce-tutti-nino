@@ -17,14 +17,6 @@
 [class*="extension-overlay"] {
   display: none !important;
   pointer-events: none !important;
-  z-index: -9999 !important;
-}
-
-/* Ensure main app content is always on top */
-#root {
-  position: relative;
-  z-index: 1;
-  isolation: isolate;
 }
 
 body {

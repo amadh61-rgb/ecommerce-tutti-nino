@@ -18,18 +18,8 @@ export const I18nProvider = ({ children }) => {
             if (saved && SUPPORTED_LOCALES.includes(saved)) {
                 return saved;
             }
-            // Detectar do navegador
-            const browserLocale = navigator.language;
-            if (SUPPORTED_LOCALES.includes(browserLocale)) {
-                return browserLocale;
-            }
-            // Verificar prefixo (ex: pt-PT -> pt-BR)
-            const prefix = browserLocale.split('-')[0];
-            const match = SUPPORTED_LOCALES.find(l => l.startsWith(prefix));
-            // Caso especial para árabe genérico 'ar' -> 'ar-SA'
-            if (prefix === 'ar') return 'ar-SA';
-
-            return match || DEFAULT_LOCALE;
+            // Forçar PT-BR como padrão inicial, ignorando navegador
+            return DEFAULT_LOCALE;
         } catch {
             return DEFAULT_LOCALE;
         }

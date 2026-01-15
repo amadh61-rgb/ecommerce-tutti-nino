@@ -4,23 +4,19 @@ import { useI18n } from '../../hooks/useI18n';
 import { legalContent } from '../../data/legalData';
 
 export default function TermsModal() {
-    const { closeModal } = useModal();
     const { t } = useI18n();
 
     return (
-        <>
+        <div className="p-8 max-h-[80vh] overflow-y-auto">
             <h2 className="text-2xl font-bold text-slate-800 mb-6">{legalContent.termsAndExchanges.title} 📜</h2>
-            <div className="max-h-[60vh] overflow-y-auto text-sm text-slate-600 leading-relaxed pr-2 space-y-4">
+            <div className="space-y-6 text-slate-600 leading-relaxed">
                 {legalContent.termsAndExchanges.sections.map((section, idx) => (
                     <div key={idx}>
-                        <strong className="block text-slate-800 mb-1">{section.title}</strong>
+                        <h3 className="text-lg font-bold text-rose-900 mb-2">{section.title}</h3>
                         <p>{section.content}</p>
                     </div>
                 ))}
             </div>
-            <button onClick={closeModal} className="w-full py-3 bg-slate-800 text-white font-bold rounded-xl hover:bg-pink-500 transition-colors mt-6">
-                {t('modals.understood')}
-            </button>
-        </>
+        </div>
     );
 }

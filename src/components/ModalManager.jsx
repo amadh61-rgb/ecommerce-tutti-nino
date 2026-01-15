@@ -7,6 +7,7 @@ import { useCart } from '../hooks/useCart';
 // Import Modals (Keep small modals static or lazy? Small ones are fine static)
 import LoginModal from './modals/LoginModal';
 import ContactModal from './modals/ContactModal';
+import AboutModal from './modals/AboutModal';
 import PrivacyModal from './modals/PrivacyModal';
 import TermsModal from './modals/TermsModal';
 import ShippingModal from './modals/ShippingModal';
@@ -28,6 +29,8 @@ export default function ModalManager({ onLoginSuccess }) {
                 return <LoginModal onLoginSuccess={onLoginSuccess} />;
             case 'contact':
                 return <ContactModal />;
+            case 'about':
+                return <AboutModal />;
             case 'privacy':
                 return <PrivacyModal />;
             case 'terms':

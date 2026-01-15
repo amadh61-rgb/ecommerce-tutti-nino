@@ -15,7 +15,7 @@ const AnnouncementBar = () => {
             aria-atomic="true"
             className="bg-pink-500 text-white py-3 text-center shadow-md"
         >
-            <p className="text-xs md:text-xl font-bold md:font-extrabold tracking-tight md:tracking-wide px-1 md:px-4 whitespace-nowrap overflow-hidden text-ellipsis">
+            <p className="text-[10px] md:text-sm font-bold md:font-bold tracking-tight md:tracking-normal px-1 md:px-4 whitespace-nowrap overflow-hidden text-ellipsis">
                 {t('announcement.freeShipping')}
             </p>
         </div>

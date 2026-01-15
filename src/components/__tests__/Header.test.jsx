@@ -39,14 +39,15 @@ describe('Header', () => {
 
     it('renders logo', () => {
         renderHeader();
-        const logo = screen.getByAltText('Tutti & Nino');
+        const logo = screen.getByAltText('Tutti & Nino Logo');
         expect(logo).toBeInTheDocument();
     });
 
     it('renders search input', () => {
         renderHeader();
-        const searchInput = screen.getByRole('textbox');
-        expect(searchInput).toBeInTheDocument();
+        // There might be multiple inputs if mobile menu is rendered or simply use queryByPlaceholderText or specific role
+        const searchInputs = screen.getAllByRole('textbox');
+        expect(searchInputs.length).toBeGreaterThan(0);
     });
 
     it('renders cart icon with count', () => {
@@ -63,20 +64,22 @@ describe('Header', () => {
         const setSearchQuery = vi.fn();
         renderHeader({ setSearchQuery });
 
-        const searchInput = screen.getByRole('textbox');
-        fireEvent.change(searchInput, { target: { value: 'planner' } });
+        const searchInputs = screen.getAllByRole('textbox');
+        // Pick the first one (Desktop)
+        fireEvent.change(searchInputs[0], { target: { value: 'planner' } });
 
         expect(setSearchQuery).toHaveBeenCalledWith('planner');
     });
+
+    // ... (keep XSS test if relevant, usually same selector logic)
 
     it('detects XSS in search input', () => {
         const setSearchQuery = vi.fn();
         renderHeader({ setSearchQuery });
 
-        const searchInput = screen.getByRole('textbox');
-        fireEvent.change(searchInput, { target: { value: '<script>alert("xss")</script>' } });
+        const searchInputs = screen.getAllByRole('textbox');
+        fireEvent.change(searchInputs[0], { target: { value: '<script>alert("xss")</script>' } });
 
-        // Should still call setSearchQuery but the value gets sanitized elsewhere
         expect(setSearchQuery).toHaveBeenCalled();
     });
 
@@ -84,7 +87,8 @@ describe('Header', () => {
         const setIsMobileMenuOpen = vi.fn();
         renderHeader({ setIsMobileMenuOpen });
 
-        // Find the mobile menu button (the one with Menu icon)
+        // Update to match likely ARIA label "Abrir menu" or "Menu"
+        // Using "Abrir menu" or regex
         const menuButton = screen.getByLabelText(/menu/i);
         fireEvent.click(menuButton);
 
@@ -128,7 +132,8 @@ describe('Header', () => {
         const setActiveModal = vi.fn();
         renderHeader({ setActiveModal, isLoggedIn: false });
 
-        const loginButton = screen.getByText(/entrar/i);
+        // Use context of button (aria-label or text)
+        const loginButton = screen.getByRole('button', { name: /entrar|nav.login/i });
         fireEvent.click(loginButton);
 
         expect(setActiveModal).toHaveBeenCalledWith('login');

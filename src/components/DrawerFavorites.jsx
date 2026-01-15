@@ -2,7 +2,7 @@ import React from 'react';
 import { Heart, ShoppingBag, X } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
-export default function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onToggleFavorite, setNotification }) {
+function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onToggleFavorite, setNotification }) {
     const { t, formatCurrency, getProductData } = useI18n();
 
     if (!isOpen) return null;
@@ -15,7 +15,7 @@ export default function DrawerFavorites({ isOpen, onClose, favoriteProducts, onA
     return (
         <>
             <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-purple-50/50">
-                <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <h2 id="favorites-title" className="text-xl font-bold text-slate-800 flex items-center gap-2">
                     <Heart className="w-5 h-5 text-purple-500" /> {t('favorites.title')}
                 </h2>
                 <button onClick={onClose} className="p-3 hover:bg-white rounded-full transition-colors text-slate-500 touch-target close-btn-mobile" aria-label={t('common.close')}>
@@ -67,3 +67,4 @@ export default function DrawerFavorites({ isOpen, onClose, favoriteProducts, onA
         </>
     );
 }
+export default React.memo(DrawerFavorites);

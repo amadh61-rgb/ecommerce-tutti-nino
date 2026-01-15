@@ -87,6 +87,7 @@ export function detectXSS(input) {
     if (typeof input !== 'string') return false;
 
     const xssPatterns = [
+        // eslint-disable-next-line security/detect-unsafe-regex
         /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
         /javascript:/gi,
         /on\w+\s*=/gi,

@@ -4,10 +4,11 @@ export default {
         "./index.html",
         "./src/**/*.{js,ts,jsx,tsx}",
     ],
+    darkMode: 'class',
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Outfit', 'sans-serif'],
+                sans: ['Inter', 'Outfit', 'sans-serif'],
             },
             animation: {
                 'fade-in': 'fade-in 0.3s ease-out',

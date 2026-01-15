@@ -18,48 +18,42 @@ class ShippingService {
      * @returns {Promise<Array>} - Opções de frete
      */
     async calculateShipping(cep, items) {
-        // Simulação - será substituído por integração real (Correios API, Melhor Envio, etc)
-        console.log('[Shipping] Calculando frete...', { cep, items });
+        console.log('[Shipping] Calculando frete via API...', { cep, items });
 
-        await new Promise(resolve => setTimeout(resolve, 800));
+        try {
+            const response = await fetch('/api/shipping/calculate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ zipCode: cep, items })
+            });
 
+            if (!response.ok) {
+                throw new Error('Erro ao calcular frete no servidor');
+            }
+
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('API Shipping Error:', error);
+            // Fallback para mock local em caso de erro da API (opcional)
+            return this._getMockShipping(cep, items);
+        }
+    }
+
+    _getMockShipping(cep, items) {
         const total = items.reduce((acc, item) => acc + (item.price * item.qty), 0);
         const isFreeShipping = total >= SHIPPING_CONFIG.FREE_SHIPPING_THRESHOLD;
-
-        // Simular opções de frete baseado no CEP
-        const region = parseInt(cep.slice(0, 2));
-        const baseDelivery = region <= 30 ? 3 : region <= 50 ? 5 : 7;
 
         return [
             {
                 id: 'pac',
                 carrier: 'Correios',
-                service: 'PAC',
+                service: 'PAC (Fallback)',
                 price: isFreeShipping ? 0 : SHIPPING_CONFIG.DEFAULT_SHIPPING_COST,
                 originalPrice: SHIPPING_CONFIG.DEFAULT_SHIPPING_COST,
-                deliveryDays: baseDelivery + 5,
-                deliveryRange: `${baseDelivery + 4} a ${baseDelivery + 6} dias úteis`,
+                deliveryDays: 7,
+                deliveryRange: '5 a 9 dias úteis',
                 isFree: isFreeShipping
-            },
-            {
-                id: 'sedex',
-                carrier: 'Correios',
-                service: 'SEDEX',
-                price: isFreeShipping ? 12.90 : 27.90,
-                originalPrice: 27.90,
-                deliveryDays: baseDelivery + 2,
-                deliveryRange: `${baseDelivery + 1} a ${baseDelivery + 3} dias úteis`,
-                isFree: false
-            },
-            {
-                id: 'express',
-                carrier: 'Jadlog',
-                service: 'Express',
-                price: isFreeShipping ? 8.90 : 22.50,
-                originalPrice: 22.50,
-                deliveryDays: baseDelivery + 3,
-                deliveryRange: `${baseDelivery + 2} a ${baseDelivery + 4} dias úteis`,
-                isFree: false
             }
         ];
     }

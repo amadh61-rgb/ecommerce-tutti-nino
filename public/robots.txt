@@ -1,23 +1,4 @@
-# Sitemap - Tutti & Nino
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://tuttiandnino.vercel.app/sitemap.xml
-
-# Crawl-delay para ser gentil com o servidor
-Crawl-delay: 1
-
-# Bloquear recursos desnecessários para bots
-Disallow: /api/
-Disallow: /_next/
-Disallow: /static/
-
-# Permitir arquivos importantes
-Allow: /assets/
-Allow: /*.js$
-Allow: /*.css$
-Allow: /*.png$
-Allow: /*.jpg$
-Allow: /*.svg$
-Allow: /*.webp$
+Sitemap: https://ecommerce-tutti-nino.vercel.app/sitemap.xml

@@ -44,7 +44,7 @@ export default function HomePage() {
         let result = productsData;
         if (selectedCategory !== 'Todos') {
             result = result.filter((p) => {
-                if (selectedCategory === 'Marcadores') return p.category === 'Marcadores de Página';
+                if (selectedCategory === 'Marcadores') return p.category === 'Marcadores de Livro';
                 if (selectedCategory === 'Casa') return p.category === 'Artigos para Casa';
                 return p.category === selectedCategory;
             });
@@ -66,6 +66,7 @@ export default function HomePage() {
             'Marcadores': 'bookmarks',
             'Casa': 'home',
             'Planners': 'planners',
+            'Papelaria': 'stationery',
             'Adesivos': 'stickers',
             'Cadernos': 'notebooks',
             'Canetas': 'pens',

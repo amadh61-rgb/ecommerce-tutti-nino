@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-    Star,
-    PenTool,
     Sticker,
     Bookmark,
-    Home as HomeIcon,
-    Layers
+    Gift,
+    Sparkles,
+    Star,
+    PenTool
 } from 'lucide-react';
 
 // --- DADOS DOS PRODUTOS ---
@@ -50,8 +50,8 @@ export const productsData = [
     },
     {
         id: 3,
-        name: "Marcador Magnético Celeste",
-        category: "Marcadores de Página",
+        name: "Marcadores Magnético Celeste",
+        category: "Marcadores de Livro",
         price: 12.00,
         rating: 5,
         reviews: 210,
@@ -68,7 +68,7 @@ export const productsData = [
     {
         id: 4,
         name: "Washi Tapes - Coleção Sonhos",
-        category: "Acessórios",
+        category: "Kits",
         price: 29.90,
         rating: 4,
         reviews: 45,
@@ -160,11 +160,11 @@ export const productsData = [
 // --- FILTROS VISUAIS ---
 export const quickFilters = [
     { name: "Todos", translationKey: 'products.categories.all', icon: <Star className="w-5 h-5" />, color: "bg-slate-100 text-slate-600" },
-    { name: "Papelaria", translationKey: 'products.categories.planners', icon: <PenTool className="w-5 h-5" />, color: "bg-pink-100 text-pink-600" },
+    { name: "Marcadores", translationKey: 'products.categories.bookmarks', fullCategory: "Marcadores de Livro", icon: <Bookmark className="w-5 h-5" />, color: "bg-sky-100 text-sky-600" },
     { name: "Adesivos", translationKey: 'products.categories.stickers', icon: <Sticker className="w-5 h-5" />, color: "bg-purple-100 text-purple-600" },
-    { name: "Marcadores", translationKey: 'products.categories.accessories', fullCategory: "Marcadores de Página", icon: <Bookmark className="w-5 h-5" />, color: "bg-sky-100 text-sky-600" }, // Using general accessories or mapping specifically if key exists
-    { name: "Casa", translationKey: 'products.categories.accessories', fullCategory: "Artigos para Casa", icon: <HomeIcon className="w-5 h-5" />, color: "bg-orange-100 text-orange-600" }, // Mapping to accessories for now as specific key might not exist
-    { name: "Coleções", translationKey: 'products.categories.notebooks', icon: <Layers className="w-5 h-5" />, color: "bg-teal-100 text-teal-600" },
+    { name: "Papelaria", translationKey: 'products.categories.stationery', icon: <PenTool className="w-5 h-5" />, color: "bg-pink-100 text-pink-600" },
+    { name: "Kits", translationKey: 'products.categories.kits', icon: <Gift className="w-5 h-5" />, color: "bg-teal-100 text-teal-600" },
+    { name: "Acessórios", translationKey: 'products.categories.accessories', icon: <Sparkles className="w-5 h-5" />, color: "bg-orange-100 text-orange-600" },
 ];
 
 export const testimonials = [
@@ -194,10 +194,11 @@ export const testimonials = [
 // --- MENU PRINCIPAL (Mapeado para Categorias) ---
 export const mainMenu = [
     { label: "Início", translationKey: 'nav.home', action: "reset" },
-    { label: "Marcadores de Página", translationKey: 'products.categories.accessories', action: "filter", category: "Marcadores de Página" },
+    { label: "Marcadores", translationKey: 'products.categories.bookmarks', action: "filter", category: "Marcadores de Livro" },
     { label: "Adesivos", translationKey: 'products.categories.stickers', action: "filter", category: "Adesivos" },
-    { label: "Papelaria", translationKey: 'nav.categories', action: "filter", category: "Papelaria" },
-    { label: "Contato", translationKey: 'nav.contact', action: "modal", modal: "contact" }
+    { label: "Papelaria", translationKey: 'products.categories.stationery', action: "filter", category: "Papelaria" },
+    { label: "Kits", translationKey: 'products.categories.kits', action: "filter", category: "Kits" },
+    { label: "Acessórios", translationKey: 'products.categories.accessories', action: "filter", category: "Acessórios" }
 ];
 
 // --- DADOS DO USUÁRIO MOCK ---

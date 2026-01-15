@@ -39,7 +39,7 @@ class PaymentService {
             // Tentar chamar a API
             let response;
             try {
-                response = await fetch('/api/create-payment', {
+                response = await fetch('/api/payment/create-session', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(orderData)

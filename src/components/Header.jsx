@@ -32,22 +32,22 @@ export default function Header({
     navigateToDashboard
 }) {
     const navigate = useNavigate();
-    const [localSearch, setLocalSearch] = useState(searchQuery || '');
+    // Removed localSearch to avoid conflict with MobileMenu updates
+    // const [localSearch, setLocalSearch] = useState(searchQuery || '');
     const { t, isRTL } = useI18n();
 
-    // Debounce da busca para performance
-    const debouncedSearch = useDebounce(localSearch, 300);
+    // Debounce da busca APENAS para navegação/URL
+    const debouncedSearch = useDebounce(searchQuery, 500);
 
-    // Atualizar busca quando debounce disparar
+    // Atualizar URL quando o termo debounced mudar
     useEffect(() => {
-        // Só atualizar se for diferente do valor atual
-        if (debouncedSearch !== searchQuery) {
-            setSearchQuery(debouncedSearch);
-            if (debouncedSearch) {
-                navigate(`/?busca=${encodeURIComponent(debouncedSearch)}`);
-            }
+        if (debouncedSearch) {
+            navigate(`/?busca=${encodeURIComponent(debouncedSearch)}`);
+        } else if (searchQuery === '' && window.location.search.includes('busca=')) {
+            // Se limpou a busca, volta para home limpa
+            navigate('/');
         }
-    }, [debouncedSearch, setSearchQuery, navigate, searchQuery]);
+    }, [debouncedSearch, navigate, searchQuery]);
 
     const handleSearch = (e) => {
         let value = e.target.value.slice(0, 50);
@@ -57,18 +57,17 @@ export default function Header({
             value = '';
         }
 
-        setLocalSearch(value);
+        setSearchQuery(value);
     };
 
     const handleLogoClick = () => {
         setSelectedCategory("Todos");
         setSearchQuery("");
-        setLocalSearch("");
         navigate('/');
     };
 
     return (
-        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all">
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner">
             <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between gap-4">
 
@@ -83,27 +82,27 @@ export default function Header({
                         </button>
                         <Link
                             to="/"
+                            aria-label="Tutti & Nino Home"
                             onClick={handleLogoClick}
-                            className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-400 to-sky-400 tracking-tighter"
                         >
-                            <img src="/header-logo.png" alt="Tutti & Nino" className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+                            <img src="/header-logo.png" alt="Tutti & Nino Logo" className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300" />
                         </Link>
                     </div>
 
                     {/* Barra de Busca */}
-                    <div className="hidden lg:flex flex-1 max-w-lg relative mx-8 group">
+                    <div className="hidden lg:flex flex-1 max-w-lg relative mx-8 group" role="search">
                         <input
                             type="text"
-                            value={localSearch}
+                            value={searchQuery}
                             onChange={handleSearch}
                             placeholder={t('common.search')}
                             maxLength={50}
                             className={`w-full ${isRTL ? 'pr-12 pl-4' : 'pl-12 pr-4'} py-2.5 rounded-full bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-300 transition-all text-sm placeholder:text-slate-400 group-hover:bg-white`}
                         />
-                        <Search className={`w-5 h-5 absolute ${isRTL ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 transition-colors ${localSearch ? 'text-pink-500' : 'text-slate-400'}`} />
-                        {localSearch && (
+                        <Search className={`w-5 h-5 absolute ${isRTL ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-pink-500' : 'text-slate-400'}`} />
+                        {searchQuery && (
                             <button
-                                onClick={() => { setLocalSearch(''); setSearchQuery(''); navigate('/'); }}
+                                onClick={() => { setSearchQuery(''); navigate('/'); }}
                                 className={`absolute ${isRTL ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 p-1 bg-slate-200 rounded-full hover:bg-slate-300`}
                                 aria-label={t('aria.clearSearch')}
                             >
@@ -189,24 +188,27 @@ export default function Header({
             {/* --- MENU PRINCIPAL (Barra de Categorias) --- */}
             <div className="hidden lg:block bg-pink-100 border-y border-pink-200 shadow-sm">
                 <div className="container mx-auto px-4">
-                    <ul className="flex items-center justify-center gap-10 text-sm font-bold text-pink-700 py-3 tracking-wide">
-                        {mainMenu.map((item, index) => (
-                            <li key={index} className="group relative cursor-pointer">
-                                <button
-                                    onClick={() => handleMenuClick(item)}
-                                    className={`flex items-center gap-1.5 hover:text-pink-900 transition-colors py-2 uppercase text-xs sm:text-sm
-                                    ${selectedCategory === item.category ? 'text-pink-900' : ''}`}
-                                >
-                                    {t(item.translationKey) || item.label}
-                                    {(item.action === 'filter' || item.label === 'Mais') && (
-                                        <ChevronDown className="w-3.5 h-3.5 text-pink-500 group-hover:text-pink-800 transition-colors" />
-                                    )}
-                                </button>
-                                {/* Active/Hover Line */}
-                                <span className={`absolute bottom-0 left-0 h-0.5 bg-pink-600 transition-all duration-300 ${selectedCategory === item.category ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-                            </li>
-                        ))}
-                    </ul>
+                    <nav aria-label={t('aria.mainMenu') || "Menu principal"}>
+                        <ul className="flex items-center justify-center gap-10 text-sm font-bold text-pink-700 py-3 tracking-wide">
+                            {mainMenu.map((item, index) => (
+                                <li key={index} className="group relative cursor-pointer">
+                                    <button
+                                        onClick={() => handleMenuClick(item)}
+                                        className={`flex items-center gap-1.5 hover:text-pink-900 transition-colors py-2 uppercase text-xs sm:text-sm
+                                        ${selectedCategory === item.category ? 'text-pink-900' : ''}`}
+                                        aria-current={selectedCategory === item.category ? 'page' : undefined}
+                                    >
+                                        {t(item.translationKey) || item.label}
+                                        {(item.action === 'filter' || item.label === 'Mais') && (
+                                            <ChevronDown className="w-3.5 h-3.5 text-pink-500 group-hover:text-pink-800 transition-colors" />
+                                        )}
+                                    </button>
+                                    {/* Active/Hover Line */}
+                                    <span className={`absolute bottom-0 left-0 h-0.5 bg-pink-600 transition-all duration-300 ${selectedCategory === item.category ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </header>

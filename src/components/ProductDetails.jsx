@@ -5,7 +5,7 @@ import { generateSlug } from '../utils/slug';
 import { productsData } from '../data/mockData';
 import { useI18n } from '../hooks/useI18n';
 
-export default function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
+function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
     const navigate = useNavigate();
     const { t, isRTL, formatCurrency, getProductData } = useI18n();
     const [quantity, setQuantity] = useState(1);
@@ -352,3 +352,4 @@ export default function ProductDetails({ product, onClose, onAddToCart, isModal 
         </div>
     );
 }
+export default React.memo(ProductDetails);

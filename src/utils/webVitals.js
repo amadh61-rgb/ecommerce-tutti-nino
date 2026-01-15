@@ -78,7 +78,7 @@ export async function initWebVitals() {
         if (import.meta.env.DEV) {
             console.log('[Web Vitals] Monitoramento iniciado');
         }
-    } catch (error) {
+    } catch {
         // Biblioteca não instalada - falha silenciosa
         if (import.meta.env.DEV) {
             console.warn('[Web Vitals] Biblioteca não encontrada. Instale com: npm install web-vitals');

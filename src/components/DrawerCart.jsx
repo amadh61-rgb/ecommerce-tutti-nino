@@ -2,7 +2,7 @@ import React from 'react';
 import { ShoppingBag, Trash2, X } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
-export default function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }) {
+function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }) {
     const { t, formatCurrency, getProductData } = useI18n();
     const cartTotal = cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
 
@@ -10,7 +10,7 @@ export default function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCar
 
     return (
         <>
-            <div role="dialog" aria-labelledby="cart-title" className="p-6 border-b border-slate-100 flex items-center justify-between bg-pink-50/50">
+            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-pink-50/50">
                 <h2 id="cart-title" className="text-xl font-bold text-slate-800 flex items-center gap-2">
                     <ShoppingBag className="w-5 h-5 text-pink-500" /> {t('cart.title')}
                 </h2>
@@ -59,3 +59,4 @@ export default function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCar
         </>
     );
 }
+export default React.memo(DrawerCart);

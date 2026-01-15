@@ -21,7 +21,7 @@ export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrack
     return (
         <>
             <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-sky-50/50">
-                <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                <h2 id="tracking-title" className="text-xl font-bold text-slate-800 flex items-center gap-2">
                     <PackageSearch className="w-5 h-5 text-sky-500" /> {t('tracking.title')}
                 </h2>
                 <button onClick={onClose} className="p-3 hover:bg-white rounded-full transition-colors text-slate-500 touch-target close-btn-mobile" aria-label={t('common.close')}>

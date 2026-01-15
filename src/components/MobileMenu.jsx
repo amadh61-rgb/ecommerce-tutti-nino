@@ -17,7 +17,7 @@ export default function MobileMenu({
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
             <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
             <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto mobile-scroll safe-top safe-bottom">
                 <div className="flex items-center justify-between mb-6">
@@ -36,7 +36,7 @@ export default function MobileMenu({
                     )}
                 </div>
                 {/* Navigation */}
-                <nav className="space-y-2 text-lg font-medium text-slate-600 flex-1">
+                <nav className="space-y-2 text-lg font-medium text-slate-600 flex-1" role="navigation" aria-label="Mobile menu navigation">
                     {mainMenu.map((item, index) => (
                         <button key={index} onClick={() => handleMenuClick(item)} className="flex w-full items-center justify-between hover:text-pink-500 py-3 px-2 border-b border-slate-50 last:border-0 text-left rounded-lg hover:bg-pink-50 transition-colors touch-target">
                             {t(item.translationKey) || item.label} <ChevronRight className={`w-5 h-5 text-slate-300 ${t('direction') === 'rtl' ? 'rotate-180' : ''}`} />

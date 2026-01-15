@@ -13,7 +13,15 @@ import ReloadPrompt from '../components/ReloadPrompt';
 import SEO from '../components/SEO';
 import ModalManager from '../components/ModalManager';
 import DrawerManager from '../components/DrawerManager'; // New Manager
+import SkipLinks from '../components/SkipLinks';
+import DrawerManager from '../components/DrawerManager'; // New Manager
+import SkipLinks from '../components/SkipLinks';
+import ErrorBoundary from '../components/ErrorBoundary';
 import MobileMenu from '../components/MobileMenu';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
+
+<SkipLinks />
 
 // Preload Routes
 const preloadCheckout = () => import('../pages/CheckoutPage');
@@ -118,18 +126,20 @@ export default function MainLayout() {
 
                 {/* Main Content - Router Outlet */}
                 <main id="main-content" tabIndex="-1">
-                    <Outlet context={{
-                        user,
-                        isLoggedIn,
-                        setIsLoggedIn,
-                        setUser,
-                        setActiveDrawer: openDrawer, // Provide openDrawer as setActiveDrawer
-                        setTrackingCode, // From Context
-                        selectedCategory,
-                        setSelectedCategory,
-                        searchQuery,
-                        setSearchQuery
-                    }} />
+                    <ErrorBoundary>
+                        <Outlet context={{
+                            user,
+                            isLoggedIn,
+                            setIsLoggedIn,
+                            setUser,
+                            setActiveDrawer: openDrawer, // Provide openDrawer as setActiveDrawer
+                            setTrackingCode, // From Context
+                            selectedCategory,
+                            setSelectedCategory,
+                            searchQuery,
+                            setSearchQuery
+                        }} />
+                    </ErrorBoundary>
                 </main>
 
                 {/* Mobile Menu */}
@@ -165,6 +175,10 @@ export default function MainLayout() {
 
                 {/* Footer */}
                 <Footer setSelectedCategory={setSelectedCategory} setActiveDrawer={openDrawer} setActiveModal={openModal} />
+
+                {/* Vercel Analytics & Speed Insights */}
+                <Analytics />
+                <SpeedInsights />
             </div>
         </HelmetProvider>
     );

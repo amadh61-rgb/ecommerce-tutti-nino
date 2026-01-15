@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import TestimonialCard from '../components/TestimonialCard';
-import QuickViewModal from '../components/QuickViewModal';
 import InfoStrip from '../components/InfoStrip';
 import { productsData, testimonials } from '../data/mockData';
 import { useCart } from '../hooks/useCart';
@@ -21,10 +20,8 @@ export default function HomePage() {
 
     const [selectedCategory, setSelectedCategory] = useState(categoryParam);
     const [searchQuery, setSearchQuery] = useState(searchParam);
-    // deleted state
-    // deleted state
+
     const [activeTestimonial, setActiveTestimonial] = useState(0); // Novo state para testemunhos
-    const [quickViewProduct, setQuickViewProduct] = useState(null);
 
     const { addToCart } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
@@ -125,7 +122,7 @@ export default function HomePage() {
                                     isFavorite={favorites.includes(product.id)}
                                     onToggleFavorite={(e) => toggleFavorite(e, product.id)}
                                     onAddToCart={() => addToCart(product)}
-                                    onQuickView={() => setQuickViewProduct(product)}
+                                    onQuickView={() => openModal('quickview', product)}
                                 />
                             ))}
                         </div>
@@ -179,16 +176,6 @@ export default function HomePage() {
                     <NewsletterForm />
                 </div>
             </section>
-
-            {/* Quick View Modal */}
-            <QuickViewModal
-                product={quickViewProduct}
-                isOpen={!!quickViewProduct}
-                onClose={() => setQuickViewProduct(null)}
-                onAddToCart={() => addToCart(quickViewProduct)}
-                onToggleFavorite={(e) => toggleFavorite(e, quickViewProduct?.id)}
-                isFavorite={favorites.includes(quickViewProduct?.id)}
-            />
         </>
     );
 }

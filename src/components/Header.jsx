@@ -6,6 +6,9 @@ import { useDebounce } from '../hooks/useDebounce';
 import { detectXSS } from '../utils/security';
 import LanguageSelector from './LanguageSelector';
 import { useI18n } from '../hooks/useI18n';
+import { useCart } from '../context/CartContext';
+import { useFavorites } from '../context/FavoritesContext';
+import { useModal } from '../context/ModalContext';
 
 // Helper de SLUG
 const generateSlug = (text) =>
@@ -21,10 +24,6 @@ export default function Header({
     setSelectedCategory,
     setSearchQuery,
     searchQuery,
-    setActiveDrawer,
-    favorites,
-    cartCount,
-    setActiveModal,
     selectedCategory,
     handleMenuClick,
     user,
@@ -32,9 +31,10 @@ export default function Header({
     navigateToDashboard
 }) {
     const navigate = useNavigate();
-    // Removed localSearch to avoid conflict with MobileMenu updates
-    // const [localSearch, setLocalSearch] = useState(searchQuery || '');
     const { t, isRTL } = useI18n();
+    const { cartCount } = useCart();
+    const { favorites } = useFavorites();
+    const { openDrawer, openModal } = useModal();
 
     // Debounce da busca APENAS para navegação/URL
     const debouncedSearch = useDebounce(searchQuery, 500);
@@ -67,7 +67,7 @@ export default function Header({
     };
 
     return (
-        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner" dir="ltr">
+        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner" dir="ltr">
             <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between gap-4">
 
@@ -116,7 +116,7 @@ export default function Header({
 
                         {/* Rastreio - Visível em todos os dispositivos */}
                         <button
-                            onClick={() => setActiveDrawer('tracking')}
+                            onClick={() => openDrawer('tracking')}
                             className="p-2 sm:p-2.5 hover:bg-sky-50 rounded-full transition-colors text-slate-500 hover:text-sky-500 touch-target"
                             title={t('nav.tracking')}
                             aria-label={t('aria.trackOrder')}
@@ -126,7 +126,7 @@ export default function Header({
 
                         {/* Favoritos - Visível em todos os dispositivos */}
                         <button
-                            onClick={() => setActiveDrawer('favorites')}
+                            onClick={() => openDrawer('favorites')}
                             className="relative p-2 sm:p-2.5 rounded-full transition-colors touch-target hover:bg-pink-50 text-slate-500 hover:text-pink-500"
                             title={t('nav.favorites')}
                             aria-label={t('aria.favoritesCount', { count: favorites.length })}
@@ -141,7 +141,7 @@ export default function Header({
 
                         {/* Carrinho - Visível em todos os dispositivos */}
                         <button
-                            onClick={() => setActiveDrawer('cart')}
+                            onClick={() => openDrawer('cart')}
                             className="relative p-2 sm:p-3 hover:bg-pink-50 rounded-full transition-colors group touch-target"
                             title={t('nav.cart')}
                             aria-label={t('aria.cartCount', { count: cartCount })}
@@ -170,7 +170,7 @@ export default function Header({
                             </button>
                         ) : (
                             <button
-                                onClick={() => setActiveModal('login')}
+                                onClick={() => openModal('login')}
                                 className="hidden lg:block bg-slate-800 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-slate-700 transition-colors shadow-lg shadow-slate-200"
                             >
                                 {t('nav.login')}

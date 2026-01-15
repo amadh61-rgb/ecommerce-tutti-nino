@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { ShoppingBag, X, Play, Minus, Plus, Lock } from 'lucide-react';
+import { ShoppingBag, Play, Minus, Plus, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { generateSlug } from '../utils/slug';
 import { productsData } from '../data/mockData';
 import { useI18n } from '../hooks/useI18n';
 
-function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
+function ProductDetails({ product, onAddToCart }) {
     const navigate = useNavigate();
     const { t, isRTL, formatCurrency, getProductData } = useI18n();
     const [quantity, setQuantity] = useState(1);
@@ -23,87 +23,11 @@ function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
     // Mock thumbnails (replicating the main image since we only have one per product in mock data)
     const thumbnails = [product.image, product.image, product.image];
 
-    const handleViewDetails = () => {
-        const slug = generateSlug(product.name);
-        if (onClose) onClose();
-        navigate(`/produto/${slug}`);
-    };
+    // Reference handleViewDetails removed as navigate is straightforward now if needed, but actually page view doesn't navigate to itself.
 
     const handleQuantityChange = (delta) => {
         setQuantity(prev => Math.max(1, prev + delta));
     };
-
-    // --- MODAL LAYOUT (Compact - Kept as is for QuickView) ---
-    if (isModal) {
-        return (
-            <div
-                className="bg-white w-full flex flex-col md:flex-row md:rounded-3xl h-full md:h-auto md:max-h-[85vh] max-w-5xl overflow-hidden shadow-2xl relative animate-scale-up"
-                onClick={(e) => e.stopPropagation()}
-            >
-                {/* Image Section */}
-                <div className="md:w-1/2 bg-slate-50 relative flex items-center justify-center p-8 order-first md:order-last">
-                    <img
-                        src={product.image}
-                        alt={productName}
-                        className="max-h-[60vh] max-w-full object-contain filter drop-shadow-xl"
-                    />
-                    <button
-                        onClick={onClose}
-                        className={`absolute top-4 ${isRTL ? 'left-4' : 'right-4'} p-2 bg-white/80 rounded-full hover:bg-white transition-colors z-10 shadow-sm md:hidden`}
-                    >
-                        <X className="w-5 h-5 text-slate-500" />
-                    </button>
-                </div>
-
-                {/* Content Section - Scrollable */}
-                <div className="md:w-1/2 p-6 md:p-8 flex flex-col gap-4 overflow-y-auto">
-                    <button
-                        onClick={onClose}
-                        className="self-end p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors hidden md:block"
-                        aria-label={t('common.close')}
-                    >
-                        <X className="w-5 h-5 text-slate-500" />
-                    </button>
-
-                    <div>
-                        {productBadge && (
-                            <span className="inline-block px-3 py-1 bg-pink-500 text-white text-[10px] font-bold rounded-full mb-2 shadow-sm">
-                                {productBadge}
-                            </span>
-                        )}
-                        <h1 className="text-xl font-bold text-slate-800 leading-tight">
-                            {productName}
-                        </h1>
-                    </div>
-
-                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-4">
-                        {productDescription}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-2 gap-3 mt-auto border-t border-slate-100 pt-4">
-                        <div className="text-2xl font-bold text-slate-800">
-                            {formatCurrency(product.price)}
-                        </div>
-                        <div className="flex gap-2">
-                            <button
-                                onClick={handleViewDetails}
-                                className="px-3 py-2 bg-slate-100 text-slate-700 font-bold rounded-full hover:bg-slate-200 transition-colors text-xs"
-                            >
-                                {t('products.viewDetails')}
-                            </button>
-                            <button
-                                onClick={() => onAddToCart(product)}
-                                className="px-4 py-2 bg-slate-800 text-white font-bold rounded-full hover:bg-pink-500 transition-colors shadow-lg flex items-center gap-2 text-xs"
-                            >
-                                <ShoppingBag className="w-3 h-3" />
-                                <span>{t('products.addToCart')}</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
     // --- REFERENCE PAGE LAYOUT ---
     return (
@@ -127,6 +51,18 @@ function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
                                         <img src={thumb} alt="thumbnail" className="w-full h-full object-contain" />
                                     </div>
                                 ))}
+
+                                {/* Video Button - Added to thumbnails column */}
+                                {product.video && (
+                                    <button
+                                        onClick={() => window.open(product.video, '_blank')}
+                                        className="w-20 h-20 border-2 border-pink-100 bg-pink-50 rounded-lg flex flex-col items-center justify-center text-pink-500 hover:bg-pink-100 hover:border-pink-300 transition-colors group/video"
+                                        title={t('products.watchVideo')}
+                                    >
+                                        <Play className="w-8 h-8 fill-current mb-1 group-hover/video:scale-110 transition-transform" />
+                                        <span className="text-[10px] font-bold uppercase">Vídeo</span>
+                                    </button>
+                                )}
                             </div>
 
                             {/* Main Image */}
@@ -138,33 +74,10 @@ function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
                                 />
                             </div>
                         </div>
-
-                        {/* Watch Video Button - Centered below image */}
-                        <div className="flex justify-center w-full mt-4">
-                            <button
-                                className="border-2 border-pink-500 text-pink-500 font-bold rounded-lg py-3 px-8 flex items-center justify-center gap-2 hover:bg-pink-50 transition-colors uppercase text-sm tracking-widest"
-                                onClick={() => product.video ? window.open(product.video, '_blank') : null}
-                            >
-                                <Play className="w-5 h-5 fill-current" />
-                                {t('products.watchVideo') || 'Assista ao vídeo'}
-                            </button>
-                        </div>
                     </div>
 
                     {/* RIGHT COLUMN: INFO & BUY (7 Cols) */}
                     <div className="lg:col-span-6 flex flex-col gap-6">
-
-                        {/* Tags */}
-                        <div className="flex gap-2">
-                            {productBadge && (
-                                <span className="bg-pink-600 text-white text-xs font-bold px-3 py-1 uppercase rounded-sm">
-                                    {productBadge}
-                                </span>
-                            )}
-                            <span className="bg-slate-800 text-white text-xs font-bold px-3 py-1 uppercase rounded-sm">
-                                {t('common.featured') || 'Destaque'}
-                            </span>
-                        </div>
 
                         {/* Title & Brand */}
                         <div>
@@ -199,7 +112,7 @@ function ProductDetails({ product, onClose, onAddToCart, isModal = false }) {
 
 
                         {/* Buy Actions */}
-                        <div className="flex flex-col sm:flex-row gap-4 mt-2">
+                        <div className="flex flex-row gap-4 mt-2">
                             {/* Quantity */}
                             <div className="flex items-center bg-slate-100 rounded-md h-12">
                                 <button onClick={() => handleQuantityChange(-1)} className="px-4 h-full text-slate-500 hover:text-pink-600 transition-colors">

@@ -14,10 +14,36 @@ export default function MobileMenu({
 }) {
     const { t } = useI18n();
 
+    const [headerHeight, setHeaderHeight] = React.useState(0);
+
+    React.useEffect(() => {
+        const updateHeight = () => {
+            const header = document.querySelector('header');
+            if (header) {
+                setHeaderHeight(header.getBoundingClientRect().bottom);
+            }
+        };
+
+        updateHeight();
+        window.addEventListener('scroll', updateHeight);
+        window.addEventListener('resize', updateHeight);
+
+        return () => {
+            window.removeEventListener('scroll', updateHeight);
+            window.removeEventListener('resize', updateHeight);
+        };
+    }, []);
+
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
+        <div
+            className="fixed inset-0 z-40 lg:hidden transition-[top] duration-75 ease-out"
+            style={{ top: `${headerHeight}px`, height: `calc(100vh - ${headerHeight}px)` }}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Mobile navigation menu"
+        >
             <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
             <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto mobile-scroll safe-top safe-bottom">
                 <div className="flex items-center justify-between mb-6">

@@ -13,7 +13,7 @@ import ShippingModal from './modals/ShippingModal';
 import FaqModal from './modals/FaqModal';
 
 // Lazy load large components
-const ProductDetails = lazy(() => import('./ProductDetails'));
+const ProductQuickView = lazy(() => import('./ProductQuickView'));
 
 export default function ModalManager({ onLoginSuccess }) {
     const { activeModal, closeModal, modalData } = useModal();
@@ -40,11 +40,10 @@ export default function ModalManager({ onLoginSuccess }) {
             case 'quickview':
                 return (
                     <Suspense fallback={<div className="p-12 flex justify-center"><div className="w-12 h-12 border-4 border-slate-200 border-t-pink-500 rounded-full animate-spin"></div></div>}>
-                        <ProductDetails
+                        <ProductQuickView
                             product={modalData}
                             onClose={closeModal}
                             onAddToCart={addToCart}
-                            isModal={true}
                         />
                     </Suspense>
                 );

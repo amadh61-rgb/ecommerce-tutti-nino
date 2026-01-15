@@ -44,6 +44,8 @@ export default function MainLayout() {
         openModal,
         closeModal,
         openDrawer,
+        closeDrawer, // Destructured
+        activeDrawer, // Destructured
         notification,
         showNotification,
         trackingCode,
@@ -59,6 +61,20 @@ export default function MainLayout() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+
+    // Sync: Close Mobile Menu when Drawer opens
+    useEffect(() => {
+        if (activeDrawer) {
+            setIsMobileMenuOpen(false);
+        }
+    }, [activeDrawer]);
+
+    // Sync: Close Drawer when Mobile Menu opens
+    useEffect(() => {
+        if (isMobileMenuOpen && activeDrawer) {
+            closeDrawer();
+        }
+    }, [isMobileMenuOpen]);
 
     const handleMenuClick = (item) => {
         if (item.action === 'reset') {
@@ -111,10 +127,6 @@ export default function MainLayout() {
                     setSelectedCategory={setSelectedCategory}
                     setSearchQuery={setSearchQuery}
                     searchQuery={searchQuery}
-                    setActiveDrawer={openDrawer} // Mapping openDrawer to setActiveDrawer prop
-                    favorites={favorites}
-                    cartCount={cartCount}
-                    setActiveModal={openModal}
                     selectedCategory={selectedCategory}
                     handleMenuClick={handleMenuClick}
                     user={user}

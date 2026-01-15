@@ -59,10 +59,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                                         <path fill="#FF5F00" d="M65.7 11.2a43.35 43.35 0 0 0-16.2 32.3 43.35 43.35 0 0 0 16.2 32.3 43.35 43.35 0 0 0 16.2-32.3 43.35 43.35 0 0 0-16.2-32.3z" />
                                     </svg>
                                 </div>
-                                {/* Elo - Official logo image */}
-                                <div className="h-12 w-12 rounded-full shadow-sm flex items-center justify-center overflow-hidden hover:shadow-md transition-shadow">
-                                    <img src="/elo-logo.png" alt="Elo" className="h-full w-full object-cover" />
-                                </div>
+
                                 {/* Pix - Official logo image */}
                                 <div className="h-12 px-3 bg-white rounded-lg shadow-sm flex items-center justify-center border border-slate-100 hover:shadow-md transition-shadow">
                                     <img src="/pix-logo.png" alt="Pix" className="h-8 object-contain" />

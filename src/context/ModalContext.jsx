@@ -56,3 +56,11 @@ export const ModalProvider = ({ children }) => {
         </ModalContext.Provider>
     );
 };
+
+export const useModal = () => {
+    const context = React.useContext(ModalContext);
+    if (!context) {
+        throw new Error('useModal deve ser usado dentro de um ModalProvider');
+    }
+    return context;
+};

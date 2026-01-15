@@ -2,7 +2,7 @@
 // Serviço para integração com gateways de pagamento
 
 import { PAYMENT_CONFIG } from '../config/constants';
-import { api, ApiError } from './api';
+
 
 /**
  * Interface para gateways de pagamento
@@ -30,55 +30,43 @@ class PaymentService {
      * @param {object} orderData - Dados do pedido
      * @returns {Promise<object>} - Sessão de pagamento
      */
+    /**
+     * Cria uma sessão de pagamento (via Backend Seguro)
+     * @param {object} orderData - Dados do pedido
+     * @returns {Promise<object>} - Sessão de pagamento
+     */
     async createPaymentSession(orderData) {
-        console.log(`[${this.gateway}] Iniciando pagamento seguro...`, orderData);
+        console.log(`[${this.gateway}] Iniciando pagamento seguro via Backend...`, orderData);
 
         try {
             const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 
-            // Tentar chamar a API
-            let response;
-            try {
-                response = await fetch('/api/payment/create-session', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(orderData)
-                });
-            } catch (fetchError) {
-                // Se falhar o fetch e for localhost, assumimos que é porque a API Route não existe no Vite
-                if (isLocalhost) {
-                    console.warn('[DEV] Simulando resposta da API InfinitePay (Localhost)');
-                    await new Promise(r => setTimeout(r, 1000)); // Delay simulado
-                    return {
-                        sessionId: `mock_sess_${Date.now()}`,
-                        checkoutUrl: 'https://pay.infinitepay.io/simulacao', // URL fictícia
-                        status: 'pending'
-                    };
-                }
-                throw fetchError;
-            }
+            // Chamada real para a API Serverless
+            const response = await fetch('/api/payment/create-session', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
 
+            // Tratamento de erro 404 (comum em dev se api não rodar)
             if (!response.ok) {
-                // Fallback específico para 404 local
                 if (response.status === 404 && isLocalhost) {
-                    console.warn('[DEV] API não encontrada (normal no Vite). Simulando sucesso.');
+                    console.warn('[DEV] API Backend não encontrada. Usando MOCK local para desenvolvimento.');
+                    // Simula delay de rede
+                    await new Promise(r => setTimeout(r, 800));
                     return {
                         sessionId: `mock_sess_${Date.now()}`,
-                        checkoutUrl: 'https://pay.infinitepay.io/simulacao',
+                        checkoutUrl: `/checkout?session_id=mock_${Date.now()}&status=success`,
                         status: 'pending'
                     };
                 }
-
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Erro ao iniciar pagamento');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || `Erro no servidor: ${response.status}`);
             }
 
-            const data = await response.json();
-            return {
-                sessionId: data.transactionId,
-                checkoutUrl: data.checkoutUrl,
-                status: 'pending'
-            };
+            const result = await response.json();
+            return result.data; // A API retorna { success: true, data: { ... } }
+
         } catch (error) {
             console.error('Payment Service Error:', error);
             throw error;

@@ -44,7 +44,7 @@ createRoot(document.getElementById('root')).render(
         <FavoritesProvider>
           <ModalProvider>
             <ErrorBoundary>
-              <BrowserRouter>
+              <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
                 <ScrollToTop />
                 <Routes>
                   <Route element={<MainLayout />}>

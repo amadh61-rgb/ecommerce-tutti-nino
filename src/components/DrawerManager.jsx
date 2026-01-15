@@ -35,10 +35,11 @@ export default function DrawerManager() {
 
     return (
         <div className="fixed inset-0 z-[60]">
-            {/* DEBUG: Changed to RED to identify if this is the stuck overlay */}
-            <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} />
+            {activeDrawer && (
+                <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} />
+            )}
             <div
-                className={`absolute top-0 ${activeDrawer ? 'right-0' : '-right-full'} h-full w-full max-w-md bg-white shadow-2xl flex flex-col transition-transform duration-300 transform`}
+                className={`absolute top-0 left-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transition-transform duration-300 transform ${activeDrawer ? 'translate-x-0' : '-translate-x-full'}`}
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={`${activeDrawer}-title`}

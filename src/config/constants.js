@@ -111,6 +111,6 @@ export const PAYMENT_CONFIG = {
  */
 export const I18N_CONFIG = {
     DEFAULT_LOCALE: 'pt-BR',
-    SUPPORTED_LOCALES: ['pt-BR', 'en-US', 'es-ES', 'ar-SA'],
+    SUPPORTED_LOCALES: ['pt-BR', 'en-US', 'es-ES'],
     CURRENCY: 'BRL'
 };

@@ -7,7 +7,6 @@ const LOCALE_NAMES = {
     'pt-BR': { name: 'Português', flag: '🇧🇷' },
     'en-US': { name: 'English', flag: '🇺🇸' },
     'es-ES': { name: 'Español', flag: '🇪🇸' },
-    'ar-SA': { name: 'العربية', flag: '🇸🇦' },
 };
 
 function LanguageSelector({ className = '' }) {

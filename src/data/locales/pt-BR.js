@@ -20,7 +20,7 @@ export const ptBR = {
         secondary: 'Mais Vendidos',
     },
     products: {
-        title: 'Destaques da Semana',
+        title: 'Mimos que você vai amar',
         found: '{count} itens encontrados',
         addToCart: 'Adicionar ao Carrinho',
         addedToCart: 'Adicionado!',

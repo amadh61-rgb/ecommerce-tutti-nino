@@ -189,12 +189,12 @@ export default function Header({
             <div className="hidden lg:block bg-pink-100 border-y border-pink-200 shadow-sm" dir="ltr">
                 <div className="container mx-auto px-4">
                     <nav aria-label={t('aria.mainMenu') || "Menu principal"}>
-                        <ul className="flex items-center justify-center gap-10 text-sm font-bold text-pink-700 py-3 tracking-wide">
+                        <ul className="flex items-center justify-center gap-10 text-xs font-bold text-pink-700 py-2 tracking-wide">
                             {mainMenu.map((item, index) => (
                                 <li key={index} className="group relative cursor-pointer">
                                     <button
                                         onClick={() => handleMenuClick(item)}
-                                        className={`flex items-center gap-1.5 hover:text-pink-900 transition-colors py-2 uppercase text-xs sm:text-sm
+                                        className={`flex items-center gap-1.5 hover:text-pink-900 transition-colors py-1 uppercase text-[10px] sm:text-xs
                                         ${selectedCategory === item.category ? 'text-pink-900' : ''}`}
                                         aria-current={selectedCategory === item.category ? 'page' : undefined}
                                     >

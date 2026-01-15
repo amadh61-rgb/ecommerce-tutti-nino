@@ -71,20 +71,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, onQui
                             <Eye className="w-5 h-5" />
                         </button>
 
-                        {/* Botão Ver Vídeo (Se houver) */}
-                        {product.video && (
-                            <button
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    onQuickView && onQuickView();
-                                }}
-                                className="p-3 bg-white text-slate-700 rounded-full hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-lg transform hover:scale-110 flex items-center justify-center"
-                                title={t('aria.watchVideo')}
-                            >
-                                <Play className="w-5 h-5" />
-                            </button>
-                        )}
+
 
                     </div>
                 </div>

@@ -6,7 +6,8 @@ function Hero({ setSelectedCategory }) {
     const { t } = useI18n();
     return (
         <section className="relative overflow-hidden bg-gradient-to-b from-pink-500 via-pink-200 to-pink-50 text-white">
-            <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
+            {/* Blobs de fundo - Forçados LTR para evitar inversão estranha */}
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10" dir="ltr">
                 <div className="absolute top-[-10%] left-[-5%] w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-blob" />
                 <div className="absolute bottom-[-10%] right-[-5%] w-96 h-96 bg-sky-200/40 rounded-full blur-3xl animate-blob animation-delay-2000" />
             </div>

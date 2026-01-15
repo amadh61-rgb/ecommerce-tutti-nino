@@ -7,22 +7,22 @@ function InfoStrip() {
 
     const items = [
         {
-            icon: <CreditCard className="w-8 h-8 text-pink-500" />,
+            icon: <CreditCard className="w-8 h-8 text-[#ec4a9a]" />,
             title: t('infoStrip.creditCard'),
             subtitle: t('infoStrip.installments')
         },
         {
-            icon: <Truck className="w-8 h-8 text-pink-500" />,
+            icon: <Truck className="w-8 h-8 text-[#ec4a9a]" />,
             title: t('infoStrip.freeShipping'),
             subtitle: t('infoStrip.allBrazil')
         },
         {
-            icon: <Percent className="w-8 h-8 text-pink-500" />,
+            icon: <Percent className="w-8 h-8 text-[#ec4a9a]" />,
             title: t('infoStrip.discount'),
             subtitle: t('infoStrip.boleto')
         },
         {
-            icon: <Lock className="w-8 h-8 text-pink-500" />,
+            icon: <Lock className="w-8 h-8 text-[#ec4a9a]" />,
             title: t('infoStrip.secure'),
             subtitle: t('infoStrip.certified')
         }
@@ -44,7 +44,7 @@ function InfoStrip() {
     }, [mobileGroups.length]);
 
     return (
-        <section className="bg-pink-50 py-6 border-b border-pink-200 -mt-6 md:-mt-12 relative z-20">
+        <section className="bg-transparent py-6 border-b border-pink-200 -mt-6 md:-mt-12 relative z-20">
             <div className="container mx-auto px-4">
 
                 {/* --- VERSÃO MOBILE (Carrossel: 2 itens por vez) --- */}

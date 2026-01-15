@@ -19,7 +19,7 @@ function Hero({ setSelectedCategory }) {
     }, []);
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-pink-500 via-pink-200 to-pink-50 text-white">
+        <section className="relative overflow-hidden bg-transparent text-white">
             {/* Blobs de fundo - Forçados LTR para evitar inversão estranha */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10" dir="ltr">
                 <div className="absolute top-[-10%] left-[-5%] w-96 h-96 bg-pink-200/40 rounded-full blur-3xl animate-blob" />
@@ -50,7 +50,7 @@ function Hero({ setSelectedCategory }) {
                         </div>
 
                         {/* Carousel Indicators (Dots) */}
-                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                        <div className="absolute bottom-6 md:-bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
                             {slides.map((_, index) => (
                                 <button
                                     key={index}

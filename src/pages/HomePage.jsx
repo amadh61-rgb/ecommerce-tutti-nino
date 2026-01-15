@@ -77,18 +77,18 @@ export default function HomePage() {
 
     return (
         <>
-            {/* Hero Section */}
-            <Hero setSelectedCategory={setSelectedCategory} />
-
-            {/* Info Banner (Trust Signals) */}
-            <InfoStrip />
+            {/* Hero & Info Banner Wrapper */}
+            <div className="bg-gradient-to-b from-[#ec4a9a] to-[#fdebf5]">
+                <Hero setSelectedCategory={setSelectedCategory} />
+                <InfoStrip />
+            </div>
 
             {/* Product Grid */}
-            <section id="products-grid" className="py-16 bg-gradient-to-b from-[#F3E5F5] to-white min-h-[600px]">
+            <section id="products-grid" className="py-16 bg-[#F9F9F9] min-h-[600px]">
                 <div className="container mx-auto px-4">
                     <div className="flex items-end justify-between mb-10">
                         <div>
-                            <h2 className="text-3xl font-bold text-slate-800 mb-2">
+                            <h2 className="text-3xl font-bold text-[#2E1065] mb-2">
                                 {searchQuery
                                     ? t('home.searchTitle', { query: searchQuery })
                                     : selectedCategory === 'Todos'

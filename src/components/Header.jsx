@@ -67,7 +67,7 @@ export default function Header({
     };
 
     return (
-        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner">
+        <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner" dir="ltr">
             <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between gap-4">
 
@@ -97,13 +97,13 @@ export default function Header({
                             onChange={handleSearch}
                             placeholder={t('common.search')}
                             maxLength={50}
-                            className={`w-full ${isRTL ? 'pr-12 pl-4' : 'pl-12 pr-4'} py-2.5 rounded-full bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-300 transition-all text-sm placeholder:text-slate-400 group-hover:bg-white`}
+                            className="w-full pl-12 pr-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-300 transition-all text-sm placeholder:text-slate-400 group-hover:bg-white"
                         />
-                        <Search className={`w-5 h-5 absolute ${isRTL ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 transition-colors ${searchQuery ? 'text-pink-500' : 'text-slate-400'}`} />
+                        <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 transition-colors text-slate-400" />
                         {searchQuery && (
                             <button
                                 onClick={() => { setSearchQuery(''); navigate('/'); }}
-                                className={`absolute ${isRTL ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 p-1 bg-slate-200 rounded-full hover:bg-slate-300`}
+                                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 bg-slate-200 rounded-full hover:bg-slate-300"
                                 aria-label={t('aria.clearSearch')}
                             >
                                 <X className="w-4 h-4 text-slate-500" />
@@ -186,7 +186,7 @@ export default function Header({
             </div>
 
             {/* --- MENU PRINCIPAL (Barra de Categorias) --- */}
-            <div className="hidden lg:block bg-pink-100 border-y border-pink-200 shadow-sm">
+            <div className="hidden lg:block bg-pink-100 border-y border-pink-200 shadow-sm" dir="ltr">
                 <div className="container mx-auto px-4">
                     <nav aria-label={t('aria.mainMenu') || "Menu principal"}>
                         <ul className="flex items-center justify-center gap-10 text-sm font-bold text-pink-700 py-3 tracking-wide">

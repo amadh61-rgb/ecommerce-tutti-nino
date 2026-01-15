@@ -160,7 +160,7 @@ export const ptBR = {
     footer: {
         categories: 'Categorias',
         help: 'Ajuda',
-        legal: 'Legal',
+        legal: 'Informações Legais',
         about: 'Quem somos',
         faq: 'Perguntas frequentes',
         shipping: 'Política de envios e prazos',
@@ -168,7 +168,7 @@ export const ptBR = {
         privacy: 'Política de privacidade',
         terms: 'Termos de Uso',
         contact: 'Fale Conosco',
-        copyright: '© 2026 Tutti & Nino. Todos os direitos reservados.',
+        copyright: 'Copyright © 2026 Tuttilina. Todos os direitos reservados.',
         paymentMethods: 'Formas de Pagamento',
         security: 'Segurança',
         securePurchase: 'Compra',

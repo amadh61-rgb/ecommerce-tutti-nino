@@ -10,32 +10,46 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     {/* Logo */}
                     <div className="col-span-1 flex flex-col items-center md:items-start">
-                        <div className="mb-6">
-                            <img src="/footer-logo.png" alt="Tutti & Nino" className="h-64 w-auto object-contain" />
+                        <div>
+                            <img src="/footer-logo.png" alt="Tuttilina" className="h-[220px] w-auto object-contain" id="footer-logo-img" />
                         </div>
                     </div>
 
                     {/* Ajuda */}
                     <div className="flex flex-col h-full items-center md:items-start">
                         <h4 className="text-2xl font-bold text-slate-800 mb-5 text-center md:text-left">{t('footer.help')}</h4>
-                        <ul className="flex-1 flex flex-col gap-3 text-base text-slate-500 w-full">
-                            <li className="flex items-center justify-center md:justify-start"><button onClick={() => setActiveModal('about')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-center md:text-left">{t('footer.about')}</button></li>
-                            <li className="flex items-center justify-center md:justify-start"><button onClick={() => setActiveModal('shipping')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-center md:text-left">{t('footer.shipping')}</button></li>
-                            <li className="flex items-center justify-center md:justify-start"><button onClick={() => setActiveModal('returns')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-center md:text-left">{t('footer.returns')}</button></li>
-                            <li className="flex items-center justify-center md:justify-start"><button onClick={() => setActiveModal('faq')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-center md:text-left">{t('footer.faq')}</button></li>
-                            <li className="flex items-center justify-center md:justify-start"><button onClick={() => setActiveModal('privacy')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-center md:text-left">{t('footer.privacy')}</button></li>
-                        </ul>
+                        <div className="flex-1 w-[320px] md:w-full max-w-md mx-auto md:mx-0">
+                            <ul className="flex flex-col gap-3 text-base text-slate-500 w-full">
+                                <li className="text-left"><button onClick={() => setActiveModal('about')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-left w-full p-0">{t('footer.about')}</button></li>
+                                <li className="text-left"><button onClick={() => setActiveModal('shipping')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-left w-full p-0">{t('footer.shipping')}</button></li>
+                                <li className="text-left"><button onClick={() => setActiveModal('returns')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-left w-full p-0">{t('footer.returns')}</button></li>
+                                <li className="text-left"><button onClick={() => setActiveModal('faq')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-left w-full p-0">{t('footer.faq')}</button></li>
+                                <li className="text-left"><button onClick={() => setActiveModal('privacy')} className="hover:text-pink-500 transition-colors hover:translate-x-1 duration-200 text-left w-full p-0">{t('footer.privacy')}</button></li>
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Legal */}
                     <div className="flex flex-col h-full items-center md:items-start">
                         <h4 className="text-2xl font-bold text-slate-800 mb-5 text-center md:text-left">{t('footer.legal')}</h4>
-                        <div className="flex-1 flex flex-col gap-2 text-sm text-slate-500 w-full">
-                            <div className="flex items-center justify-center md:justify-start"><strong className="text-slate-700">{t('footer.company.razaoSocial')}:</strong>&nbsp;Tutti & Nino Papelaria LTDA</div>
-                            <div className="flex items-center justify-center md:justify-start"><strong className="text-slate-700">{t('footer.company.cnpj')}:</strong>&nbsp;45.123.456/0001-89</div>
-                            <div className="flex items-center justify-center md:justify-start"><strong className="text-slate-700">{t('footer.company.address')}:</strong>&nbsp;Av. Paulista, 1000 - São Paulo, SP</div>
-                            <div className="flex items-center justify-center md:justify-start"><strong className="text-slate-700">{t('footer.company.email')}:</strong>&nbsp;contato@tuttinino.com.br</div>
-                            <div className="flex items-center justify-center md:justify-start"><strong className="text-slate-700">{t('footer.company.phone')}:</strong>&nbsp;(11) 99999-9999</div>
+                        <div className="flex-1 w-[320px] md:w-full max-w-md mx-auto md:mx-0">
+                            <ul className="flex flex-col gap-3 text-sm md:text-base text-slate-500">
+                                <li className="text-left">
+                                    <strong className="text-slate-700 font-semibold">{t('footer.company.razaoSocial')}:</strong> <span>Tutti & Nino Papelaria LTDA</span>
+                                </li>
+                                <li className="text-left">
+                                    <strong className="text-slate-700 font-semibold">{t('footer.company.cnpj')}:</strong> <span>45.123.456/0001-89</span>
+                                </li>
+                                <li className="text-left">
+                                    <strong className="text-slate-700 font-semibold">{t('footer.company.address')}:</strong> <span>Av. Paulista, 1000 - São Paulo, SP</span>
+                                </li>
+                                <li className="text-left">
+                                    <strong className="text-slate-700 font-semibold">{t('footer.company.email')}:</strong> <span>contato@tuttinino.com.br</span>
+                                </li>
+                                <li className="text-left">
+                                    <strong className="text-slate-700 font-semibold">{t('footer.company.phone')}:</strong> <span>(11) 99999-9999</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

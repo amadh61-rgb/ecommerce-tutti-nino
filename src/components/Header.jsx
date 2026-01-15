@@ -199,7 +199,7 @@ export default function Header({
                                         aria-current={selectedCategory === item.category ? 'page' : undefined}
                                     >
                                         {t(item.translationKey) || item.label}
-                                        {(item.action === 'filter' || item.label === 'Mais') && (
+                                        {item.subcategories?.length > 0 && (
                                             <ChevronDown className="w-3.5 h-3.5 text-pink-500 group-hover:text-pink-800 transition-colors" />
                                         )}
                                     </button>

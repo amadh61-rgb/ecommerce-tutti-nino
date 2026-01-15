@@ -28,26 +28,88 @@ function InfoStrip() {
         }
     ];
 
+    const [currentGroup, setCurrentGroup] = React.useState(0);
+
+    // Agrupa itens em pares para o mobile (2 slides de 2 itens)
+    const mobileGroups = [
+        items.slice(0, 2),
+        items.slice(2, 4)
+    ];
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentGroup((prev) => (prev + 1) % mobileGroups.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, [mobileGroups.length]);
+
     return (
-        <section className="bg-pink-50 py-8 border-b border-pink-200">
+        <section className="bg-pink-50 py-6 border-b border-pink-200">
             <div className="container mx-auto px-4">
-                <div className="flex overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory gap-4 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0">
+
+                {/* --- VERSÃO MOBILE (Carrossel: 2 itens por vez) --- */}
+                <div className="md:hidden relative flex flex-col items-center">
+                    <div className="relative w-full overflow-hidden h-24">
+                        {mobileGroups.map((group, groupIndex) => (
+                            <div
+                                key={groupIndex}
+                                className={`absolute inset-0 w-full grid grid-cols-2 gap-2 transition-all duration-500 ease-in-out ${groupIndex === currentGroup
+                                        ? 'opacity-100 translate-x-0 z-10'
+                                        : 'opacity-0 translate-x-10 -z-10'
+                                    }`}
+                            >
+                                {group.map((item, index) => (
+                                    <div key={index} className="flex flex-col items-center justify-center text-center p-2 border border-pink-100/50 rounded-lg bg-white/40 h-full">
+                                        <div className="p-1.5 border border-pink-200 rounded-lg bg-white shadow-sm shrink-0 text-pink-500 mb-2">
+                                            {React.cloneElement(item.icon, { className: "w-5 h-5" })}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-slate-700 font-bold text-xs leading-tight mb-0.5">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-slate-500 text-[10px] leading-tight">
+                                                {item.subtitle}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Dots Mobile */}
+                    <div className="flex justify-center gap-2 mt-2">
+                        {mobileGroups.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentGroup(index)}
+                                className={`h-1.5 rounded-full transition-all duration-300 ${index === currentGroup ? 'bg-pink-500 w-4' : 'bg-pink-300 w-1.5'
+                                    }`}
+                                aria-label={`Ver grupo ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+                </div>
+
+                {/* --- VERSÃO DESKTOP (Grid Estático: 4 itens) --- */}
+                <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {items.map((item, index) => (
-                        <div key={index} className="min-w-[45vw] sm:min-w-[auto] snap-center flex flex-col md:flex-row items-center justify-center md:justify-start gap-3 md:gap-4 hover:transform md:hover:scale-105 transition-transform duration-300 bg-white/50 md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none border border-pink-100 md:border-none text-center md:text-left">
-                            <div className="p-2 border border-pink-200 rounded-lg bg-white shadow-sm shrink-0">
+                        <div key={index} className="flex items-center gap-4 p-4 border border-transparent hover:border-pink-200/50 rounded-xl transition-all duration-300 hover:bg-white/40">
+                            <div className="p-3 border border-pink-200 rounded-xl bg-white shadow-sm text-pink-500 shrink-0">
                                 {item.icon}
                             </div>
-                            <div>
-                                <h3 className="text-slate-700 font-bold text-xs md:text-sm lg:text-base leading-tight mb-1 md:mb-0">
+                            <div className="text-left">
+                                <h3 className="text-slate-700 font-bold text-base leading-tight mb-1">
                                     {item.title}
                                 </h3>
-                                <p className="text-slate-500 text-[10px] md:text-xs lg:text-sm leading-tight">
+                                <p className="text-slate-500 text-sm leading-tight">
                                     {item.subtitle}
                                 </p>
                             </div>
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );

@@ -1,58 +1,15 @@
-import React, { useState } from 'react';
-import { Instagram, Facebook, Twitter, MessageCircle } from 'lucide-react';
+import React from 'react';
 
 export default function FloatingWhatsApp() {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const socials = [
-        {
-            name: 'Instagram',
-            icon: Instagram,
-            color: 'bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]',
-            link: '#'
-        },
-        {
-            name: 'Facebook',
-            icon: Facebook,
-            color: 'bg-[#1877F2]',
-            link: '#'
-        },
-        {
-            name: 'Twitter',
-            icon: Twitter,
-            color: 'bg-[#1DA1F2]',
-            link: '#'
-        }
-    ];
-
     return (
-        <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end gap-3"
-            onMouseEnter={() => setIsOpen(true)}
-            onMouseLeave={() => setIsOpen(false)}
-        >
-            {/* Social Buttons Stack */}
-            <div className={`flex flex-col gap-3 transition-all duration-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}>
-                {socials.map((social, index) => (
-                    <a
-                        key={social.name}
-                        href={social.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`p-3 text-white rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 ${social.color}`}
-                        title={social.name}
-                    >
-                        <social.icon className="w-6 h-6" />
-                    </a>
-                ))}
-            </div>
-
+        <div className="fixed bottom-6 right-6 z-[90] flex flex-col items-end gap-3">
             {/* Main WhatsApp Button */}
             <a
                 href="https://wa.me/5513999999999?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tutti%20%26%20Nino%20e%20gostaria%20de%20tirar%20uma%20d%C3%BAvida."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 bg-[#25D366] text-white rounded-full shadow-xl hover:shadow-2xl hover:scale-110 transition-all duration-300 animate-bounce-in flex items-center gap-2 group"
-                aria-label="Fale conosco"
+                aria-label="Fale conosco no WhatsApp"
             >
                 <div className="relative">
                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">

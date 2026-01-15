@@ -2,8 +2,22 @@ import React from 'react';
 import { ArrowRight, Heart, Star } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
+const slides = [
+    { id: 1, image: "/banner-slide-1.png", alt: "Seu Planner 2026 Chegou" },
+    { id: 2, image: "/banner-slide-2.png", alt: "Planeje com Estilo - Adesivos" }
+];
+
 function Hero({ setSelectedCategory }) {
     const { t } = useI18n();
+    const [currentSlide, setCurrentSlide] = React.useState(0);
+
+    React.useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentSlide((prev) => (prev + 1) % slides.length);
+        }, 2000);
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <section className="relative overflow-hidden bg-gradient-to-b from-pink-500 via-pink-200 to-pink-50 text-white">
             {/* Blobs de fundo - Forçados LTR para evitar inversão estranha */}
@@ -13,27 +27,39 @@ function Hero({ setSelectedCategory }) {
             </div>
 
             <div className="container mx-auto px-4 py-8 lg:py-24 hero-mobile-compact">
-                <div className="flex flex-col-reverse lg:flex-row items-center gap-8 lg:gap-12">
-                    <div className="lg:w-1/2 space-y-4 lg:space-y-6 text-center lg:text-left">
-                        <span className="inline-block px-4 py-1.5 rounded-full bg-white/20 text-white text-xs sm:text-sm font-semibold tracking-wide mb-1 lg:mb-2 animate-bounce-in backdrop-blur-sm">
-                            {t('hero.badge')}
-                        </span>
-                        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight hero-title-mobile">
-                            {t('hero.title')}
-                        </h1>
-                        <p className="text-base lg:text-lg text-white/90 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                            {t('hero.subtitle')}
-                        </p>
+                <div className="flex justify-center items-center w-full">
+                    <div className="w-full max-w-[1400px] relative group">
 
-                    </div>
+                        {/* Carousel Slides */}
+                        <div className="relative h-[280px] sm:h-[300px] lg:h-[500px] w-full">
+                            {slides.map((slide, index) => (
+                                <div
+                                    key={slide.id}
+                                    className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                                        }`}
+                                >
+                                    <div className="relative h-full bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/50 shadow-xl">
+                                        <img
+                                            src={slide.image}
+                                            alt={slide.alt}
+                                            className="rounded-2xl w-full h-full object-cover shadow-sm"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
 
-                    <div className="lg:w-1/2 relative group">
-                        <div className="relative z-10 bg-white/40 backdrop-blur-sm p-4 rounded-3xl border border-white/50 shadow-xl transition-transform duration-700 group-hover:rotate-1">
-                            <img
-                                src="/hero-banner.png"
-                                alt="Papelaria Hero"
-                                className="rounded-2xl w-full h-auto object-cover shadow-sm"
-                            />
+                        {/* Carousel Indicators (Dots) */}
+                        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+                            {slides.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentSlide(index)}
+                                    className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-pink-600 w-6' : 'bg-pink-300 hover:bg-pink-400'
+                                        }`}
+                                    aria-label={`Ir para slide ${index + 1}`}
+                                />
+                            ))}
                         </div>
 
                     </div>

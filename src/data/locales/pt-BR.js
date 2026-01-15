@@ -66,7 +66,7 @@ export const ptBR = {
     },
     home: {
         searchTitle: 'Buscando por: "{query}"',
-        weekHighlights: 'Destaques da Semana',
+        weekHighlights: 'Mimos que você vai amar',
         itemsFound: '{count} itens encontrados',
         noResultsTitle: 'Ops! Não encontrámos nada.',
         noResultsDesc: 'Tente outra categoria ou termo de busca.',

@@ -31,8 +31,6 @@ export default function DrawerManager() {
         navigate('/checkout');
     };
 
-    if (!activeDrawer && !trackingCode) return null; // Added trackingCode check just in case but main logic is activeDrawer
-    // Reverting to just activeDrawer check to match original logic precisely but enforcing LTR
     if (!activeDrawer) return null;
 
     return (
@@ -41,7 +39,8 @@ export default function DrawerManager() {
             className={`fixed inset-0 z-[60] transform transition-all duration-300 ${activeDrawer ? 'translate-x-0' : 'translate-x-full pointer-events-none'}`}
             dir="ltr"
         >
-            <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} />
+            {/* DEBUG: Changed to RED to identify if this is the stuck overlay */}
+            <div className="absolute inset-0 bg-red-900/50 backdrop-blur-sm" onClick={closeDrawer} />
             <div
                 className={`absolute top-0 ${activeDrawer ? 'right-0' : '-right-full'} h-full w-full max-w-md bg-white shadow-2xl flex flex-col transition-transform duration-300 transform`}
                 role="dialog"

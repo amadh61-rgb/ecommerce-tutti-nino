@@ -85,7 +85,7 @@ export default function Header({
                             aria-label="Tutti & Nino Home"
                             onClick={handleLogoClick}
                         >
-                            <img src="/header-logo.png" alt="Tutti & Nino Logo" className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300" />
+                            <img src="/header-logo.png" alt="Tutti & Nino Logo" width="180" height="48" className="h-10 md:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300" />
                         </Link>
                     </div>
 

@@ -11,7 +11,7 @@ export default function Footer({ setSelectedCategory, setActiveDrawer, setActive
                     {/* Logo */}
                     <div className="col-span-1 flex flex-col items-center md:items-start">
                         <div>
-                            <img src="/footer-logo.png" alt="Tuttilina" className="h-[220px] w-auto object-contain" id="footer-logo-img" />
+                            <img src="/footer-logo.png" alt="Tuttilina" width="220" height="220" className="h-[220px] w-auto object-contain" id="footer-logo-img" />
                         </div>
                     </div>
 

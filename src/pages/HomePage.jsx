@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
-import TestimonialCard from '../components/TestimonialCard';
+import TestimonialsSection from '../components/TestimonialsSection';
 import InfoStrip from '../components/InfoStrip';
 import { productsData, testimonials } from '../data/mockData';
 import { useCart } from '../hooks/useCart';
@@ -21,7 +21,7 @@ export default function HomePage() {
     const [selectedCategory, setSelectedCategory] = useState(categoryParam);
     const [searchQuery, setSearchQuery] = useState(searchParam);
 
-    const [activeTestimonial, setActiveTestimonial] = useState(0); // Novo state para testemunhos
+
 
     const { addToCart } = useCart();
     const { favorites, toggleFavorite } = useFavorites();
@@ -135,42 +135,7 @@ export default function HomePage() {
             </section>
 
             {/* Testimonials */}
-            <section className="py-20 bg-[#FFF0F5]">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h2 className="text-[22px] md:text-5xl font-cookie text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis"
-                            style={{ textShadow: "2px 2px 0px rgba(255,255,255,0.5)" }}
-                        >
-                            {t('testimonials.title')}
-                        </h2>
-                        <p className="text-slate-500 font-lato">{t('testimonials.subtitle')}</p>
-                    </div>
-
-                    <div
-                        className="flex overflow-x-auto pt-8 pb-6 -mx-4 px-4 md:grid md:grid-cols-3 gap-6 md:gap-8 mobile-scroll snap-x snap-mandatory md:pb-0 md:mx-0 md:px-0 scrollbar-hide"
-                        onScroll={(e) => {
-                            const scrollLeft = e.currentTarget.scrollLeft;
-                            const width = e.currentTarget.offsetWidth;
-                            const index = Math.round(scrollLeft / width);
-                            setActiveTestimonial(index);
-                        }}
-                    >
-                        {testimonials.map((t) => (
-                            <TestimonialCard key={t.id} data={t} />
-                        ))}
-                    </div>
-
-                    {/* Dots Indicator (Mobile Only) */}
-                    <div className="flex md:hidden justify-center gap-2 mt-4">
-                        {testimonials.map((_, idx) => (
-                            <div
-                                key={idx}
-                                className={`w-2 h-2 rounded-full transition-all duration-300 ${idx === activeTestimonial ? 'bg-pink-500 w-6' : 'bg-slate-300'}`}
-                            />
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <TestimonialsSection />
 
             {/* Newsletter */}
             <section className="py-20 bg-[#FFF0F5]">

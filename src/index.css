@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cookie&family=Lato:wght@400;700&display=swap');
+/* Google Fonts imported via link in index.html for performance */
 
 @tailwind base;
 @tailwind components;

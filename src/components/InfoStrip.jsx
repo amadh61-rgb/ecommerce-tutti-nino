@@ -49,7 +49,7 @@ function InfoStrip() {
 
                 {/* --- VERSÃO MOBILE (Carrossel: 2 itens por vez) --- */}
                 <div className="md:hidden relative flex flex-col items-center">
-                    <div className="relative w-full overflow-hidden h-24">
+                    <div className="relative w-full overflow-hidden h-32">
                         {mobileGroups.map((group, groupIndex) => (
                             <div
                                 key={groupIndex}

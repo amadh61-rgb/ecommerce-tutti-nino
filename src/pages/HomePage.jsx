@@ -88,7 +88,7 @@ export default function HomePage() {
                 <div className="container mx-auto px-4">
                     {/* Header da Seção */}
                     <div className="text-center mb-12">
-                        <h2 className="text-2xl md:text-5xl font-cookie text-[#880E4F] mb-4 relative inline-block animate-fade-in"
+                        <h2 className="text-[26px] md:text-5xl font-cookie text-[#880E4F] mb-4 relative inline-block animate-fade-in"
                             style={{ textShadow: "3px 3px 0px rgba(253, 226, 243, 1)" }}
                         >
                             {searchQuery
@@ -138,7 +138,7 @@ export default function HomePage() {
             <section className="py-20 bg-[#FFF0F5]">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-xl md:text-5xl font-cookie text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis"
+                        <h2 className="text-[22px] md:text-5xl font-cookie text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis"
                             style={{ textShadow: "2px 2px 0px rgba(255,255,255,0.5)" }}
                         >
                             {t('testimonials.title')}
@@ -175,7 +175,7 @@ export default function HomePage() {
             {/* Newsletter */}
             <section className="py-20 bg-[#FFF0F5]">
                 <div className="container mx-auto px-4 text-center max-w-2xl">
-                    <h2 className="text-xl md:text-5xl font-cookie text-[#880E4F] mb-4 whitespace-nowrap overflow-hidden text-ellipsis">{t('newsletter.title')}</h2>
+                    <h2 className="text-[22px] md:text-5xl font-cookie text-[#880E4F] mb-4 whitespace-nowrap overflow-hidden text-ellipsis">{t('newsletter.title')}</h2>
                     <p className="text-slate-600 mb-8 font-lato">{t('newsletter.subtitle')}</p>
                     <NewsletterForm />
                 </div>

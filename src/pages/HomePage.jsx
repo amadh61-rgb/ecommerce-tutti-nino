@@ -88,7 +88,7 @@ export default function HomePage() {
                 <div className="container mx-auto px-4">
                     {/* Header da Seção */}
                     <div className="text-center mb-12">
-                        <h2 className="text-5xl font-cookie text-[#880E4F] mb-4 relative inline-block animate-fade-in"
+                        <h2 className="text-3xl md:text-5xl font-cookie text-[#880E4F] mb-4 relative inline-block animate-fade-in"
                             style={{ textShadow: "3px 3px 0px rgba(253, 226, 243, 1)" }}
                         >
                             {searchQuery

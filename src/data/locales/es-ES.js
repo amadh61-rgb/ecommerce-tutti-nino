@@ -54,6 +54,7 @@ export const esES = {
             all: 'Todos',
             planners: 'Planners',
             stickers: 'Pegatinas',
+            stationery: 'Papelería',
             notebooks: 'Cuadernos',
             pens: 'Bolígrafos',
             accessories: 'Accesorios',

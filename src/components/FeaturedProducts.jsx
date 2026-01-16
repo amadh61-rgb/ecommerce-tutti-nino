@@ -51,7 +51,11 @@ const FeaturedProducts = () => {
                 </div>
                 <div style={gridStyle}>
                     {products.map(product => (
-                        <ProductCard key={product.id} product={product} />
+                        <ProductCard
+                            key={product.id}
+                            product={product}
+                            onAddToCart={(qty) => console.log('Add to cart:', product.name, qty)}
+                        />
                     ))}
                 </div>
             </div>

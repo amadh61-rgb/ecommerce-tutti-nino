@@ -67,7 +67,7 @@ export default function Header({
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm transition-all" role="banner" dir="ltr">
+        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all" role="banner" dir="ltr">
             <div className="container mx-auto px-4 py-4">
                 <div className="flex items-center justify-between gap-4">
 
@@ -99,7 +99,7 @@ export default function Header({
                             maxLength={50}
                             className="w-full pl-12 pr-4 py-2.5 rounded-full bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-200 focus:border-pink-300 transition-all text-sm placeholder:text-slate-400 group-hover:bg-white"
                         />
-                        <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 transition-colors text-slate-400" />
+                        <Search className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 transition-colors text-[#FF1493]" />
                         {searchQuery && (
                             <button
                                 onClick={() => { setSearchQuery(''); navigate('/'); }}
@@ -117,7 +117,7 @@ export default function Header({
                         {/* Rastreio - Visível em todos os dispositivos */}
                         <button
                             onClick={() => openDrawer('tracking')}
-                            className="p-2 sm:p-2.5 hover:bg-sky-50 rounded-full transition-colors text-slate-500 hover:text-sky-500 touch-target"
+                            className="p-2 sm:p-2.5 hover:bg-sky-50 rounded-full transition-colors text-[#FF1493] hover:text-pink-600 touch-target"
                             title={t('nav.tracking')}
                             aria-label={t('aria.trackOrder')}
                         >
@@ -127,11 +127,11 @@ export default function Header({
                         {/* Favoritos - Visível em todos os dispositivos */}
                         <button
                             onClick={() => openDrawer('favorites')}
-                            className="relative p-2 sm:p-2.5 rounded-full transition-colors touch-target hover:bg-pink-50 text-slate-500 hover:text-pink-500"
+                            className="relative p-2 sm:p-2.5 rounded-full transition-colors touch-target hover:bg-pink-50 text-[#FF1493] hover:text-pink-600"
                             title={t('nav.favorites')}
                             aria-label={t('aria.favoritesCount', { count: favorites.length })}
                         >
-                            <Heart className={`w-5 h-5 sm:w-6 sm:h-6 ${favorites.length > 0 ? 'fill-pink-500 text-pink-500' : ''}`} />
+                            <Heart className={`w-5 h-5 sm:w-6 sm:h-6 ${favorites.length > 0 ? 'fill-[#FF1493] text-[#FF1493]' : ''}`} />
                             {favorites.length > 0 && (
                                 <span className="absolute -top-1 -right-1 bg-pink-500 text-white text-[10px] font-bold w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center rounded-full shadow-sm">
                                     {favorites.length}
@@ -146,9 +146,9 @@ export default function Header({
                             title={t('nav.cart')}
                             aria-label={t('aria.cartCount', { count: cartCount })}
                         >
-                            <ShoppingBag className="w-5 h-5 sm:w-7 sm:h-7 text-slate-700 group-hover:text-pink-500 transition-colors" />
+                            <ShoppingBag className="w-5 h-5 sm:w-7 sm:h-7 text-[#FF1493] group-hover:text-pink-600 transition-colors" />
                             {cartCount > 0 && (
-                                <span className="absolute -top-1 -right-1 bg-sky-400 text-white text-[10px] sm:text-xs font-bold w-4 h-4 sm:w-6 sm:h-6 flex items-center justify-center rounded-full shadow-sm animate-pulse">
+                                <span className="absolute -top-1 -right-1 bg-[#FF69B4] text-white text-[10px] sm:text-xs font-bold w-4 h-4 sm:w-6 sm:h-6 flex items-center justify-center rounded-full shadow-sm animate-pulse">
                                     {cartCount}
                                 </span>
                             )}
@@ -171,7 +171,7 @@ export default function Header({
                         ) : (
                             <button
                                 onClick={() => openModal('login')}
-                                className="hidden lg:block bg-slate-800 text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-slate-700 transition-colors shadow-lg shadow-slate-200"
+                                className="hidden lg:block bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white px-5 py-2 rounded-full text-sm font-medium hover:brightness-90 transition-all shadow-lg shadow-pink-200"
                             >
                                 {t('nav.login')}
                             </button>
@@ -186,25 +186,25 @@ export default function Header({
             </div>
 
             {/* --- MENU PRINCIPAL (Barra de Categorias) --- */}
-            <div className="hidden lg:block bg-pink-100 border-y border-pink-200 shadow-sm" dir="ltr">
+            <div className="hidden lg:block bg-[#EC509D]" dir="ltr">
                 <div className="container mx-auto px-4">
                     <nav aria-label={t('aria.mainMenu') || "Menu principal"}>
-                        <ul className="flex items-center justify-center gap-10 text-xs font-bold text-pink-700 py-2 tracking-wide">
+                        <ul className="flex items-center justify-center gap-10 text-sm font-bold text-white py-2 tracking-wide">
                             {mainMenu.map((item, index) => (
                                 <li key={index} className="group relative cursor-pointer">
                                     <button
                                         onClick={() => handleMenuClick(item)}
-                                        className={`flex items-center gap-1.5 hover:text-pink-900 transition-colors py-1 uppercase text-[10px] sm:text-xs
-                                        ${selectedCategory === item.category ? 'text-pink-900' : ''}`}
+                                        className={`flex items-center gap-1.5 hover:text-[#FFE4E1] transition-colors py-1 uppercase text-xs sm:text-sm
+                                        ${selectedCategory === item.category ? 'text-[#FFE4E1]' : ''}`}
                                         aria-current={selectedCategory === item.category ? 'page' : undefined}
                                     >
                                         {t(item.translationKey) || item.label}
                                         {item.subcategories?.length > 0 && (
-                                            <ChevronDown className="w-3.5 h-3.5 text-pink-500 group-hover:text-pink-800 transition-colors" />
+                                            <ChevronDown className="w-3.5 h-3.5 text-white group-hover:text-[#FFE4E1] transition-colors" />
                                         )}
                                     </button>
                                     {/* Active/Hover Line */}
-                                    <span className={`absolute bottom-0 left-0 h-0.5 bg-pink-600 transition-all duration-300 ${selectedCategory === item.category ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                                    <span className={`absolute bottom-0 left-0 h-0.5 bg-[#FFE4E1] transition-all duration-300 ${selectedCategory === item.category ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
                                 </li>
                             ))}
                         </ul>

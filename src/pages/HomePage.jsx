@@ -86,16 +86,19 @@ export default function HomePage() {
             {/* Product Grid */}
             <section id="products-grid" className="py-16 bg-[#F9F9F9] min-h-[600px]">
                 <div className="container mx-auto px-4">
-                    <div className="flex items-end justify-between mb-10">
-                        <div>
-                            <h2 className="text-3xl font-bold text-[#2E1065] mb-2">
-                                {searchQuery
-                                    ? t('home.searchTitle', { query: searchQuery })
-                                    : selectedCategory === 'Todos'
-                                        ? t('home.weekHighlights')
-                                        : getCategoryTranslation(selectedCategory)}
-                            </h2>
-                        </div>
+                    {/* Header da Seção */}
+                    <div className="text-center mb-12">
+                        <h2 className="text-5xl font-cookie text-[#880E4F] mb-4 relative inline-block animate-fade-in"
+                            style={{ textShadow: "3px 3px 0px rgba(253, 226, 243, 1)" }}
+                        >
+                            {searchQuery
+                                ? t('home.searchTitle', { query: searchQuery })
+                                : selectedCategory === 'Todos'
+                                    ? t('home.weekHighlights')
+                                    : getCategoryTranslation(selectedCategory)}
+                        </h2>
+                        {/* Elemento decorativo subtil (opcional) */}
+                        <div className="w-24 h-1 bg-gradient-to-r from-transparent via-pink-400 to-transparent mx-auto mt-2 rounded-full opacity-60"></div>
                     </div>
 
                     {filteredProducts.length === 0 ? (
@@ -120,7 +123,7 @@ export default function HomePage() {
                                     product={product}
                                     isFavorite={favorites.includes(product.id)}
                                     onToggleFavorite={(e) => toggleFavorite(e, product.id)}
-                                    onAddToCart={() => addToCart(product)}
+                                    onAddToCart={(qty) => addToCart({ ...product, qty: qty || 1 })}
                                     onQuickView={() => openModal('quickview', product)}
                                 />
                             ))}
@@ -132,13 +135,15 @@ export default function HomePage() {
             </section>
 
             {/* Testimonials */}
-            <section className="py-20 bg-sky-50">
+            <section className="py-20 bg-[#FFF0F5]">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
-                        <h2 className="text-[17px] md:text-3xl font-bold text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis px-4">
+                        <h2 className="text-5xl font-cookie text-slate-800 mb-4 whitespace-nowrap overflow-hidden text-ellipsis px-4"
+                            style={{ textShadow: "2px 2px 0px rgba(255,255,255,0.5)" }}
+                        >
                             {t('testimonials.title')}
                         </h2>
-                        <p className="text-slate-500">{t('testimonials.subtitle')}</p>
+                        <p className="text-slate-500 font-lato">{t('testimonials.subtitle')}</p>
                     </div>
 
                     <div
@@ -168,10 +173,10 @@ export default function HomePage() {
             </section>
 
             {/* Newsletter */}
-            <section className="py-20 bg-slate-50">
+            <section className="py-20 bg-[#FFF0F5]">
                 <div className="container mx-auto px-4 text-center max-w-2xl">
-                    <h2 className="text-3xl font-bold text-slate-800 mb-4">{t('newsletter.title')}</h2>
-                    <p className="text-slate-600 mb-8">{t('newsletter.subtitle')}</p>
+                    <h2 className="text-5xl font-cookie text-[#880E4F] mb-4">{t('newsletter.title')}</h2>
+                    <p className="text-slate-600 mb-8 font-lato">{t('newsletter.subtitle')}</p>
                     <NewsletterForm />
                 </div>
             </section>

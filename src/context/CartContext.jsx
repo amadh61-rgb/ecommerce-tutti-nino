@@ -88,7 +88,10 @@ export const CartProvider = ({ children }) => {
 
     const addToCart = useCallback((product) => {
         // Validar produto antes de adicionar
-        const validProduct = validateCartItem({ ...product, qty: 1 });
+        // Usa a quantidade informada ou 1 se não informada
+        const qtyToAdd = product.qty && typeof product.qty === 'number' && product.qty > 0 ? product.qty : 1;
+        const validProduct = validateCartItem({ ...product, qty: qtyToAdd });
+
         if (!validProduct) return;
 
         setCartItems((prev) => {
@@ -101,7 +104,7 @@ export const CartProvider = ({ children }) => {
             if (existing) {
                 return prev.map((item) =>
                     item.id === validProduct.id
-                        ? { ...item, qty: Math.min(item.qty + 1, CART_MAX_QUANTITY) }
+                        ? { ...item, qty: Math.min(item.qty + validProduct.qty, CART_MAX_QUANTITY) }
                         : item
                 );
             }

@@ -10,11 +10,11 @@ function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }
 
     return (
         <>
-            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-pink-50/50">
-                <h2 id="cart-title" className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                    <ShoppingBag className="w-5 h-5 text-pink-500" /> {t('cart.title')}
+            <div className="p-6 flex items-center justify-between bg-[#EC509D]">
+                <h2 id="cart-title" className="text-xl font-bold text-white flex items-center gap-2">
+                    <ShoppingBag className="w-5 h-5 text-white" /> {t('cart.title')}
                 </h2>
-                <button onClick={onClose} className="p-3 hover:bg-white rounded-full transition-colors text-slate-500 touch-target close-btn-mobile" aria-label={t('common.close')}>
+                <button onClick={onClose} className="p-3 hover:bg-white/20 rounded-full transition-colors text-white touch-target close-btn-mobile" aria-label={t('common.close')}>
                     <X className="w-7 h-7" />
                 </button>
             </div>
@@ -32,9 +32,9 @@ function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }
                             <img src={item.image} srcSet={`${item.image}?w=200 200w, ${item.image}?w=400 400w`} alt={getProductData(item.id, 'name') || item.name} className="w-20 h-20 rounded-xl object-cover bg-slate-50 border border-slate-100" />
                             <div className="flex-1">
                                 <h4 className="font-bold text-slate-800 text-sm line-clamp-2">{getProductData(item.id, 'name') || item.name}</h4>
-                                <p className="text-xs text-sky-500 font-medium mb-1">{getProductData(item.id, 'category') || item.category}</p>
+                                <p className="text-xs text-[#FF1493] font-medium mb-1">{getProductData(item.id, 'category') || item.category}</p>
                                 <div className="flex items-center justify-between mt-2">
-                                    <span className="text-sm font-semibold">
+                                    <span className="text-sm font-semibold text-[#880E4F]">
                                         {item.qty}x {formatCurrency(item.price)}
                                     </span>
                                     <button onClick={() => onRemoveFromCart(item.id)} className="text-red-400 hover:text-red-600 p-1" aria-label={t('cart.remove')}>
@@ -48,11 +48,11 @@ function DrawerCart({ isOpen, onClose, cartItems, onRemoveFromCart, onCheckout }
             </div>
 
             <div className="p-6 border-t border-slate-100 bg-slate-50">
-                <div className="flex justify-between items-center mb-4 text-lg font-bold text-slate-800">
+                <div className="flex justify-between items-center mb-4 text-lg font-bold text-[#880E4F]">
                     <span>{t('cart.total')}:</span>
                     <span>{formatCurrency(cartTotal)}</span>
                 </div>
-                <button onClick={onCheckout} className="w-full py-4 bg-slate-800 text-white font-bold rounded-full hover:bg-pink-500 transition-all shadow-lg hover:shadow-pink-200">
+                <button onClick={onCheckout} className="w-full py-4 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white font-bold rounded-full hover:shadow-lg hover:shadow-pink-200 transition-all transform hover:-translate-y-0.5">
                     {t('cart.checkout')}
                 </button>
             </div>

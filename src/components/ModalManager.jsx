@@ -6,6 +6,7 @@ import { useCart } from '../hooks/useCart';
 
 // Import Modals (Keep small modals static or lazy? Small ones are fine static)
 import LoginModal from './modals/LoginModal';
+import RegisterModal from './modals/RegisterModal';
 import ContactModal from './modals/ContactModal';
 import AboutModal from './modals/AboutModal';
 import PrivacyModal from './modals/PrivacyModal';
@@ -27,6 +28,8 @@ export default function ModalManager({ onLoginSuccess }) {
         switch (activeModal) {
             case 'login':
                 return <LoginModal onLoginSuccess={onLoginSuccess} />;
+            case 'register':
+                return <RegisterModal onRegisterSuccess={onLoginSuccess} />;
             case 'contact':
                 return <ContactModal />;
             case 'about':
@@ -74,7 +77,11 @@ export default function ModalManager({ onLoginSuccess }) {
     // I should adjust the wrapper width based on modal type.
 
     const isQuickView = activeModal === 'quickview';
-    const maxWidthClass = isQuickView ? 'max-w-4xl' : 'max-w-md';
+    const isRegister = activeModal === 'register';
+
+    let maxWidthClass = 'max-w-md';
+    if (isQuickView) maxWidthClass = 'max-w-4xl';
+    else if (isRegister) maxWidthClass = 'max-w-3xl'; // Wider layout for register modal
 
     return (
         <div
@@ -83,9 +90,9 @@ export default function ModalManager({ onLoginSuccess }) {
             aria-modal="true"
             aria-labelledby="modal-title"
         >
-            <div className={`bg-white rounded-3xl w-full ${maxWidthClass} overflow-hidden shadow-2xl relative animate-scale-up`}>
-                <button onClick={closeModal} className="absolute top-4 right-4 z-50 p-3 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors" aria-label={t('aria.closeModal')}>
-                    <X className="w-6 h-6 text-slate-500" />
+            <div className={`bg-white rounded-3xl w-[95%] md:w-full ${maxWidthClass} max-h-[90vh] overflow-y-auto shadow-2xl relative animate-scale-up scrollbar-thin scrollbar-thumb-pink-200 scrollbar-track-transparent`}>
+                <button onClick={closeModal} className="absolute top-4 right-4 z-50 p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-colors cursor-pointer" aria-label={t('aria.closeModal')}>
+                    <X className="w-5 h-5 text-slate-500" />
                 </button>
                 {renderModalContent()}
             </div>

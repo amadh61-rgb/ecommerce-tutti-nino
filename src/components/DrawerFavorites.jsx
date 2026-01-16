@@ -14,11 +14,11 @@ function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onTog
 
     return (
         <>
-            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-purple-50/50">
-                <h2 id="favorites-title" className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                    <Heart className="w-5 h-5 text-purple-500" /> {t('favorites.title')}
+            <div className="p-6 flex items-center justify-between bg-[#EC509D]">
+                <h2 id="favorites-title" className="text-xl font-bold text-white flex items-center gap-2">
+                    <Heart className="w-5 h-5 text-white" /> {t('favorites.title')}
                 </h2>
-                <button onClick={onClose} className="p-3 hover:bg-white rounded-full transition-colors text-slate-500 touch-target close-btn-mobile" aria-label={t('common.close')}>
+                <button onClick={onClose} className="p-3 hover:bg-white/20 rounded-full transition-colors text-white touch-target close-btn-mobile" aria-label={t('common.close')}>
                     <X className="w-7 h-7" />
                 </button>
             </div>
@@ -36,18 +36,18 @@ function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onTog
                             <img src={item.image} alt={getProductData(item.id, 'name') || item.name} className="w-20 h-20 rounded-xl object-cover bg-slate-50 border border-slate-100" />
                             <div className="flex-1">
                                 <h4 className="font-bold text-slate-800 text-sm line-clamp-2">{getProductData(item.id, 'name') || item.name}</h4>
-                                <p className="font-bold text-pink-600 text-sm">
+                                <p className="font-bold text-[#FF1493] text-sm">
                                     {formatCurrency(item.price)}
                                 </p>
                                 <button
                                     onClick={() => onAddToCart(item)}
-                                    className="text-xs mt-2 px-3 py-1.5 bg-slate-800 text-white rounded-full hover:bg-pink-500 transition-colors flex items-center gap-1 w-fit"
+                                    className="text-xs mt-2 px-3 py-1.5 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white rounded-full hover:shadow-md transition-all flex items-center gap-1 w-fit"
                                 >
                                     <ShoppingBag className="w-3 h-3" /> {t('products.addToCart')}
                                 </button>
                             </div>
-                            <button onClick={(e) => onToggleFavorite(e, item.id)} className="text-pink-500 hover:text-pink-600 p-2">
-                                <Heart className="w-5 h-5 fill-pink-500" />
+                            <button onClick={(e) => onToggleFavorite(e, item.id)} className="text-[#FF1493] hover:text-[#EC509D] p-2">
+                                <Heart className="w-5 h-5 fill-[#FF1493]" />
                             </button>
                         </div>
                     ))
@@ -58,7 +58,7 @@ function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onTog
                 <div className="p-6 border-t border-slate-100 bg-slate-50">
                     <button
                         onClick={addAllToCart}
-                        className="w-full py-4 border border-slate-300 text-slate-700 font-bold rounded-full hover:bg-slate-100 transition-all"
+                        className="w-full py-4 border border-[#FF1493] text-[#FF1493] font-bold rounded-full hover:bg-pink-50 transition-all"
                     >
                         {t('favorites.addAllToCart')}
                     </button>

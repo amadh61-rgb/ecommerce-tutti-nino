@@ -54,6 +54,7 @@ export const enUS = {
             all: 'All',
             planners: 'Planners',
             stickers: 'Stickers',
+            stationery: 'Stationery',
             notebooks: 'Notebooks',
             pens: 'Pens',
             accessories: 'Accessories',

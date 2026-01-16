@@ -66,7 +66,7 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
                                 onClick={() => window.open(slides[currentSlide].src, '_blank')}
                                 className="absolute inset-0 flex items-center justify-center z-10 group/play"
                             >
-                                <div className="w-16 h-16 bg-pink-600 rounded-full flex items-center justify-center shadow-lg group-hover/play:scale-110 transition-transform">
+                                <div className="w-16 h-16 bg-[#eb50c7] rounded-full flex items-center justify-center shadow-lg group-hover/play:scale-110 transition-transform">
                                     <ShoppingBag className="w-0 h-0 hidden" /> {/* Dummy import fix if needed, using Play from lucide typically */}
                                     <svg className="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
                                 </div>
@@ -106,7 +106,7 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
                         <button
                             key={idx}
                             onClick={(e) => { e.stopPropagation(); setCurrentSlide(idx); }}
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-pink-500 w-6' : 'bg-slate-300 hover:bg-pink-300'}`}
+                            className={`w-2 h-2 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-[#eb50c7] w-6' : 'bg-slate-300 hover:bg-[#eb50c7]/50'}`}
                         />
                     ))}
                 </div>
@@ -120,7 +120,7 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
 
                 <div>
                     {productBadge && (
-                        <span className="inline-block px-3 py-1 bg-pink-500 text-white text-[10px] font-bold rounded-full mb-2 shadow-sm">
+                        <span className="inline-block px-3 py-1 bg-[#eb50c7] text-white text-[10px] font-bold rounded-full mb-2 shadow-sm">
                             {productBadge}
                         </span>
                     )}
@@ -146,15 +146,15 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
                         </button>
                         <button
                             onClick={() => onAddToCart(product)}
-                            className="px-4 py-2 bg-slate-800 text-white font-bold rounded-full hover:bg-pink-500 transition-colors shadow-lg flex items-center gap-2 text-xs"
+                            className="px-4 py-2 bg-[#eb50c7] text-white font-bold rounded-full hover:brightness-90 transition-all shadow-lg flex items-center gap-2 text-xs"
                         >
                             <ShoppingBag className="w-3 h-3" />
-                            <span>{t('products.addToCart')}</span>
+                            <span>{t('products.buy')}</span>
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 

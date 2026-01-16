@@ -8,7 +8,9 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Inter', 'Outfit', 'sans-serif'],
+                sans: ['Lato', 'sans-serif'],
+                cookie: ['"Cookie"', 'cursive'],
+                lato: ['Lato', 'sans-serif'],
             },
             animation: {
                 'fade-in': 'fade-in 0.3s ease-out',

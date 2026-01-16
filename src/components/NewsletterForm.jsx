@@ -170,7 +170,7 @@ function NewsletterForm() {
             <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-pink-500 text-white font-bold rounded-xl hover:bg-pink-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white font-bold rounded-full hover:brightness-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
                 {status === 'loading' ? (
                     <>

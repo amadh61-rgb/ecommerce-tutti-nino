@@ -32,6 +32,7 @@ import { useI18n } from '../hooks/useI18n';
 
 // Icons
 import { CheckCircle } from 'lucide-react';
+import { generateSlug } from '../utils/slug';
 
 export default function MainLayout() {
     const navigate = useNavigate();
@@ -83,7 +84,8 @@ export default function MainLayout() {
             navigate('/');
         } else if (item.action === 'filter') {
             setSelectedCategory(item.category || item.label);
-            navigate('/?categoria=' + (item.category || item.label));
+            const slug = generateSlug(item.category || item.label);
+            navigate(`/categoria/${slug}`);
         } else if (item.action === 'modal') {
             openModal(item.modal);
         }

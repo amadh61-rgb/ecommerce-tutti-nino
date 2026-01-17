@@ -116,7 +116,7 @@ export default function HomePage() {
                             </button>
                         </div>
                     ) : (
-                        <div className="flex overflow-x-auto pb-6 -mx-4 px-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 mobile-scroll snap-x snap-mandatory sm:pb-0 sm:mx-0 sm:px-0 scrollbar-hide">
+                        <div className="flex overflow-x-auto pb-6 -mx-4 px-4 gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 lg:gap-8 overscroll-x-contain scroll-smooth snap-x snap-mandatory sm:pb-0 sm:mx-0 sm:px-0 scrollbar-hide">
                             {filteredProducts.map((product) => (
                                 <ProductCard
                                     key={product.id}

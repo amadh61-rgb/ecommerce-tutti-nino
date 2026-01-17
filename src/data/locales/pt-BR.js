@@ -64,6 +64,22 @@ export const ptBR = {
         },
         watchVideo: 'Assistir ao Vídeo',
     },
+    category: {
+        showingCount: '{count} produtos encontrados',
+    },
+    sort: {
+        relevance: 'Relevância',
+        priceLowHigh: 'Menor Preço',
+        priceHighLow: 'Maior Preço',
+        nameAZ: 'Nome (A-Z)',
+        rating: 'Melhor Avaliados',
+    },
+    filter: {
+        allPrices: 'Todos os preços',
+        upto50: 'Até R$ 50,00',
+        '50to100': 'R$ 50,00 a R$ 100,00',
+        over100: 'Acima de R$ 100,00',
+    },
     home: {
         searchTitle: 'Buscando por: "{query}"',
         weekHighlights: 'Mimos que você vai amar',
@@ -216,7 +232,9 @@ export const ptBR = {
         seeMore: 'Ver Mais',
         seeLess: 'Ver Menos',
         processing: 'Processando...',
+        processing: 'Processando...',
         language: 'Idioma',
+        sortBy: 'Ordenar por',
     },
     errors: {
         required: 'Campo obrigatório',

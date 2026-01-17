@@ -20,7 +20,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 <div
-                    className="flex overflow-x-auto pt-8 pb-6 -mx-4 px-4 md:grid md:grid-cols-3 gap-6 md:gap-8 mobile-scroll snap-x snap-mandatory md:pb-0 md:mx-0 md:px-0 scrollbar-hide"
+                    className="flex overflow-x-auto pt-8 pb-6 -mx-4 px-4 md:grid md:grid-cols-3 gap-6 md:gap-8 overscroll-x-contain scroll-smooth snap-x snap-mandatory md:pb-0 md:mx-0 md:px-0 scrollbar-hide"
                     onScroll={(e) => {
                         const scrollLeft = e.currentTarget.scrollLeft;
                         const width = e.currentTarget.offsetWidth;

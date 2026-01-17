@@ -45,7 +45,7 @@ export default function MobileMenu({
             aria-label="Mobile navigation menu"
         >
             <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
-            <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto mobile-scroll safe-top safe-bottom">
+            <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto overscroll-y-contain scroll-smooth safe-top safe-bottom">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
                         <span className="text-2xl font-bold text-pink-500">{t('common.menu') || 'Menu'}</span>

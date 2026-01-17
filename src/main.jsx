@@ -19,6 +19,7 @@ import HomePage from './pages/HomePage';
 
 // Pages - Lazy loading for others
 const ProductPage = lazy(() => import('./pages/ProductPage'));
+const CategoryPage = lazy(() => import('./pages/CategoryPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
@@ -52,6 +53,11 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/produto/:slug" element={
                       <Suspense fallback={<PageLoader />}>
                         <ProductPage />
+                      </Suspense>
+                    } />
+                    <Route path="/categoria/:slug" element={
+                      <Suspense fallback={<PageLoader />}>
+                        <CategoryPage />
                       </Suspense>
                     } />
                     <Route path="/checkout" element={

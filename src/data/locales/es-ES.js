@@ -64,6 +64,22 @@ export const esES = {
         },
         watchVideo: 'Ver Vídeo',
     },
+    category: {
+        showingCount: '{count} productos encontrados',
+    },
+    sort: {
+        relevance: 'Relevancia',
+        priceLowHigh: 'Menor Precio',
+        priceHighLow: 'Mayor Precio',
+        nameAZ: 'Nombre (A-Z)',
+        rating: 'Mejor Valorados',
+    },
+    filter: {
+        allPrices: 'Todos los precios',
+        upto50: 'Hasta R$ 50,00',
+        '50to100': 'R$ 50,00 a R$ 100,00',
+        over100: 'Más de R$ 100,00',
+    },
     home: {
         searchTitle: 'Buscando: "{query}"',
         weekHighlights: 'Destacados de la Semana',
@@ -214,7 +230,9 @@ export const esES = {
         seeMore: 'Ver Más',
         seeLess: 'Ver Menos',
         processing: 'Procesando...',
+        processing: 'Procesando...',
         language: 'Idioma',
+        sortBy: 'Ordenar por',
     },
     errors: {
         required: 'Campo obligatorio',

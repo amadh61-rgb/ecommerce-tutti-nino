@@ -26,7 +26,7 @@ function Hero({ setSelectedCategory }) {
                 <div className="absolute bottom-[-10%] right-[-5%] w-96 h-96 bg-sky-200/40 rounded-full blur-3xl animate-blob animation-delay-2000" />
             </div>
 
-            <div className="container mx-auto px-4 py-8 lg:py-24 hero-mobile-compact">
+            <div className="container mx-auto px-4 pt-4 pb-8 lg:pt-4 lg:pb-20 hero-mobile-compact">
                 <div className="flex justify-center items-center w-full">
                     <div className="w-full max-w-[1400px] relative group">
 

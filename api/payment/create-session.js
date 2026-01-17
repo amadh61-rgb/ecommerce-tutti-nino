@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import allowCors from '../utils/cors'
+import { getPaymentProvider } from '../services/payment'
 
 // Define validation schema
 const paymentSchema = z.object({
@@ -30,30 +31,21 @@ async function handler(req, res) {
 
         const { items, currency } = result.data
 
-        // --- SECURITY CHECK (Mock) ---
-        // Simulate server-side calculation
-        const totalAmount = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-
-        // Simulate Payment Provider Response
-        const mockPaymentSession = {
-            sessionId: `sess_${Math.random().toString(36).substring(7)}`,
-            status: 'pending',
-            amount: totalAmount,
-            currency,
-            checkoutUrl: `/checkout?session_id=sess_${Math.random().toString(36).substring(7)}&status=success`,
-            clientSecret: `pi_${Math.random().toString(36).substring(7)}_secret`
-        }
-
-        await new Promise(resolve => setTimeout(resolve, 800))
+        // 2. Delegate to the active Payment Provider (Mock, MercadoPago, etc.)
+        const paymentProvider = getPaymentProvider()
+        const session = await paymentProvider.createSession({ items, currency })
 
         return res.status(200).json({
             success: true,
-            data: mockPaymentSession
+            data: session
         })
 
     } catch (error) {
         console.error('Payment Session Error:', error)
-        return res.status(500).json({ message: 'Internal Server Error' })
+        return res.status(500).json({
+            message: 'Internal Server Error',
+            error: process.env.NODE_ENV === 'development' ? error.message : undefined
+        })
     }
 }
 

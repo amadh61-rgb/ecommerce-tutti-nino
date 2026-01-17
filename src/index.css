@@ -149,9 +149,13 @@ body {
 /* Focus styles */
 button:focus-visible,
 a:focus-visible,
-input:focus-visible {
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid #f472b6;
   outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.3);
+  z-index: 50;
 }
 
 /* Custom Animation Keyframes */
@@ -348,7 +352,7 @@ input:focus-visible {
 /* Hero mais compacto no mobile */
 @media (max-width: 768px) {
   .hero-mobile-compact {
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
   }
 

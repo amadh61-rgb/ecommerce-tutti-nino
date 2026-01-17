@@ -64,10 +64,10 @@ function InfoStrip() {
                                             {React.cloneElement(item.icon, { className: "w-5 h-5" })}
                                         </div>
                                         <div>
-                                            <h3 className="text-slate-700 font-bold text-xs leading-tight mb-0.5">
+                                            <h3 className="text-slate-700 font-bold text-sm leading-tight mb-0.5">
                                                 {item.title}
                                             </h3>
-                                            <p className="text-slate-500 text-[10px] leading-tight">
+                                            <p className="text-slate-500 text-xs leading-tight">
                                                 {item.subtitle}
                                             </p>
                                         </div>
@@ -99,10 +99,10 @@ function InfoStrip() {
                                 {item.icon}
                             </div>
                             <div className="text-left">
-                                <h3 className="text-slate-700 font-bold text-base leading-tight mb-1">
+                                <h3 className="text-slate-700 font-bold text-lg leading-tight mb-1">
                                     {item.title}
                                 </h3>
-                                <p className="text-slate-500 text-sm leading-tight">
+                                <p className="text-slate-500 text-base leading-tight">
                                     {item.subtitle}
                                 </p>
                             </div>

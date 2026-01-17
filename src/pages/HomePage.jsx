@@ -5,7 +5,7 @@ import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import TestimonialsSection from '../components/TestimonialsSection';
 import InfoStrip from '../components/InfoStrip';
-import { productsData, testimonials } from '../data/mockData';
+import { productsData } from '../data/mockData';
 import { useCart } from '../hooks/useCart';
 import { useFavorites } from '../hooks/useFavorites';
 import { useModal } from '../hooks/useModal';

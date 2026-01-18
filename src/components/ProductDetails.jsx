@@ -17,7 +17,7 @@ function ProductDetails({ product, onAddToCart }) {
     // Translated product data
     const productName = getProductData(product.id, 'name') || product.name;
     const productDescription = getProductData(product.id, 'description') || product.description;
-    const productBadge = getProductData(product.id, 'badge') || product.badge;
+    const _productBadge = getProductData(product.id, 'badge') || product.badge;
     const productSpecs = getProductData(product.id, 'specs') || product.specs;
 
     // Mock thumbnails (replicating the main image since we only have one per product in mock data)
@@ -43,13 +43,13 @@ function ProductDetails({ product, onAddToCart }) {
                             {/* Thumbnails Strip */}
                             <div className="flex flex-col gap-3 w-20 overflow-y-auto py-1 scrollbar-hide">
                                 {thumbnails.map((thumb, idx) => (
-                                    <div
+                                    <button
                                         key={idx}
                                         className={`w-20 h-20 border-2 rounded-lg cursor-pointer transition-all p-1 ${activeImage === thumb && idx === 0 ? 'border-pink-500' : 'border-slate-100 hover:border-pink-300'}`}
                                         onClick={() => setActiveImage(thumb)}
                                     >
                                         <img src={thumb} alt="thumbnail" className="w-full h-full object-contain" />
-                                    </div>
+                                    </button>
                                 ))}
 
                                 {/* Video Button - Added to thumbnails column */}
@@ -217,7 +217,7 @@ function ProductDetails({ product, onAddToCart }) {
                             const relatedName = getProductData(relatedProduct.id, 'name') || relatedProduct.name;
                             const relatedBadge = getProductData(relatedProduct.id, 'badge') || relatedProduct.badge;
                             return (
-                                <div key={relatedProduct.id} className="group cursor-pointer" onClick={() => {
+                                <button key={relatedProduct.id} className="group cursor-pointer text-left" onClick={() => {
                                     const slug = generateSlug(relatedProduct.name);
                                     navigate(`/produto/${slug}`);
                                     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -256,7 +256,7 @@ function ProductDetails({ product, onAddToCart }) {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </button>
                             )
                         })}
                 </div>

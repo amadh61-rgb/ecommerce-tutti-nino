@@ -21,7 +21,7 @@ async function handler(req, res) {
 
         switch (event.type) {
             case 'payment_intent.succeeded':
-            case 'order.paid': // Generic event name
+            case 'order.paid': { // Generic event name
                 const paymentIntent = event.data?.object || event.data
                 console.log('💰 Payment captured!', paymentIntent.id)
 
@@ -29,12 +29,14 @@ async function handler(req, res) {
                 // TODO: Trigger ERP Sync (Next Phase)
                 // await syncOrderToERP(paymentIntent)
                 break
+            }
 
-            case 'payment_intent.payment_failed':
+            case 'payment_intent.payment_failed': {
                 const paymentFailed = event.data?.object || event.data
                 console.log('❌ Payment failed:', paymentFailed.id)
                 // TODO: Notify user via email
                 break
+            }
 
             default:
                 console.log(`Unhandled event type ${event.type}`)

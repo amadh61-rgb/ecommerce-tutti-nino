@@ -2,7 +2,7 @@ import React from 'react';
 import { Shield, Lock } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
-export default function Footer({ setSelectedCategory, setActiveDrawer, setActiveModal }) {
+export default function Footer({ setActiveModal }) {
     const { t } = useI18n();
     return (
         <footer id="footer" className="bg-white pt-16 pb-8 border-t border-slate-100" role="contentinfo">

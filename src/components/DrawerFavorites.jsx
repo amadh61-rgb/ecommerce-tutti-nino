@@ -1,6 +1,8 @@
 import React from 'react';
 import { Heart, ShoppingBag, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useI18n } from '../hooks/useI18n';
+import { generateSlug } from '../utils/slug';
 
 import { useFocusTrap } from '../hooks/useFocusTrap';
 
@@ -43,9 +45,15 @@ function DrawerFavorites({ isOpen, onClose, favoriteProducts, onAddToCart, onTog
                     ) : (
                         favoriteProducts.map(item => (
                             <div key={item.id} className="flex gap-4 items-center animate-fade-in p-2 hover:bg-slate-50 rounded-xl transition-colors mb-2">
-                                <img src={item.image} alt={getProductData(item.id, 'name') || item.name} className="w-20 h-20 rounded-xl object-cover bg-slate-50 border border-slate-100" />
+                                <Link to={`/produto/${generateSlug(item.name)}`} onClick={onClose} className="shrink-0">
+                                    <img src={item.image} alt={getProductData(item.id, 'name') || item.name} className="w-20 h-20 rounded-xl object-cover bg-slate-50 border border-slate-100" />
+                                </Link>
                                 <div className="flex-1">
-                                    <h4 className="font-bold text-slate-800 text-sm line-clamp-2">{getProductData(item.id, 'name') || item.name}</h4>
+                                    <Link to={`/produto/${generateSlug(item.name)}`} onClick={onClose}>
+                                        <h4 className="font-bold text-slate-800 text-sm line-clamp-2 hover:text-[#FF1493] transition-colors">
+                                            {getProductData(item.id, 'name') || item.name}
+                                        </h4>
+                                    </Link>
                                     <p className="font-bold text-[#FF1493] text-sm">
                                         {formatCurrency(item.price)}
                                     </p>

@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
-import { useI18n } from '../../hooks/useI18n';
-import { User, Mail, Lock, FileText, Smartphone } from 'lucide-react';
+import { User, Mail, Lock, FileText } from 'lucide-react';
 
 export default function RegisterModal({ onRegisterSuccess }) {
     const { closeModal, openModal } = useModal();
-    const { t } = useI18n();
     const [cpf, setCpf] = useState('');
 
     const handleCpfChange = (e) => {
@@ -42,19 +40,20 @@ export default function RegisterModal({ onRegisterSuccess }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-4">
                     {/* Nome Completo */}
                     <div>
-                        <label className="block text-sm font-semibold text-[#454545] mb-1">Nome Completo</label>
+                        <label htmlFor="register-name" className="block text-sm font-semibold text-[#454545] mb-1">Nome Completo</label>
                         <div className="relative">
                             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input type="text" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="Seu nome" />
+                            <input id="register-name" type="text" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="Seu nome" />
                         </div>
                     </div>
 
                     {/* CPF */}
                     <div>
-                        <label className="block text-sm font-semibold text-[#454545] mb-1">CPF</label>
+                        <label htmlFor="register-cpf" className="block text-sm font-semibold text-[#454545] mb-1">CPF</label>
                         <div className="relative">
                             <FileText className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                             <input
+                                id="register-cpf"
                                 type="text"
                                 required
                                 value={cpf}
@@ -68,19 +67,19 @@ export default function RegisterModal({ onRegisterSuccess }) {
 
                     {/* E-mail */}
                     <div>
-                        <label className="block text-sm font-semibold text-[#454545] mb-1">E-mail</label>
+                        <label htmlFor="register-email" className="block text-sm font-semibold text-[#454545] mb-1">E-mail</label>
                         <div className="relative">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input type="email" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="seu@email.com" />
+                            <input id="register-email" type="email" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="seu@email.com" />
                         </div>
                     </div>
 
                     {/* Senha */}
                     <div>
-                        <label className="block text-sm font-semibold text-[#454545] mb-1">Senha</label>
+                        <label htmlFor="register-password" className="block text-sm font-semibold text-[#454545] mb-1">Senha</label>
                         <div className="relative">
                             <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                            <input type="password" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="••••••••" />
+                            <input id="register-password" type="password" required className="w-full pl-12 pr-4 h-11 rounded-xl border border-[#E0E0E0] focus:outline-none focus:border-[#FF69B4] focus:ring-4 focus:ring-pink-100 transition-all" placeholder="••••••••" />
                         </div>
                     </div>
                 </div>
@@ -91,7 +90,7 @@ export default function RegisterModal({ onRegisterSuccess }) {
                         <input id="terms" type="checkbox" required className="w-5 h-5 border border-slate-300 rounded focus:ring-pink-500 text-pink-600 cursor-pointer focus:ring-offset-0 focus:ring-pink-200" />
                     </div>
                     <label htmlFor="terms" className="text-sm text-slate-600 leading-tight cursor-pointer">
-                        Li e concordo com os <a href="#" className="text-[#FF1493] hover:underline">Termos de Uso</a> e <a href="#" className="text-[#FF1493] hover:underline">Política de Privacidade</a>.
+                        Li e concordo com os <button type="button" onClick={() => openModal('terms')} className="text-[#FF1493] hover:underline">Termos de Uso</button> e <button type="button" onClick={() => openModal('privacy')} className="text-[#FF1493] hover:underline">Política de Privacidade</button>.
                     </label>
                 </div>
 

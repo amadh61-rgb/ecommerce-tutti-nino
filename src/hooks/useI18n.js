@@ -1,6 +1,6 @@
 // src/hooks/useI18n.js
 import { useContext } from 'react';
-import { I18nContext } from '../context/I18nContext';
+import { I18nContext } from '../context/I18nContextDefinition';
 
 /**
  * Hook para acessar funcionalidades de internacionalização

@@ -87,7 +87,10 @@ export default function CategoryPage() {
                             product={product}
                             isFavorite={favorites.includes(product.id)}
                             onToggleFavorite={(e) => toggleFavorite(e, product.id)}
-                            onAddToCart={(qty) => addToCart({ ...product, qty: qty || 1 })}
+                            onAddToCart={(qty) => {
+                                addToCart({ ...product, qty: qty || 1 });
+                                openModal('addedToCart', { ...product, qty: qty || 1 });
+                            }}
                             onQuickView={() => openModal('quickview', product)}
                         />
                     ))}

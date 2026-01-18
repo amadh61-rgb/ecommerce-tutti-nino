@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useI18n } from '../hooks/useI18n';
+import React, { useState, useRef } from 'react';
+
 
 const Testimonials = () => {
     // Mock user for "Ana Silva" matches the screenshot provided by user usually
@@ -65,7 +65,7 @@ const Testimonials = () => {
                     onScroll={handleScroll}
                     className="flex md:grid md:grid-cols-3 gap-4 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory pb-4 scrollbar-hide px-4 md:px-0 -mx-4 md:mx-0"
                 >
-                    {testimonials.map((testimonial, index) => (
+                    {testimonials.map((testimonial) => (
                         <div
                             key={testimonial.id}
                             className="min-w-[85vw] md:min-w-0 snap-center bg-white p-6 md:p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col items-center text-center transition-transform hover:-translate-y-1 duration-300"

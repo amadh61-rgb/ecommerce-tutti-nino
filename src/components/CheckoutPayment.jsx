@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CreditCard, QrCode, Lock, AlertCircle } from 'lucide-react';
 import { paymentSchema, formatCardNumber, validateForm } from '../utils/validation';
 import { RateLimiter, detectXSS } from '../utils/security';

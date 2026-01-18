@@ -1,22 +1,135 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useModal } from '../../hooks/useModal';
 import { useI18n } from '../../hooks/useI18n';
-import { User, Mail, Lock } from 'lucide-react';
+import { User, Mail, Lock, ArrowLeft, Send, ArrowRight } from 'lucide-react';
 
 export default function LoginModal({ onLoginSuccess }) {
     const { closeModal, openModal } = useModal();
     const { t } = useI18n();
+    const [view, setView] = useState('login'); // 'login' | 'recovery'
+    const [recoveryMethod, setRecoveryMethod] = useState('email'); // 'email' | 'phone'
+    const [recoverySent, setRecoverySent] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Simulating login success
         if (onLoginSuccess) {
-            onLoginSuccess({ name: 'Usuário', avatar: 'https://i.pravatar.cc/150?img=1' });
+            onLoginSuccess({ name: 'Usuário', avatar: 'https://ui-avatars.com/api/?name=Usuário&background=FF1493&color=fff&bold=true' });
         } else {
             closeModal();
         }
     };
 
+    const handleRecoverySubmit = (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+        // Simulate API call
+        setTimeout(() => {
+            setIsLoading(false);
+            setRecoverySent(true);
+        }, 1500);
+    };
+
+    if (view === 'recovery') {
+        return (
+            <div className="p-10">
+                <button
+                    onClick={() => { setView('login'); setRecoverySent(false); }}
+                    className="flex items-center gap-2 text-slate-500 hover:text-pink-600 font-medium mb-6 transition-colors"
+                >
+                    <ArrowLeft className="w-5 h-5" />
+                    Voltar
+                </button>
+
+                <div className="text-center mb-8">
+                    <div className="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm">
+                        <Lock className="w-10 h-10 text-pink-500" />
+                    </div>
+                    <h2 className="text-3xl font-bold text-slate-800 mb-2">Recuperar Senha</h2>
+                    <p className="text-slate-500 text-lg">
+                        {!recoverySent
+                            ? "Informe seu contato para receber as instruções."
+                            : "Verifique sua caixa de entrada!"}
+                    </p>
+                </div>
+
+                {!recoverySent ? (
+                    <form className="space-y-6 animate-fade-in" onSubmit={handleRecoverySubmit}>
+
+                        {/* Method Toggle */}
+                        <div className="flex p-1 bg-slate-100 rounded-xl relative">
+                            <div
+                                className={`absolute left-1 top-1 bottom-1 w-[calc(50%-4px)] bg-white rounded-lg shadow-sm transition-all duration-300 ${recoveryMethod === 'phone' ? 'translate-x-full' : ''}`}
+                            />
+                            <button
+                                type="button"
+                                onClick={() => setRecoveryMethod('email')}
+                                className={`flex-1 relative z-10 py-2 text-sm font-bold transition-colors ${recoveryMethod === 'email' ? 'text-pink-600' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                Via Email
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => setRecoveryMethod('phone')}
+                                className={`flex-1 relative z-10 py-2 text-sm font-bold transition-colors ${recoveryMethod === 'phone' ? 'text-pink-600' : 'text-slate-500 hover:text-slate-700'}`}
+                            >
+                                Via SMS/WhatsApp
+                            </button>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-semibold text-slate-600 mb-2">
+                                {recoveryMethod === 'email' ? 'E-mail' : 'Telefone'}
+                            </label>
+                            <div className="relative">
+                                <Mail className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 transition-opacity ${recoveryMethod === 'email' ? 'opacity-100' : 'opacity-0'}`} />
+                                <div className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 flex items-center justify-center transition-opacity ${recoveryMethod === 'phone' ? 'opacity-100' : 'opacity-0'}`}>
+                                    <span className="text-lg">📱</span>
+                                </div>
+
+                                <input
+                                    type={recoveryMethod === 'email' ? 'email' : 'tel'}
+                                    required
+                                    className="w-full pl-12 pr-4 h-12 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all"
+                                    placeholder={recoveryMethod === 'email' ? 'seu@email.com' : '(11) 99999-9999'}
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="w-full h-12 bg-pink-600 text-white font-bold text-lg rounded-full hover:bg-pink-700 hover:shadow-lg hover:scale-[1.02] transition-all transform flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {isLoading ? (
+                                <div className="w-6 h-6 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            ) : (
+                                <>
+                                    <span>Recuperar Senha</span>
+                                    <ArrowRight className="w-5 h-5" />
+                                </>
+                            )}
+                        </button>
+                    </form>
+                ) : (
+                    <div className="animate-fade-in text-center space-y-6">
+                        <div className="bg-green-50 text-green-700 p-4 rounded-xl border border-green-100">
+                            Enviamos um link de recuperação para o seu {recoveryMethod === 'email' ? 'e-mail' : 'telefone'}. Por favor, verifique.
+                        </div>
+                        <button
+                            onClick={() => setView('login')}
+                            className="w-full h-12 bg-slate-800 text-white font-bold rounded-full hover:bg-slate-700 transition-colors"
+                        >
+                            Voltar para o Login
+                        </button>
+                    </div>
+                )}
+            </div>
+        );
+    }
+
+    // Login View
     return (
         <div className="p-10">
             <div className="text-center mb-8">
@@ -34,13 +147,24 @@ export default function LoginModal({ onLoginSuccess }) {
                         <input type="email" required maxLength={100} className="w-full pl-12 pr-4 h-12 rounded-xl border border-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all" placeholder="seu@email.com" />
                     </div>
                 </div>
-                <div className="mb-8">
+                <div className="mb-2">
                     <label className="block text-sm font-semibold text-[#454545] mb-2">{t('modals.login.password')}</label>
                     <div className="relative">
                         <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                         <input type="password" required maxLength={50} className="w-full pl-12 pr-4 h-12 rounded-xl border border-[#E0E0E0] focus:outline-none focus:ring-2 focus:ring-pink-300 focus:border-transparent transition-all" placeholder="••••••••" />
                     </div>
                 </div>
+
+                <div className="flex justify-end">
+                    <button
+                        type="button"
+                        onClick={() => setView('recovery')}
+                        className="text-sm font-bold text-pink-600 hover:text-pink-700 hover:underline"
+                    >
+                        Esqueceu sua senha?
+                    </button>
+                </div>
+
                 <button type="submit" className="w-full h-12 mt-6 bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white font-bold text-lg rounded-full hover:shadow-lg hover:scale-[1.02] transition-all transform flex items-center justify-center">
                     {t('modals.login.submit')}
                 </button>

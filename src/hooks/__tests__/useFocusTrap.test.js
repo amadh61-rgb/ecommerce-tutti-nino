@@ -1,5 +1,5 @@
 // src/hooks/__tests__/useFocusTrap.test.js
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { renderHook } from '@testing-library/react';
 import { useFocusTrap } from '../useFocusTrap';
 

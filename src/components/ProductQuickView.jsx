@@ -3,10 +3,12 @@ import { ShoppingBag, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { generateSlug } from '../utils/slug';
 import { useI18n } from '../hooks/useI18n';
+import { useModal } from '../hooks/useModal';
 
 function ProductQuickView({ product, onClose, onAddToCart }) {
     const navigate = useNavigate();
-    const { t, isRTL, formatCurrency, getProductData } = useI18n();
+    const { t, formatCurrency, getProductData } = useI18n();
+    const { openModal } = useModal();
 
     const [currentSlide, setCurrentSlide] = React.useState(0);
 
@@ -52,7 +54,8 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
     return (
         <div
             className="bg-white w-full flex flex-col md:flex-row md:rounded-3xl h-full md:h-auto md:max-h-[85vh] max-w-5xl overflow-hidden shadow-none md:shadow-2xl relative animate-scale-up"
-            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
         >
             {/* Carousel Section */}
             <div className="md:w-1/2 bg-slate-100 relative group order-first md:order-last flex flex-col">
@@ -145,7 +148,10 @@ function ProductQuickView({ product, onClose, onAddToCart }) {
                             {t('products.viewDetails')}
                         </button>
                         <button
-                            onClick={() => onAddToCart(product)}
+                            onClick={() => {
+                                onAddToCart(product);
+                                openModal('addedToCart', product);
+                            }}
                             className="px-4 py-2 bg-[#eb50c7] text-white font-bold rounded-full hover:brightness-90 transition-all shadow-lg flex items-center gap-2 text-xs"
                         >
                             <ShoppingBag className="w-3 h-3" />

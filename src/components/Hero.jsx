@@ -1,14 +1,14 @@
 import React from 'react';
 import { ArrowRight, Heart, Star } from 'lucide-react';
-import { useI18n } from '../hooks/useI18n';
+
 
 const slides = [
     { id: 1, image: "/banner-slide-1.png", alt: "Seu Planner 2026 Chegou" },
     { id: 2, image: "/banner-slide-2.png", alt: "Planeje com Estilo - Adesivos" }
 ];
 
-function Hero({ setSelectedCategory }) {
-    const { t } = useI18n();
+function Hero() {
+
     const [currentSlide, setCurrentSlide] = React.useState(0);
 
     React.useEffect(() => {

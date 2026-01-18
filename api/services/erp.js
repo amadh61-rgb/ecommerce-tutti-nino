@@ -1,3 +1,5 @@
+/* global process */
+/* eslint-disable no-unused-vars */
 /**
  * ERP Service Abstraction
  * 
@@ -14,7 +16,7 @@ class ErpProvider {
      * @param {Object} orderData - The full order object
      * @returns {Promise<Object>} - Confirmation data from ERP
      */
-    async sendOrder(orderData) {
+    async sendOrder(_orderData) {
         throw new Error("Method 'sendOrder' must be implemented");
     }
 }
@@ -38,7 +40,7 @@ class MockErpProvider extends ErpProvider {
 
 // Bling Implementation (Placeholder)
 class BlingProvider extends ErpProvider {
-    async sendOrder(orderData) {
+    async sendOrder(_orderData) {
         // TODO: Transform 'orderData' to XML/JSON required by Bling
         // TODO: Axios.post(process.env.BLING_API_URL, ...)
         throw new Error("Bling provider is not fully configured yet.");

@@ -6,7 +6,8 @@ import DrawerCart from '../DrawerCart';
 import { CartProvider } from '../../context/CartContext';
 import { I18nProvider } from '../../context/I18nContext';
 
-const mockCartItems = [
+// Mock data for future tests with cart items
+const MOCK_CART_ITEMS = [
     { id: 1, name: 'Planner Test', price: 89.90, quantity: 2, image: '/test.jpg' },
     { id: 2, name: 'Sticker Test', price: 29.90, quantity: 1, image: '/test2.jpg' },
 ];
@@ -16,7 +17,7 @@ const defaultProps = {
     onClose: vi.fn(),
 };
 
-const renderDrawerCart = (props = {}, cartItems = []) => {
+const renderDrawerCart = (props = {}) => {
     // We'll use CartProvider but may need to mock useCart
     return render(
         <BrowserRouter>

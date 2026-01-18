@@ -1,5 +1,5 @@
 // src/hooks/useDebounce.js
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 /**
  * Hook de debounce para otimizar inputs de busca e outros campos
@@ -69,20 +69,31 @@ export function useDebouncedCallback(callback, delay = 300) {
  */
 export function useThrottle(value, limit = 300) {
     const [throttledValue, setThrottledValue] = useState(value);
-    const [lastRan, setLastRan] = useState(Date.now());
+    const lastRan = useRef(0);
+    const isFirstRun = useRef(true);
 
     useEffect(() => {
+        // Skip initial render - just track the time
+        if (isFirstRun.current) {
+            isFirstRun.current = false;
+            lastRan.current = Date.now();
+            return;
+        }
+
+        const now = Date.now();
+        const timeSinceLastRan = now - lastRan.current;
+
         const handler = setTimeout(() => {
-            if (Date.now() - lastRan >= limit) {
+            if (Date.now() - lastRan.current >= limit) {
                 setThrottledValue(value);
-                setLastRan(Date.now());
+                lastRan.current = Date.now();
             }
-        }, limit - (Date.now() - lastRan));
+        }, Math.max(0, limit - timeSinceLastRan));
 
         return () => {
             clearTimeout(handler);
         };
-    }, [value, limit, lastRan]);
+    }, [value, limit]);
 
     return throttledValue;
 }

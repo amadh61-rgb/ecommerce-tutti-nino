@@ -60,7 +60,7 @@ export default function DrawerManager() {
             style={{ top: `${headerHeight}px`, height: `calc(100vh - ${headerHeight}px)` }}
         >
             {activeDrawer && (
-                <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} />
+                <div className="absolute inset-0 bg-slate-900/30 backdrop-blur-sm" onClick={closeDrawer} onKeyDown={(e) => e.key === 'Escape' && closeDrawer()} role="button" tabIndex={0} aria-label="Fechar painel" />
             )}
             <div
                 className={`absolute top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col transition-transform duration-300 transform ${activeDrawer ? 'translate-x-0' : 'translate-x-full'}`}

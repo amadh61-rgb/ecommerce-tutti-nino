@@ -1,17 +1,25 @@
 // src/pages/ProductPage.jsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductDetails from '../components/ProductDetails';
 import { productsData } from '../data/mockData';
 import { useCart } from '../hooks/useCart';
+import { useModal } from '../hooks/useModal';
 import SEO from '../components/SEO';
 import { generateSlug } from '../utils/slug';
+import Breadcrumbs from '../components/Breadcrumbs';
 
 export default function ProductPage() {
     const { slug } = useParams();
     const navigate = useNavigate();
     const { addToCart } = useCart();
+    const { openModal } = useModal();
     const product = productsData.find((p) => generateSlug(p.name) === slug);
+
+    const handleAddToCart = (item) => {
+        addToCart(item);
+        openModal('addedToCart', item);
+    };
 
     useEffect(() => {
         if (!product) {
@@ -37,11 +45,19 @@ export default function ProductPage() {
                 type="product"
             />
             <div className="min-h-screen bg-white md:bg-slate-50 animate-fade-in relative z-10 w-full">
+                <div className="container mx-auto px-4 py-4 md:py-8">
+                    <Breadcrumbs
+                        items={[
+                            { label: product.category, link: `/categoria/${generateSlug(product.category)}` },
+                            { label: product.name }
+                        ]}
+                    />
+                </div>
                 <div className="w-full">
                     <ProductDetails
                         product={product}
                         onClose={() => navigate('/')}
-                        onAddToCart={addToCart}
+                        onAddToCart={handleAddToCart}
                         isModal={false}
                     />
                 </div>

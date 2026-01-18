@@ -52,7 +52,9 @@ export default function ProductVideo({ videoUrl, poster }) {
                 muted={isMuted}
                 playsInline
                 onClick={togglePlay}
-            />
+            >
+                <track kind="captions" src="" label="Português" default />
+            </video>
 
             {/* Controls Overlay */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100 flex flex-col justify-end p-4">

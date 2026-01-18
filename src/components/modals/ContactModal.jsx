@@ -9,27 +9,64 @@ export default function ContactModal() {
     const { t } = useI18n();
 
     return (
-        <>
-            <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Mail className="w-8 h-8 text-purple-500" />
+        <div className="flex flex-col h-full bg-slate-50">
+            {/* Header */}
+            <div className="bg-white px-8 py-6 border-b border-slate-100 flex items-center gap-4 flex-shrink-0">
+                <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-purple-500" />
                 </div>
-                <h2 className="text-2xl font-bold text-slate-800">{t('modals.contact.title')}</h2>
-                <p className="text-slate-500">{legalContent.companyInfo.attendance}</p>
+                <div>
+                    <h2 className="text-2xl font-bold text-slate-800">{t('modals.contact.title')}</h2>
+                    <p className="text-slate-500 text-sm">Entre em contato conosco.</p>
+                </div>
             </div>
-            <div className="space-y-3">
-                <div className="p-4 bg-slate-50 rounded-xl flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-slate-400" />
-                    <span className="text-slate-600 font-medium">{legalContent.companyInfo.email}</span>
+
+            {/* Content Body */}
+            <div className="flex-1 overflow-y-auto p-8 flex items-center justify-center">
+                <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden flex flex-col md:flex-row w-full max-w-4xl">
+
+                    {/* Left: Info Hero */}
+                    <div className="bg-purple-500 p-8 md:p-12 text-white flex flex-col justify-center items-center md:items-start text-center md:text-left w-full md:w-2/5">
+                        <h3 className="text-2xl font-bold mb-4">Estamos aqui para ajudar!</h3>
+                        <p className="text-purple-100 mb-8 leading-relaxed">
+                            {legalContent.companyInfo.attendance}
+                        </p>
+                        <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <Mail className="w-10 h-10 text-white" />
+                        </div>
+                    </div>
+
+                    {/* Right: Contact Details */}
+                    <div className="p-8 md:p-12 w-full md:w-3/5 flex flex-col justify-center space-y-6">
+                        <div>
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Email</span>
+                            <a href={`mailto:${legalContent.companyInfo.email}`} className="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-purple-50 transition-colors group cursor-pointer border border-transparent hover:border-purple-100">
+                                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-purple-500 group-hover:scale-110 transition-transform">
+                                    <Mail className="w-5 h-5" />
+                                </div>
+                                <span className="font-medium text-slate-700 group-hover:text-purple-700">{legalContent.companyInfo.email}</span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 block">Redes Sociais</span>
+                            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 p-4 rounded-xl bg-slate-50 hover:bg-pink-50 transition-colors group cursor-pointer border border-transparent hover:border-pink-100">
+                                <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-sm text-pink-500 group-hover:scale-110 transition-transform">
+                                    <Instagram className="w-5 h-5" />
+                                </div>
+                                <span className="font-medium text-slate-700 group-hover:text-pink-700">@tuttienino.papelaria</span>
+                            </a>
+                        </div>
+
+                        <div className="pt-6 mt-auto">
+                            <button onClick={closeModal} className="w-full py-3 bg-slate-800 text-white font-bold rounded-xl hover:bg-slate-700 transition-all active:scale-95 shadow-lg shadow-slate-200">
+                                {t('aria.close')}
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
-                <div className="p-4 bg-slate-50 rounded-xl flex items-center gap-3">
-                    <Instagram className="w-5 h-5 text-slate-400" />
-                    <span className="text-slate-600 font-medium">@tuttienino.papelaria</span>
-                </div>
-                <button onClick={closeModal} className="w-full py-3 bg-slate-800 text-white font-bold rounded-xl hover:bg-purple-500 transition-colors mt-4">
-                    {t('aria.close')}
-                </button>
             </div>
-        </>
+        </div>
     );
 }

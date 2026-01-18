@@ -1,3 +1,4 @@
+/* global process */
 /**
  * ERP Sync Endpoint
  * POST /api/erp/sync-order

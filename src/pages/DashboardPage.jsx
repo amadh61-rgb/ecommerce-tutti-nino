@@ -1,14 +1,15 @@
 // src/pages/DashboardPage.jsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import UserDashboard from '../components/UserDashboard';
 import SEO from '../components/SEO';
-import { mockUser, mockOrders } from '../data/mockData';
+import { mockOrders } from '../data/mockData';
 import { useI18n } from '../hooks/useI18n';
 
-export default function DashboardPage({ user, isLoggedIn, onLogout, setActiveDrawer, setTrackingCode }) {
+export default function DashboardPage() {
     const navigate = useNavigate();
     const { t } = useI18n();
+    const { user, isLoggedIn, setIsLoggedIn, setUser, setActiveDrawer, setTrackingCode } = useOutletContext();
 
     // Se não estiver logado, redireciona para home
     React.useEffect(() => {
@@ -27,7 +28,8 @@ export default function DashboardPage({ user, isLoggedIn, onLogout, setActiveDra
     };
 
     const handleLogout = () => {
-        onLogout();
+        setIsLoggedIn(false);
+        setUser(null);
         navigate('/');
     };
 

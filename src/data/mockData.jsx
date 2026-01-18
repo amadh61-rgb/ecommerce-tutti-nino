@@ -213,33 +213,107 @@ export const mockOrders = [
     {
         id: "PED-9821",
         date: "10/01/2026",
+        paymentMethod: {
+            type: "credit_card",
+            brand: "Visa",
+            lastDigits: "1234",
+            installments: 3
+        },
+        shippingAddress: {
+            recipient: "Maria Silva",
+            street: "Rua das Flores, 123",
+            neighborhood: "Centro",
+            city: "São Paulo",
+            state: "SP",
+            zipCode: "01234-567"
+        },
+        subtotal: 104.90,
+        shippingCost: 0,
+        discount: 0,
         total: 104.90,
         status: "Em Trânsito",
         trackingCode: "BR123456789",
+        invoiceUrl: "#",
         items: [
-            { name: "Planner Anual 2026 - Bloom", qty: 1, price: 89.90 },
-            { name: "Pack de Adesivos Vintage", qty: 1, price: 15.00 }
+            { name: "Planner Anual 2026 - Bloom", qty: 1, price: 89.90, image: "/images/product1.png" },
+            { name: "Pack de Adesivos Vintage", qty: 1, price: 15.00, image: "/images/product2.png" }
+        ],
+        history: [
+            { status: "approved", date: "10/01/2026 10:30", label: "Pagamento Aprovado" },
+            { status: "processing", date: "10/01/2026 11:00", label: "Pedido em Separação" },
+            { status: "shipping", date: "11/01/2026 14:00", label: "Enviado para Transportadora" },
+            { status: "transit", date: "12/01/2026 09:00", label: "Em trânsito para CTCE" }
         ]
     },
     {
         id: "PED-8540",
         date: "15/12/2025",
+        paymentMethod: {
+            type: "pix",
+            brand: null,
+            lastDigits: null,
+            installments: 1
+        },
+        shippingAddress: {
+            recipient: "Maria Silva",
+            street: "Rua das Flores, 123",
+            neighborhood: "Centro",
+            city: "São Paulo",
+            state: "SP",
+            zipCode: "01234-567"
+        },
+        subtotal: 55.00,
+        shippingCost: 15.90,
+        discount: 15.90,
         total: 55.00,
         status: "Entregue",
         trackingCode: "BR987654321",
+        invoiceUrl: "#",
         items: [
-            { name: "Estojo Multiuso Soft Pink", qty: 1, price: 55.00 }
+            { name: "Estojo Multiuso Soft Pink", qty: 1, price: 55.00, image: "/images/product5.png" }
+        ],
+        history: [
+            { status: "approved", date: "15/12/2025 09:00", label: "Pagamento Aprovado" },
+            { status: "processing", date: "15/12/2025 10:30", label: "Pedido em Separação" },
+            { status: "shipping", date: "16/12/2025 08:00", label: "Enviado para Transportadora" },
+            { status: "transit", date: "17/12/2025 14:00", label: "Em trânsito" },
+            { status: "delivered", date: "18/12/2025 16:20", label: "Entregue" }
         ]
     },
     {
         id: "PED-7732",
         date: "02/11/2025",
+        paymentMethod: {
+            type: "credit_card",
+            brand: "Mastercard",
+            lastDigits: "5678",
+            installments: 2
+        },
+        shippingAddress: {
+            recipient: "Maria Silva",
+            street: "Rua das Flores, 123",
+            neighborhood: "Centro",
+            city: "São Paulo",
+            state: "SP",
+            zipCode: "01234-567"
+        },
+        subtotal: 121.80,
+        shippingCost: 0,
+        discount: 0,
         total: 121.80,
         status: "Entregue",
         trackingCode: "BR555444333",
+        invoiceUrl: "#",
         items: [
-            { name: "Organizador de Mesa Acrílico", qty: 1, price: 72.90 },
-            { name: "Caderno Pautado Coleção Zodíaco", qty: 1, price: 48.90 }
+            { name: "Organizador de Mesa Acrílico", qty: 1, price: 72.90, image: "/images/product6.png" },
+            { name: "Caderno Pautado Coleção Zodíaco", qty: 1, price: 48.90, image: "/images/product7.png" }
+        ],
+        history: [
+            { status: "approved", date: "02/11/2025 14:00", label: "Pagamento Aprovado" },
+            { status: "processing", date: "02/11/2025 16:00", label: "Pedido em Separação" },
+            { status: "shipping", date: "03/11/2025 09:00", label: "Enviado para Transportadora" },
+            { status: "transit", date: "04/11/2025 08:00", label: "Em trânsito" },
+            { status: "delivered", date: "05/11/2025 10:00", label: "Entregue" }
         ]
     }
 ];

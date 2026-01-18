@@ -11,7 +11,7 @@ export const newsletterSchema = z.object({
     email: z
         .string()
         .min(1, 'errors.required')
-        .email('errors.emailInvalid')
+        .email('errors.invalidEmail')
         .max(100, 'errors.emailTooLong')
         .transform((val) => val.toLowerCase().trim()),
     consent: z
@@ -26,7 +26,7 @@ export const loginSchema = z.object({
     email: z
         .string()
         .min(1, 'errors.required')
-        .email('errors.emailInvalid')
+        .email('errors.invalidEmail')
         .max(100, 'errors.emailTooLong')
         .transform((val) => val.toLowerCase().trim()),
     password: z
@@ -49,7 +49,7 @@ export const addressSchema = z.object({
         .transform((val) => val.replace(/\D/g, '')), // Remove formatação
     cep: z
         .string()
-        .regex(/^\d{5}-?\d{3}$/, 'errors.cepInvalid')
+        .regex(/^\d{5}-?\d{3}$/, 'errors.invalidCep')
         .transform((val) => val.replace('-', '')),
     street: z
         .string()
@@ -81,14 +81,14 @@ export const addressSchema = z.object({
         .transform((val) => val.toUpperCase()),
     phone: z
         .string()
-        .regex(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/, 'errors.phoneInvalid'),
+        .regex(/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/, 'errors.invalidPhone'),
 });
 
 // Schema para pagamento
 export const paymentSchema = z.object({
     cardNumber: z
         .string()
-        .regex(/^\d{16}$/, 'errors.cardInvalid')
+        .regex(/^\d{16}$/, 'errors.invalidCard')
         .transform((val) => val.replace(/\D/g, '')),
     cardName: z
         .string()

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useI18n } from '../hooks/useI18n';
 import LanguageSelector from './LanguageSelector';
-import { X, Search, ChevronRight, User } from 'lucide-react';
+import { X, Search, ChevronRight, User, Sun, Moon } from 'lucide-react';
 import { mainMenu } from '../data/mockData';
 
 export default function MobileMenu({
@@ -10,7 +10,12 @@ export default function MobileMenu({
     searchQuery,
     setSearchQuery,
     handleMenuClick,
-    onOpenLogin
+    onOpenLogin,
+    isLoggedIn,
+    user,
+    navigateToDashboard,
+    isDarkMode,
+    onToggleTheme
 }) {
     const { t } = useI18n();
 
@@ -44,7 +49,7 @@ export default function MobileMenu({
             aria-modal="true"
             aria-label="Mobile navigation menu"
         >
-            <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
+            <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} onKeyDown={(e) => e.key === 'Escape' && onClose()} role="button" tabIndex={0} aria-label="Fechar menu" />
             <div className="absolute top-0 left-0 h-full w-4/5 max-w-sm bg-white shadow-2xl p-6 flex flex-col overflow-y-auto overscroll-y-contain scroll-smooth safe-top safe-bottom">
                 <div className="flex items-center justify-between mb-6">
                     <div className="flex items-center gap-3">
@@ -70,10 +75,41 @@ export default function MobileMenu({
                     ))}
                 </nav>
                 {/* Footer Mobile */}
-                <div className="pt-6 mt-4 border-t border-slate-100">
-                    <button onClick={onOpenLogin} className="flex items-center gap-3 text-sky-600 font-semibold text-left py-3 w-full touch-target">
-                        <User className="w-5 h-5" /> {t('nav.account')}
+                <div className="pt-6 mt-4 border-t border-slate-100 space-y-4">
+                    {/* Dark Mode Toggle */}
+                    <button
+                        onClick={onToggleTheme}
+                        className="flex items-center gap-3 text-slate-600 font-medium py-2 w-full touch-target hover:text-pink-500 transition-colors"
+                    >
+                        {isDarkMode ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-500" />}
+                        {isDarkMode ? 'Modo Claro' : 'Modo Escuro'}
                     </button>
+
+                    {/* Login / User Profile */}
+                    {isLoggedIn ? (
+                        <button
+                            onClick={() => { onClose(); navigateToDashboard(); }}
+                            className="flex items-center gap-3 w-full p-2 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors"
+                        >
+                            <img
+                                src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name}&background=random`}
+                                alt={user?.name}
+                                className="w-10 h-10 rounded-full object-cover"
+                            />
+                            <div className="text-left">
+                                <p className="text-sm font-bold text-slate-700">{user?.name}</p>
+                                <p className="text-xs text-slate-500">Ver minha conta</p>
+                            </div>
+                        </button>
+                    ) : (
+                        <button
+                            onClick={() => { onClose(); onOpenLogin(); }}
+                            className="flex items-center justify-center gap-2 w-full py-3 bg-pink-500 text-white rounded-full font-bold shadow-md hover:bg-pink-600 active:scale-95 transition-all"
+                        >
+                            <User className="w-5 h-5" />
+                            {t('nav.login') || 'Entrar'}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

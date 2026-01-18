@@ -5,37 +5,77 @@ export default function AboutModal() {
     const { t } = useI18n();
 
     return (
-        <div className="p-8 max-h-[80vh] overflow-y-auto">
-            <h2 className="text-2xl font-bold text-slate-800 mb-6">{t('footer.about')}</h2>
 
-            <div className="space-y-6 text-slate-600 leading-relaxed">
-                <p>
-                    A <strong>Tutti & Nino</strong> nasceu do desejo de transformar a organização em momentos de inspiração.
-                    Acreditamos que planejar a rotina não precisa ser uma tarefa chata, mas sim uma experiência criativa e prazerosa.
-                </p>
-
-                <div>
-                    <h3 className="text-lg font-bold text-rose-900 mb-2">Nossa Missão</h3>
-                    <p>
-                        Trazer cor e leveza para o seu dia a dia através de papelaria criativa, funcional e de alta qualidade.
-                        Queremos ser sua parceira na realização de sonhos e metas.
-                    </p>
+        <div className="flex flex-col h-full bg-slate-50">
+            {/* Header */}
+            <div className="bg-white px-8 py-6 border-b border-slate-100 flex items-center gap-4 flex-shrink-0">
+                <div className="w-12 h-12 bg-pink-100 rounded-xl flex items-center justify-center">
+                    <span className="text-2xl">✨</span>
                 </div>
-
                 <div>
-                    <h3 className="text-lg font-bold text-rose-900 mb-2">Nossos Valores</h3>
-                    <ul className="list-disc pl-5 space-y-1">
-                        <li><strong>Criatividade:</strong> Design autoral e exclusivo.</li>
-                        <li><strong>Qualidade:</strong> Materiais premium que duram.</li>
-                        <li><strong>Comunidade:</strong> Crescer junto com nossos clientes.</li>
-                        <li><strong>Sustentabilidade:</strong> Processos conscientes.</li>
-                    </ul>
+                    <h2 className="text-2xl font-bold text-slate-800">{t('footer.about')}</h2>
+                    <p className="text-slate-500 text-sm">Conheça um pouco mais sobre a nossa história.</p>
                 </div>
+            </div>
 
-                <div className="bg-pink-50 p-4 rounded-xl border border-pink-100">
-                    <p className="text-pink-800 text-center font-medium">
-                        "Organizando sonhos com amor e estilo desde 2026."
-                    </p>
+            {/* Content Body - Compact Grid */}
+            <div className="flex-1 overflow-y-auto p-6">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                        {/* 1. Story Card */}
+                        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col md:col-span-1 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-pink-50 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                                💖
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-800 mb-4">
+                                "Organizando sonhos com amor e estilo desde 2026."
+                            </h3>
+                            <p className="text-slate-600 leading-relaxed text-sm text-justify">
+                                A <strong>Tutti & Nino</strong> nasceu do desejo de transformar a organização em momentos de inspiração.
+                                Acreditamos que planejar a rotina não precisa ser uma tarefa chata, mas sim uma experiência criativa e prazerosa.
+                            </p>
+                        </div>
+
+                        {/* 2. Mission Card */}
+                        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col md:col-span-1 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-sky-50 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                                🚀
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-800 mb-4">
+                                Nossa Missão
+                            </h3>
+                            <p className="text-slate-600 leading-relaxed text-sm text-justify">
+                                Trazer cor e leveza para o seu dia a dia através de papelaria criativa, funcional e de alta qualidade.
+                                Queremos ser sua parceira na realização de sonhos e metas, oferecendo produtos que encantam.
+                            </p>
+                        </div>
+
+                        {/* 3. Values Card */}
+                        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100 flex flex-col md:col-span-1 hover:shadow-md transition-shadow">
+                            <div className="w-14 h-14 bg-purple-50 rounded-2xl flex items-center justify-center text-3xl mb-6">
+                                💎
+                            </div>
+                            <h3 className="text-xl font-bold text-slate-800 mb-4">
+                                Nossos Valores
+                            </h3>
+                            <ul className="space-y-4">
+                                <li className="flex items-start gap-3 text-slate-600 text-sm">
+                                    <span className="w-2 h-2 rounded-full bg-pink-400 mt-1.5 shrink-0"></span>
+                                    <span><strong>Criatividade:</strong> Design autoral e exclusivo.</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-slate-600 text-sm">
+                                    <span className="w-2 h-2 rounded-full bg-pink-400 mt-1.5 shrink-0"></span>
+                                    <span><strong>Qualidade:</strong> Materiais premium.</span>
+                                </li>
+                                <li className="flex items-start gap-3 text-slate-600 text-sm">
+                                    <span className="w-2 h-2 rounded-full bg-pink-400 mt-1.5 shrink-0"></span>
+                                    <span><strong>Comunidade:</strong> Crescer junto com você.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

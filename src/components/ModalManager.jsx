@@ -13,6 +13,7 @@ import PrivacyModal from './modals/PrivacyModal';
 import TermsModal from './modals/TermsModal';
 import ShippingModal from './modals/ShippingModal';
 import FaqModal from './modals/FaqModal';
+import AddedToCartModal from './modals/AddedToCartModal';
 
 // Lazy load large components
 const ProductQuickView = lazy(() => import('./ProductQuickView'));
@@ -43,6 +44,8 @@ export default function ModalManager({ onLoginSuccess }) {
                 return <ShippingModal />;
             case 'faq':
                 return <FaqModal />;
+            case 'addedToCart':
+                return <AddedToCartModal />;
             case 'quickview':
                 return (
                     <Suspense fallback={<div className="p-12 flex justify-center"><div className="w-12 h-12 border-4 border-slate-200 border-t-pink-500 rounded-full animate-spin"></div></div>}>
@@ -78,10 +81,16 @@ export default function ModalManager({ onLoginSuccess }) {
 
     const isQuickView = activeModal === 'quickview';
     const isRegister = activeModal === 'register';
+    const isAddedToCart = activeModal === 'addedToCart';
+    const isDashboardModal = ['faq', 'shipping', 'terms', 'privacy', 'returns'].includes(activeModal);
+    const isContentModal = ['about', 'contact'].includes(activeModal);
 
     let maxWidthClass = 'max-w-md';
     if (isQuickView) maxWidthClass = 'max-w-4xl';
-    else if (isRegister) maxWidthClass = 'max-w-3xl'; // Wider layout for register modal
+    else if (isRegister) maxWidthClass = 'max-w-3xl';
+    else if (isAddedToCart) maxWidthClass = 'max-w-lg';
+    else if (isDashboardModal) maxWidthClass = 'max-w-[95vw] lg:max-w-6xl h-[85vh]'; // Fixed height for complex UIs
+    else if (isContentModal) maxWidthClass = 'max-w-[95vw] lg:max-w-7xl'; // Auto height for simple content pages
 
     return (
         <div

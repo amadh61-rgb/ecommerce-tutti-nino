@@ -1,5 +1,5 @@
 // src/components/__tests__/CookieBanner.test.jsx
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CookieBanner from '../CookieBanner';
 import { I18nProvider } from '../../context/I18nContext';

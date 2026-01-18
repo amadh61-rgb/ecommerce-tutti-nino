@@ -1,3 +1,5 @@
+/* global process */
+/* eslint-disable no-unused-vars */
 /**
  * Payment Service Abstraction
  * 
@@ -17,7 +19,7 @@ class PaymentProvider {
      * @param {string} params.currency - Currency code (e.g., 'BRL')
      * @returns {Promise<Object>} - The session data { sessionId, checkoutUrl, ... }
      */
-    async createSession({ items, currency }) {
+    async createSession({ _items, _currency }) {
         throw new Error("Method 'createSession' must be implemented");
     }
 }
@@ -49,7 +51,7 @@ class MockPaymentProvider extends PaymentProvider {
 
 // Mercado Pago Implementation (Placeholder)
 class MercadoPagoProvider extends PaymentProvider {
-    async createSession({ items, currency }) {
+    async createSession({ _items, _currency }) {
         // TODO: Install 'mercadopago' SDK
         // import { MercadoPagoConfig, Preference } from 'mercadopago';
         // const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN });

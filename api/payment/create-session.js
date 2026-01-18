@@ -1,3 +1,4 @@
+/* global process */
 import { z } from 'zod'
 import allowCors from '../utils/cors'
 import { getPaymentProvider } from '../services/payment'

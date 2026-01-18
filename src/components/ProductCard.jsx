@@ -109,7 +109,7 @@ const ProductCard = ({ product, isFavorite, onToggleFavorite, onAddToCart, onQui
                     {/* Ações: Quantidade e Botão Comprar */}
                     <div className="flex items-center gap-2 mt-2">
                         {/* Selector de Quantidade */}
-                        <div className="flex items-center border border-slate-200 rounded-full h-10 bg-slate-50 px-1" onClick={(e) => e.preventDefault()}>
+                        <div className="flex items-center border border-slate-200 rounded-full h-10 bg-slate-50 px-1">
                             <button
                                 onClick={handleDecrement}
                                 className="w-8 h-full flex items-center justify-center text-slate-400 hover:text-[#FF1493] transition-colors disabled:opacity-50"

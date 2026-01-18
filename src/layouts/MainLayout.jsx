@@ -9,7 +9,6 @@ import Footer from '../components/Footer';
 import AnnouncementBar from '../components/AnnouncementBar';
 import CookieBanner from '../components/CookieBanner';
 import FloatingWhatsApp from '../components/FloatingWhatsApp';
-import ReloadPrompt from '../components/ReloadPrompt';
 import SEO from '../components/SEO';
 import ModalManager from '../components/ModalManager';
 import DrawerManager from '../components/DrawerManager'; // New Manager
@@ -19,16 +18,13 @@ import MobileMenu from '../components/MobileMenu';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 
-<SkipLinks />
-
 // Preload Routes
 const preloadCheckout = () => import('../pages/CheckoutPage');
 
 // Hooks
-import { useCart } from '../hooks/useCart';
-import { useFavorites } from '../hooks/useFavorites';
 import { useModal } from '../hooks/useModal';
 import { useI18n } from '../hooks/useI18n';
+import { useTheme } from '../context/ThemeContext';
 
 // Icons
 import { CheckCircle } from 'lucide-react';
@@ -37,24 +33,16 @@ import { generateSlug } from '../utils/slug';
 export default function MainLayout() {
     const navigate = useNavigate();
 
-    // Context state
-    // Correct hook usage:
-    const { cartCount } = useCart();
-    const { favorites } = useFavorites();
     const {
         openModal,
         closeModal,
         openDrawer,
-        closeDrawer, // Destructured
-        activeDrawer, // Destructured
         notification,
         showNotification,
-        trackingCode,
-        setTrackingCode,
-        trackingResult,
-        setTrackingResult
+        setTrackingCode
     } = useModal();
     const { t } = useI18n();
+    const { isDarkMode, toggleTheme } = useTheme();
 
     // Local UI state
     const [searchQuery, setSearchQuery] = useState('');
@@ -64,18 +52,8 @@ export default function MainLayout() {
     const [user, setUser] = useState(null);
 
     // Sync: Close Mobile Menu when Drawer opens
-    useEffect(() => {
-        if (activeDrawer) {
-            setIsMobileMenuOpen(false);
-        }
-    }, [activeDrawer]);
+    // Effects removed: UI synchronization now handled by event handlers in Header/MobileMenu
 
-    // Sync: Close Drawer when Mobile Menu opens
-    useEffect(() => {
-        if (isMobileMenuOpen && activeDrawer) {
-            closeDrawer();
-        }
-    }, [isMobileMenuOpen]);
 
     const handleMenuClick = (item) => {
         if (item.action === 'reset') {
@@ -97,6 +75,7 @@ export default function MainLayout() {
         setUser(mockUser);
         showNotification(t('dashboard.welcome', { name: mockUser.name }));
         closeModal();
+        navigate('/dashboard');
     };
 
     // Idle Preload effect
@@ -133,7 +112,7 @@ export default function MainLayout() {
                     handleMenuClick={handleMenuClick}
                     user={user}
                     isLoggedIn={isLoggedIn}
-                    navigateToDashboard={() => navigate('/minha-conta')}
+                    navigateToDashboard={() => navigate('/dashboard')}
                 />
 
                 {/* Main Content - Router Outlet */}
@@ -162,6 +141,17 @@ export default function MainLayout() {
                     setSearchQuery={setSearchQuery}
                     handleMenuClick={handleMenuClick}
                     onOpenLogin={() => { openModal('login'); setIsMobileMenuOpen(false); }}
+                    isLoggedIn={isLoggedIn}
+                    user={user}
+                    navigateToDashboard={() => navigate('/dashboard')}
+                    isDarkMode={isDarkMode}
+                    onToggleTheme={toggleTheme}
+                // Theme logic would need state in MainLayout if not using context inside MobileMenu
+                // But MobileMenu should use the Hook if we want it to be cleaner.
+                // However, I added props to MobileMenu. Let me check if I should just use the hook in MobileMenu.
+                // Using hook in MobileMenu is better, but I added props. Let's pass null for now or mock it if ThemeContext is global.
+                // Actually, I can use the useTheme hook inside MobileMenu? No, I added them as props.
+                // Wait, MainLayout doesn't have theme state. ThemeProvider wraps MainLayout in main.jsx.
                 />
 
                 {/* Notifications - Accessible */}
@@ -183,7 +173,6 @@ export default function MainLayout() {
 
                 {/* Floating WhatsApp */}
                 <FloatingWhatsApp />
-                <ReloadPrompt />
 
                 {/* Footer */}
                 <Footer setSelectedCategory={setSelectedCategory} setActiveDrawer={openDrawer} setActiveModal={openModal} />

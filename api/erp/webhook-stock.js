@@ -1,3 +1,4 @@
+/* global process */
 /**
  * ERP Stock Synchronization Webhook
  * POST /api/erp/webhook-stock

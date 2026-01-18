@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, Search, PackageSearch, Heart, ShoppingBag, ChevronDown, X } from 'lucide-react';
 import { mainMenu } from '../data/mockData';
@@ -9,15 +9,11 @@ import { useI18n } from '../hooks/useI18n';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
 import { useModal } from '../context/ModalContext';
+import { useTheme } from '../context/ThemeContext';
+import Button from './ui/Button';
+import { getUserAvatar } from '../utils/userUtils';
+import { Sun, Moon } from 'lucide-react';
 
-// Helper de SLUG
-const generateSlug = (text) =>
-    text
-        .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '');
 
 export default function Header({
     setIsMobileMenuOpen,
@@ -28,13 +24,15 @@ export default function Header({
     handleMenuClick,
     user,
     isLoggedIn,
-    navigateToDashboard
+    navigateToDashboard,
+    isMobileMenuOpen // Added prop to fix usage in toggle
 }) {
     const navigate = useNavigate();
-    const { t, isRTL } = useI18n();
+    const { t } = useI18n();
     const { cartCount } = useCart();
     const { favorites } = useFavorites();
-    const { openDrawer, openModal } = useModal();
+    const { openDrawer, closeDrawer, openModal } = useModal();
+    const { isDarkMode, toggleTheme } = useTheme();
 
     // Debounce da busca APENAS para navegação/URL
     const debouncedSearch = useDebounce(searchQuery, 500);
@@ -67,7 +65,7 @@ export default function Header({
     };
 
     return (
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md transition-all" role="banner" dir="ltr">
+        <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md transition-all shadow-sm" role="banner" dir="ltr">
             <div className="container mx-auto px-4 py-4">
                 <a href="#main-content" className="sr-only focus:not-sr-only bg-white text-pink-600 px-4 py-2 absolute z-[100] top-0 left-0 shadow-md">
                     {t('a11y.skipToContent') || 'Pular para o conteúdo principal'}
@@ -77,7 +75,12 @@ export default function Header({
                     {/* Logo e Menu Mobile */}
                     <div className="flex items-center gap-4">
                         <button
-                            onClick={() => setIsMobileMenuOpen(true)}
+                            onClick={() => {
+                                setIsMobileMenuOpen(prev => !prev);
+                                if (!isMobileMenuOpen) {
+                                    closeDrawer();
+                                }
+                            }}
                             className="lg:hidden p-3 hover:bg-slate-100 rounded-full text-slate-600 transition-colors touch-target"
                             aria-label={t('aria.openMenu')}
                         >
@@ -117,9 +120,9 @@ export default function Header({
                     {/* Ações (Direita) */}
                     <div className="flex items-center gap-1 sm:gap-2 lg:gap-4">
 
-                        {/* Rastreio - Visível em todos os dispositivos */}
+                        {/* Rastreio */}
                         <button
-                            onClick={() => openDrawer('tracking')}
+                            onClick={() => { openDrawer('tracking'); setIsMobileMenuOpen(false); }}
                             className="p-2 sm:p-2.5 hover:bg-sky-50 rounded-full transition-colors text-[#FF1493] hover:text-pink-600 touch-target"
                             title={t('nav.tracking')}
                             aria-label={t('aria.trackOrder')}
@@ -127,9 +130,9 @@ export default function Header({
                             <PackageSearch className="w-5 h-5 sm:w-6 sm:h-6" />
                         </button>
 
-                        {/* Favoritos - Visível em todos os dispositivos */}
+                        {/* Favoritos */}
                         <button
-                            onClick={() => openDrawer('favorites')}
+                            onClick={() => { openDrawer('favorites'); setIsMobileMenuOpen(false); }}
                             className="relative p-2 sm:p-2.5 rounded-full transition-colors touch-target hover:bg-pink-50 text-[#FF1493] hover:text-pink-600"
                             title={t('nav.favorites')}
                             aria-label={t('aria.favoritesCount', { count: favorites.length })}
@@ -142,9 +145,9 @@ export default function Header({
                             )}
                         </button>
 
-                        {/* Carrinho - Visível em todos os dispositivos */}
+                        {/* Carrinho */}
                         <button
-                            onClick={() => openDrawer('cart')}
+                            onClick={() => { openDrawer('cart'); setIsMobileMenuOpen(false); }}
                             className="relative p-2 sm:p-3 hover:bg-pink-50 rounded-full transition-colors group touch-target"
                             title={t('nav.cart')}
                             aria-label={t('aria.cartCount', { count: cartCount })}
@@ -160,28 +163,40 @@ export default function Header({
                         {isLoggedIn ? (
                             <button
                                 onClick={navigateToDashboard}
-                                className="hidden lg:flex items-center gap-3 pl-2 pr-4 py-1.5 bg-slate-50 hover:bg-slate-100 rounded-full border border-slate-200 transition-all touch-target group"
+                                className="hidden lg:flex items-center gap-2 pl-1 pr-3 py-1 bg-white hover:bg-slate-50 rounded-full border border-slate-200 transition-all shadow-sm group"
                             >
                                 <img
-                                    src={user.avatar}
+                                    src={getUserAvatar(user)}
                                     alt={user.name}
-                                    className="w-8 h-8 rounded-full border border-slate-200"
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = getUserAvatar({ name: user.name }); // Force regeneration
+                                    }}
+                                    className="w-8 h-8 rounded-full object-cover relative z-10 bg-white"
                                 />
                                 <span className="text-sm font-bold text-slate-700 group-hover:text-pink-500 transition-colors">
                                     {user.name}
                                 </span>
                             </button>
                         ) : (
-                            <button
+                            <Button
                                 onClick={() => openModal('login')}
-                                className="hidden lg:block bg-gradient-to-r from-[#FF69B4] to-[#FF1493] text-white px-5 py-2 rounded-full text-sm font-medium hover:brightness-90 transition-all shadow-lg shadow-pink-200"
+                                className="hidden lg:flex"
+                                variant="primary"
                             >
                                 {t('nav.login')}
-                            </button>
+                            </Button>
                         )}
 
                         {/* Seletor de Idioma (Desktop) */}
-                        <div className="hidden lg:block">
+                        <div className="hidden lg:flex items-center gap-2">
+                            <button
+                                onClick={toggleTheme}
+                                className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-500 dark:text-slate-400"
+                                aria-label="Alternar Tema"
+                            >
+                                {isDarkMode ? <Sun className="w-5 h-5 text-yellow-500" /> : <Moon className="w-5 h-5 text-slate-600" />}
+                            </button>
                             <LanguageSelector />
                         </div>
                     </div>
@@ -198,7 +213,7 @@ export default function Header({
                                     <button
                                         onClick={() => handleMenuClick(item)}
                                         className={`flex items-center gap-1.5 hover:text-[#FFE4E1] transition-colors py-1 uppercase text-xs sm:text-sm
-                                        ${selectedCategory === item.category ? 'text-[#FFE4E1]' : ''}`}
+                                            ${selectedCategory === item.category ? 'text-[#FFE4E1]' : ''}`}
                                         aria-current={selectedCategory === item.category ? 'page' : undefined}
                                     >
                                         {t(item.translationKey) || item.label}

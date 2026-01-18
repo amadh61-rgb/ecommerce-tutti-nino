@@ -1,3 +1,5 @@
+/* global process */
+/* eslint-disable no-unused-vars */
 /**
  * Shipping Service Abstraction
  * 
@@ -17,7 +19,7 @@ class ShippingProvider {
      * @param {Array} params.items - List of items {id, width, height, length, weight, quantity, price}
      * @returns {Promise<Array>} - List of shipping options
      */
-    async calculate({ zipCode, items }) {
+    async calculate({ _zipCode, _items }) {
         throw new Error("Method 'calculate' must be implemented");
     }
 }
@@ -72,7 +74,7 @@ class MockShippingProvider extends ShippingProvider {
 
 // Melhor Envio Implementation (Placeholder)
 class MelhorEnvioProvider extends ShippingProvider {
-    async calculate({ zipCode, items }) {
+    async calculate({ _zipCode, _items }) {
         // TODO: Implement interaction with Melhor Envio API
         // Requires: process.env.MELHOR_ENVIO_TOKEN
         throw new Error("Melhor Envio provider is not fully configured yet.");

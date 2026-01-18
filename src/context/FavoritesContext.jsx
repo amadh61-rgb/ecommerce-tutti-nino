@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // src/context/FavoritesContext.jsx
 import React, { createContext, useState, useCallback, useMemo, useEffect } from 'react';
 import { FAVORITES_CONFIG } from '../config/constants';

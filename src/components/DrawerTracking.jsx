@@ -3,6 +3,7 @@ import { PackageSearch, X, CheckCircle } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
 
 import { useFocusTrap } from '../hooks/useFocusTrap';
+import { mockOrders } from '../data/mockData';
 
 export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrackingCode, trackingResult, setTrackingResult }) {
     const { t, isRTL } = useI18n();
@@ -16,11 +17,28 @@ export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrack
         e.preventDefault();
         if (!trackingCode) return;
         // Simulação de rastreio
-        setTrackingResult({
-            status: t('tracking.status.inTransit'), // "Em trânsito",
-            location: "São Paulo, SP", // Mock location
-            date: "12/05/2026"
-        });
+        // Simulação de rastreio inteligente
+        const foundOrder = window.mockOrders?.find(o => o.trackingCode === trackingCode) ||
+            (mockOrders && mockOrders.find(o => o.trackingCode === trackingCode));
+
+        if (foundOrder) {
+            setTrackingResult({
+                status: foundOrder.status,
+                history: foundOrder.history || [],
+                date: foundOrder.date
+            });
+        } else {
+            // Fallback genérico se não encontrar
+            setTrackingResult({
+                status: t('tracking.status.inTransit'),
+                location: "São Paulo, SP",
+                date: "12/05/2026",
+                history: [
+                    { status: "transit", date: "12/05/2026 14:00", label: "Objeto em trânsito - Por favor aguarde", location: "São Paulo / SP" },
+                    { status: "posted", date: "10/05/2026 09:30", label: "Objeto postado", location: "Curitiba / PR" }
+                ]
+            });
+        }
     };
 
     return (
@@ -68,28 +86,42 @@ export default function DrawerTracking({ isOpen, onClose, trackingCode, setTrack
                                 </button>
                             </form>
                         ) : (
-                            <div className="bg-white p-4 rounded-xl border-2 border-green-100 animate-fade-in shadow-sm">
-                                <div className="flex items-start gap-3">
-                                    <div className="mt-1 bg-green-100 p-1 rounded-full">
+                            <div className="bg-white p-6 rounded-2xl border border-slate-100 animate-fade-in shadow-sm">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="mt-1 bg-green-100 p-2 rounded-full">
                                         <CheckCircle className="w-5 h-5 text-green-600" />
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-slate-800 text-lg">{trackingResult.status}</h4>
-                                        <p className="text-sm text-slate-600 font-medium">{trackingResult.location}</p>
-                                        <p className="text-xs text-slate-400 mt-1">{trackingResult.date}</p>
-
-                                        <div className="mt-4 pt-4 border-t border-slate-100 flex gap-2">
-                                            <div className="h-1.5 flex-1 bg-green-500 rounded-full"></div>
-                                            <div className="h-1.5 flex-1 bg-green-500 rounded-full"></div>
-                                            <div className="h-1.5 flex-1 bg-green-500 rounded-full"></div>
-                                            <div className="h-1.5 flex-1 bg-slate-200 rounded-full"></div>
-                                        </div>
-                                        <p className={`text-[10px] ${isRTL ? 'text-left' : 'text-right'} text-slate-400 mt-1`}>75%</p>
+                                        <p className="text-sm text-slate-500">Código: {trackingCode}</p>
                                     </div>
                                 </div>
+
+                                {/* Timeline */}
+                                <div className="space-y-6 relative ml-2 before:absolute before:left-[7px] before:top-2 before:h-full before:w-[2px] before:bg-slate-100">
+                                    {trackingResult.history ? (
+                                        trackingResult.history.map((step, idx) => (
+                                            <div key={idx} className="relative pl-8 animate-fade-in" style={{ animationDelay: `${idx * 100}ms` }}>
+                                                <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white ring-2 ring-pink-100 bg-pink-500"></div>
+                                                <p className="font-bold text-slate-700 text-sm">{step.label}</p>
+                                                <p className="text-xs text-slate-500">{step.date}</p>
+                                                {step.location && <p className="text-xs text-slate-400 mt-0.5">{step.location}</p>}
+                                            </div>
+                                        ))
+                                    ) : (
+                                        // Fallback old view
+                                        <div className="relative pl-8">
+                                            <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white ring-2 ring-pink-100 bg-green-500"></div>
+                                            <p className="font-bold text-slate-700 text-sm">{trackingResult.status}</p>
+                                            <p className="text-xs text-slate-500">{trackingResult.date || 'Hoje'}</p>
+                                            {trackingResult.location && <p className="text-xs text-slate-400 mt-0.5">{trackingResult.location}</p>}
+                                        </div>
+                                    )}
+                                </div>
+
                                 <button
                                     onClick={() => { setTrackingResult(null); setTrackingCode(""); }}
-                                    className="mt-6 w-full py-2 border border-slate-200 text-slate-600 font-medium rounded-lg hover:bg-slate-50 transition-colors text-sm"
+                                    className="mt-8 w-full py-3 border border-slate-200 text-slate-600 font-bold rounded-xl hover:bg-slate-50 transition-colors text-sm"
                                 >
                                     {t('tracking.notFound') || 'Pesquisar Outro Código'}
                                 </button>

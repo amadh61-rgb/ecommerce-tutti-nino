@@ -1,3 +1,4 @@
+/* global process */
 export default async function handler(req, res) {
     // Apenas aceita POST
     if (req.method !== 'POST') {

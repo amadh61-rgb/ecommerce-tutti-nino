@@ -1,7 +1,7 @@
-import React from 'react';
-import { ArrowUpDown, ChevronDown, Check, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowUpDown, ChevronDown, Check } from 'lucide-react';
 import { useI18n } from '../hooks/useI18n';
-import { Link } from 'react-router-dom';
+import Breadcrumbs from './Breadcrumbs';
 
 export default function CategoryToolbar({
     categoryTitle,
@@ -9,7 +9,7 @@ export default function CategoryToolbar({
     onSortChange
 }) {
     const { t } = useI18n();
-    const [isSortOpen, setIsSortOpen] = React.useState(false);
+    const [isSortOpen, setIsSortOpen] = useState(false);
 
     const sortOptions = [
         { id: 'relevance', label: t('sort.relevance') || 'Relevância' },
@@ -24,10 +24,8 @@ export default function CategoryToolbar({
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
 
                     {/* Breadcrumbs (Left) */}
-                    <div className="flex items-center gap-2 text-sm text-slate-500">
-                        <Link to="/" className="hover:text-pink-500 transition-colors">Home</Link>
-                        <ChevronRight className="w-4 h-4" />
-                        <span className="text-slate-800 font-medium">{categoryTitle}</span>
+                    <div className="flex-1 w-full sm:w-auto">
+                        <Breadcrumbs items={[{ label: categoryTitle }]} />
                     </div>
 
                     {/* Controles de Ordenação (Right) */}
@@ -49,7 +47,7 @@ export default function CategoryToolbar({
 
                             {isSortOpen && (
                                 <>
-                                    <div className="fixed inset-0 z-40" onClick={() => setIsSortOpen(false)}></div>
+                                    <div className="fixed inset-0 z-40" onClick={() => setIsSortOpen(false)} onKeyDown={(e) => e.key === 'Escape' && setIsSortOpen(false)} role="button" tabIndex={0} aria-label="Fechar ordenação"></div>
                                     <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-xl border border-slate-100 py-2 z-50 animate-fade-in-down">
                                         {sortOptions.map((option) => (
                                             <button

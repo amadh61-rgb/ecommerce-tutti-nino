@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 // src/context/ModalContext.jsx
 import React, { createContext, useState, useCallback } from 'react';
 

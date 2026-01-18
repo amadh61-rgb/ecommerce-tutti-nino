@@ -8,7 +8,8 @@ class ErrorBoundary extends React.Component {
         this.state = { hasError: false, error: null, errorInfo: null };
     }
 
-    static getDerivedStateFromError(error) {
+    // eslint-disable-next-line no-unused-vars
+    static getDerivedStateFromError(_error) {
         return { hasError: true };
     }
 
@@ -65,59 +66,77 @@ class ErrorBoundary extends React.Component {
             }
 
             return (
-                <div className="min-h-screen bg-gradient-to-br from-pink-50 to-sky-50 flex items-center justify-center p-4">
-                    <div className="bg-white rounded-3xl shadow-xl p-8 max-w-lg w-full text-center">
-                        {/* Ícone */}
-                        <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                            <AlertTriangle className="w-10 h-10 text-red-500" />
+                <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
+                    {/* Container Principal Wide Dashboard */}
+                    <div className="bg-white rounded-3xl shadow-xl p-8 md:p-10 w-full max-w-[95vw] lg:max-w-[1600px] flex flex-col relative overflow-hidden border border-slate-100">
+
+                        {/* Cabeçalho: Título (Esq) + Ações (Dir) */}
+                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 border-b border-slate-100 pb-6">
+
+                            {/* Lado Esquerdo: Título e Descrição */}
+                            <div className="flex items-start gap-4">
+                                <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center flex-shrink-0">
+                                    <AlertTriangle className="w-8 h-8 text-red-500" />
+                                </div>
+                                <div>
+                                    <h1 className="text-3xl font-bold text-slate-800 mb-2">
+                                        Ops! Algo deu errado 😭
+                                    </h1>
+                                    <p className="text-slate-500 max-w-xl text-lg">
+                                        Ocorreu um erro inesperado. Nossa equipe foi notificada e
+                                        estamos trabalhando para resolver.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Lado Direito: Botões */}
+                            <div className="flex flex-col sm:flex-row w-full md:w-auto gap-3">
+                                <button
+                                    onClick={this.handleReload}
+                                    className="flex items-center justify-center gap-2 px-6 py-3 bg-pink-500 text-white font-bold rounded-xl hover:bg-pink-600 transition-all shadow-md active:scale-95"
+                                >
+                                    <RefreshCw className="w-5 h-5" />
+                                    Tentar Novamente
+                                </button>
+                                <button
+                                    onClick={this.handleGoHome}
+                                    className="flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-all active:scale-95"
+                                >
+                                    <Home className="w-5 h-5" />
+                                    Ir para Início
+                                </button>
+                            </div>
                         </div>
 
-                        {/* Título */}
-                        <h1 className="text-2xl font-bold text-slate-800 mb-2">
-                            Ops! Algo deu errado 😭
-                        </h1>
+                        {/* Área Central: Console de Erros (Expansiva) */}
+                        <div className="flex-1 flex flex-col min-h-[400px]">
+                            <h3 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+                                <span>▼ Detalhes técnicos (dev)</span>
+                            </h3>
 
-                        {/* Mensagem */}
-                        <p className="text-slate-500 mb-6">
-                            Ocorreu um erro inesperado. Nossa equipe foi notificada e
-                            estamos trabalhando para resolver.
-                        </p>
-
-                        {/* Botões de ação */}
-                        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
-                            <button
-                                onClick={this.handleReload}
-                                className="flex items-center justify-center gap-2 px-6 py-3 bg-pink-500 text-white font-bold rounded-xl hover:bg-pink-600 transition-all shadow-lg"
-                            >
-                                <RefreshCw className="w-5 h-5" />
-                                Tentar Novamente
-                            </button>
-                            <button
-                                onClick={this.handleGoHome}
-                                className="flex items-center justify-center gap-2 px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl hover:bg-slate-200 transition-all"
-                            >
-                                <Home className="w-5 h-5" />
-                                Ir para Início
-                            </button>
+                            <div className="flex-1 bg-slate-50 rounded-xl border border-slate-200 p-6 font-mono text-sm overflow-auto text-red-600 shadow-inner w-full">
+                                {/* Simulando conteúdo se não houver erro real para visualização, mas em prod usa o state */}
+                                {this.state.error ? (
+                                    <pre className="whitespace-pre-wrap break-all leading-relaxed">
+                                        {this.state.error.toString()}
+                                        {'\n'}
+                                        {this.state.errorInfo && this.state.errorInfo.componentStack}
+                                    </pre>
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center h-full text-slate-400">
+                                        <p>Nenhum log de erro capturado no momento.</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
-                        {/* Detalhes técnicos (apenas em dev) */}
-                        {import.meta.env.DEV && this.state.error && (
-                            <details className="text-left bg-slate-50 rounded-xl p-4 text-sm">
-                                <summary className="cursor-pointer font-semibold text-slate-700 mb-2">
-                                    Detalhes técnicos (dev)
-                                </summary>
-                                <pre className="whitespace-pre-wrap text-red-600 font-mono text-xs overflow-auto">
-                                    {this.state.error.toString()}
-                                    {this.state.errorInfo && this.state.errorInfo.componentStack}
-                                </pre>
-                            </details>
-                        )}
+                        {/* Rodapé: Código */}
+                        <div className="flex justify-end mt-4 pt-4 border-t border-slate-50">
+                            <p className="text-xs font-mono text-slate-400 bg-slate-50 px-3 py-1 rounded-md">
+                                Código: {this.state.errorCode || 'UNKNOWN_ERROR'}
+                            </p>
+                        </div>
 
-                        {/* Código de erro para suporte */}
-                        <p className="text-xs text-slate-400 mt-4">
-                            Código: {Date.now().toString(36).toUpperCase()}
-                        </p>
                     </div>
                 </div>
             );

@@ -5,6 +5,7 @@ import './index.css'
 import { CartProvider } from './context/CartContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import { ModalProvider } from './context/ModalContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 import ErrorBoundary from './components/ErrorBoundary'
 
@@ -13,6 +14,7 @@ import MainLayout from './layouts/MainLayout';
 
 import LoadingSpinner from './components/LoadingSpinner';
 import ScrollToTop from './components/ScrollToTop';
+import PageLoader from './components/PageLoader';
 
 // Pages - Eager loading for Home (LCP)
 import HomePage from './pages/HomePage';
@@ -20,23 +22,11 @@ import HomePage from './pages/HomePage';
 // Pages - Lazy loading for others
 const ProductPage = lazy(() => import('./pages/ProductPage'));
 const CategoryPage = lazy(() => import('./pages/CategoryPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage'));
 const CheckoutPage = lazy(() => import('./pages/CheckoutPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-import { I18nProvider, useI18n } from './context/I18nContext';
-
-// Loading Fallback
-const PageLoader = () => {
-  const { t } = useI18n();
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-12 h-12 border-4 border-pink-200 border-t-pink-500 rounded-full animate-spin"></div>
-        <p className="text-slate-500 font-medium animate-pulse">{t('common.loading') || 'Carregando...'}</p>
-      </div>
-    </div>
-  );
-};
+import { I18nProvider } from './context/I18nContext';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -44,41 +34,48 @@ createRoot(document.getElementById('root')).render(
       <CartProvider>
         <FavoritesProvider>
           <ModalProvider>
-            <ErrorBoundary>
-              <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-                <ScrollToTop />
-                <Routes>
-                  <Route element={<MainLayout />}>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/produto/:slug" element={
-                      <Suspense fallback={<PageLoader />}>
-                        <ProductPage />
-                      </Suspense>
-                    } />
-                    <Route path="/categoria/:slug" element={
-                      <Suspense fallback={<PageLoader />}>
-                        <CategoryPage />
-                      </Suspense>
-                    } />
-                    <Route path="/checkout" element={
-                      <Suspense fallback={<PageLoader />}>
-                        <CheckoutPage />
-                      </Suspense>
-                    } />
-                    <Route path="/404" element={
-                      <Suspense fallback={<PageLoader />}>
-                        <NotFoundPage />
-                      </Suspense>
-                    } />
-                    <Route path="*" element={
-                      <Suspense fallback={<PageLoader />}>
-                        <NotFoundPage />
-                      </Suspense>
-                    } />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
-            </ErrorBoundary>
+            <ThemeProvider>
+              <ErrorBoundary>
+                <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+                  <ScrollToTop />
+                  <Routes>
+                    <Route element={<MainLayout />}>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/produto/:slug" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <ProductPage />
+                        </Suspense>
+                      } />
+                      <Route path="/categoria/:slug" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <CategoryPage />
+                        </Suspense>
+                      } />
+                      <Route path="/dashboard" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <DashboardPage />
+                        </Suspense>
+                      } />
+                      <Route path="/checkout" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <CheckoutPage />
+                        </Suspense>
+                      } />
+                      <Route path="/404" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <NotFoundPage />
+                        </Suspense>
+                      } />
+                      <Route path="*" element={
+                        <Suspense fallback={<PageLoader />}>
+                          <NotFoundPage />
+                        </Suspense>
+                      } />
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
+              </ErrorBoundary>
+            </ThemeProvider>
           </ModalProvider>
         </FavoritesProvider>
       </CartProvider>

@@ -1,13 +1,12 @@
+/* eslint-disable react-refresh/only-export-components */
 // src/context/I18nContext.jsx
-import React, { createContext, useState, useCallback, useMemo, useEffect, useContext } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useContext } from 'react';
 import { translations } from '../data/translations';
 import { I18N_CONFIG } from '../config/constants';
-
-export const I18nContext = createContext(null);
+import { I18nContext } from './I18nContextDefinition';
 
 // Locales suportados (agora vindo das constantes)
-export const SUPPORTED_LOCALES = I18N_CONFIG.SUPPORTED_LOCALES;
-const DEFAULT_LOCALE = I18N_CONFIG.DEFAULT_LOCALE;
+const { SUPPORTED_LOCALES, DEFAULT_LOCALE } = I18N_CONFIG;
 const LOCALE_STORAGE_KEY = 'tutti_nino_locale';
 
 export const I18nProvider = ({ children }) => {

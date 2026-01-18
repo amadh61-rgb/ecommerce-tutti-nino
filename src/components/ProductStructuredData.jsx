@@ -1,6 +1,9 @@
 // src/components/ProductStructuredData.jsx
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
+
+// Pre-calculate price valid date at module load (not during render)
+const PRICE_VALID_DATE = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
 
 /**
  * Componente que adiciona dados estruturados JSON-LD para produtos
@@ -9,43 +12,47 @@ import { Helmet } from 'react-helmet-async';
  * @param {{ product: object }} props
  */
 export default function ProductStructuredData({ product }) {
-    if (!product) return null;
+    const structuredData = useMemo(() => {
+        if (!product) return null;
 
-    const structuredData = {
-        '@context': 'https://schema.org/',
-        '@type': 'Product',
-        name: product.name,
-        description: product.description,
-        image: product.image ? [window.location.origin + product.image] : [],
-        brand: {
-            '@type': 'Brand',
-            name: 'Tutti & Nino'
-        },
-        offers: {
-            '@type': 'Offer',
-            url: window.location.href,
-            priceCurrency: 'BRL',
-            price: product.price,
-            priceValidUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
-            availability: product.inStock !== false
-                ? 'https://schema.org/InStock'
-                : 'https://schema.org/OutOfStock',
-            seller: {
-                '@type': 'Organization',
+        return {
+            '@context': 'https://schema.org/',
+            '@type': 'Product',
+            name: product.name,
+            description: product.description,
+            image: product.image ? [window.location.origin + product.image] : [],
+            brand: {
+                '@type': 'Brand',
                 name: 'Tutti & Nino'
+            },
+            offers: {
+                '@type': 'Offer',
+                url: window.location.href,
+                priceCurrency: 'BRL',
+                price: product.price,
+                priceValidUntil: PRICE_VALID_DATE,
+                availability: product.inStock !== false
+                    ? 'https://schema.org/InStock'
+                    : 'https://schema.org/OutOfStock',
+                seller: {
+                    '@type': 'Organization',
+                    name: 'Tutti & Nino'
+                }
+            },
+            // Adiciona categoria se disponível
+            ...(product.category && {
+                category: product.category
+            }),
+            // Adiciona rating agregado (valores de exemplo para demonstração)
+            aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '4.8',
+                reviewCount: '127'
             }
-        },
-        // Adiciona categoria se disponível
-        ...(product.category && {
-            category: product.category
-        }),
-        // Adiciona rating agregado (valores de exemplo para demonstração)
-        aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: '4.8',
-            reviewCount: '127'
-        }
-    };
+        };
+    }, [product]);
+
+    if (!structuredData) return null;
 
     return (
         <Helmet>
